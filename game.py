@@ -24,7 +24,8 @@ def processPlayerEvents(player):
 				
 			if event.key == pygame.K_RIGHT:
 				player.moving[3] = True
-				
+			if event.key == pygame.K_TAB:
+				player.getPosition()
 		if event.type == pygame.KEYUP:
 			if event.key == pygame.K_UP:
 				player.moving[0] = False

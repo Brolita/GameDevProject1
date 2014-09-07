@@ -4,8 +4,8 @@ class Player:
 	def __init__ (self):
 		self.image = pygame.image.load("Art Stuff\player sprite.png").convert_alpha()
 		self.rect = self.image.get_rect()
-		self.rect.x = 288
-		self.rect.y = 208
+		self.rect.x = 0
+		self.rect.y = 0
 		self.x_velocity = 5
 		self.y_velocity = 5
 		self.moving = [False, False, False, False] #up, down, left, right
@@ -43,6 +43,9 @@ class Player:
 			else:
 				self.rect = future
 				
-		
+	def getPosition(self):
+		print 'Player is currently at', self.rect.x + 16, ', ', self.rect.y + 48
+		return (self.rect.x + 16, self.rect.y + 48)
+	
 	def draw(self, screen):
 		screen.blit(self.image, self.rect, [0, 0, 32, 48])
