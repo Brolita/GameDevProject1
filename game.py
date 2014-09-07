@@ -1,5 +1,6 @@
 import pygame, sys, random, fileinput
 from player import Player
+from snowball import Snowball
 
 pygame.init()
 screen = pygame.display.set_mode((600, 800))
@@ -12,7 +13,7 @@ def processPlayerEvents(player):
 			print pygame.key.name(event.key)
 			if event.key == pygame.K_ESCAPE:
 				sys.exit()
-			
+	
 			if event.key == pygame.K_UP:
 				player.moving[0] = True
 				
@@ -26,6 +27,9 @@ def processPlayerEvents(player):
 				player.moving[3] = True
 			if event.key == pygame.K_TAB:
 				player.getPosition()
+			if event.key == pygame.K_SPACE:
+				player.firing = True
+				
 		if event.type == pygame.KEYUP:
 			if event.key == pygame.K_UP:
 				player.moving[0] = False
@@ -39,6 +43,9 @@ def processPlayerEvents(player):
 			if event.key == pygame.K_RIGHT:
 				player.moving[3] = False
 
+			if event.key == pygame.K_SPACE:
+				player.firing = False
+				
 gameRunning = True
 player = Player()
 
@@ -46,7 +53,7 @@ while gameRunning:
 	clock.tick(60)
 	processPlayerEvents(player)
 	screen.blit(levelOneBackground, levelOneBackground.get_rect(), [0, 0, 600, 800])
-	player.update()
+	player.update(screen)
 	player.draw(screen)
 	pygame.display.flip()
 
