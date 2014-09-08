@@ -1,6 +1,10 @@
 import pygame, sys, random, fileinput
 from player import Player
 from snowball import Snowball
+from Vector import Vector
+from engine import engine
+from bullet import *
+from enemy import *
 
 pygame.init()
 screen = pygame.display.set_mode((600, 800))
@@ -47,13 +51,15 @@ def processPlayerEvents(player):
 				player.firing = False
 				
 gameRunning = True
-player = Player()
+game = engine()
+player = Player(game)
 
 while gameRunning:
 	clock.tick(60)
 	processPlayerEvents(player)
 	screen.blit(levelOneBackground, levelOneBackground.get_rect(), [0, 0, 600, 800])
-	player.update(screen)
-	player.draw(screen)
+	game.update()
+	game.draw()
 	pygame.display.flip()
+	
 

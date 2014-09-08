@@ -1,9 +1,9 @@
 import pygame
-
+from Vector import Vector
 from snowball import Snowball
 
 class Player:
-	def __init__ (self):
+	def __init__ (self, game):
 		print 'Made a snowball!'
 		self.image = pygame.image.load("Art Stuff\player sprite.png").convert_alpha()
 		self.rect = self.image.get_rect()
@@ -16,7 +16,8 @@ class Player:
 		self.snowballs = []
 		self.fireCooldown = 5
 		self.canFire = True
-		
+		self.game = game
+		game.gameObjects.append(self)
 	
 	def update(self, screen):
 		self.fireCooldown -= 1
@@ -68,8 +69,8 @@ class Player:
 				self.rect = future
 				
 	def getPosition(self):
-		print 'Player is currently at', self.rect.x + 16, ', ', self.rect.y + 48
-		return (self.rect.x + 16, self.rect.y + 48)
+		#print 'Player is currently at', self.rect.x + 16, ', ', self.rect.y + 48
+		return Vector(self.rect.x + 16, self.rect.y + 48)
 	
 	
 	
