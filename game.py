@@ -2,7 +2,7 @@ import pygame, sys, random, fileinput
 from player import Player
 from snowball import Snowball
 from Vector import Vector
-from engine import engine
+from engine import Engine
 from bullet import *
 from enemy import *
 
@@ -51,7 +51,7 @@ def processPlayerEvents(player):
 				player.firing = False
 				
 gameRunning = True
-game = engine()
+game = Engine(screen)
 player = Player(game)
 
 while gameRunning:

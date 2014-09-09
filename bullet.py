@@ -1,8 +1,9 @@
+import pygame
 from Vector import Vector
-from engine import engine
+from engine import Engine
 
 class Bullet(pygame.sprite.Sprite):
-	def __init__ (self, game, spriteName, generateAtInstantiation = true):
+	def __init__ (self, game, spriteName, generateAtInstantiation = True):
 		self.spriteName = spriteName
 		self.isGenerated = generateAtInstantiation
 		game.gameObjects.append(self)
@@ -12,19 +13,22 @@ class Bullet(pygame.sprite.Sprite):
 			self.Generate()
 			
 	def generate (self):
-		if(!self.isGenerated):
+		if not self.isGenerated:
 			pygame.sprite.Sprite.__init__(self)
 			self.image = pygame.image.load('Art Stuff\\' + spriteName + '.png')
 			self.isGenerated = true	
 			
-	def draw (self):
-		screen.blit(self.image, (self.position.x, self.position.y))
-		
+	def draw (self, screen):
+		if screen.get_rect().copy().inflate(40,40).collidepoint(self.position.x, self.position.y):
+			screen.blit(self.image, (self.position.x, self.position.y))
+		else:
+			del self
+			
 	def __del__ (self):
 		game.gameObjects.pop(self._id_)
 		
 class LinearBullet(Bullet):
-	def __init__(self, init, target, speed, game, spriteName, generateAtInstantiation = true):
+	def __init__(self, init, target, speed, game, spriteName, generateAtInstantiation = True):
 		self.position = init
 		self.target = target
 		self.speed = speed
@@ -36,14 +40,14 @@ class LinearBullet(Bullet):
 	def update(self):
 		self.position += self.velocityh
 		
-	def draw(self):
-		Super(LinearBullet, self).draw()
+	def draw(self, screen):
+		Super(LinearBullet, self).draw(screen)
 	
 	def __del__(self):
 		Super(LinearBullet, self).__del__()
 		
 class CircularBullet(Bullet):
-	def __init__(self, init, target, radialSpeed, game, spriteName, generateAtInstantiation = true):
+	def __init__(self, init, target, radialSpeed, game, spriteName, generateAtInstantiation = True):
 		self.position = init
 		self.target = target
 		self.radialSpeed = radialSpeed
@@ -52,14 +56,14 @@ class CircularBullet(Bullet):
 	def update(self):
 		self.position.RotateAround(self.target, self.angularSpeed/self.game.framerate)
 	
-	def draw(self):
-		Super(LinearBullet, self).draw()
+	def draw(self, screen):
+		Super(LinearBullet, self).draw(screen)
 	
 	def __del__(self):
 		Super(LinearBullet, self).__del__()
 		
 class SpiralBullet(Bullet):
-	def __init__(self, init, target, radialSpeed, approachSpeed, game, spriteName, generateAtInstantiation = true):
+	def __init__(self, init, target, radialSpeed, approachSpeed, game, spriteName, generateAtInstantiation = True):
 		self.position = init
 		self.target = target
 		self.radialSpeed = radialSpeed
@@ -70,8 +74,8 @@ class SpiralBullet(Bullet):
 		self.position.RotateAround(self.target, self,radialSpeed)
 		self.position.MoveToward(self.target, self.approachSpeed)
 	
-	def draw(self):
-		Super(LinearBullet, self).draw()
+	def draw(self, screen):
+		Super(LinearBullet, self).draw(screen)
 	
 	def __del__(self):
 		Super(LinearBullet, self).__del__()

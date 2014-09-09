@@ -6,9 +6,9 @@ class Vector:
 	def Difference(self, pos):
 		#calculates the difference between a this vector and another
 		if type(pos) is Vector:
-			return math.sqrt((self.x-pos.x)**2 + (self.y-pos.y)**2))
+			return math.sqrt((self.x-pos.x)**2 + (self.y-pos.y)**2)
 		elif type(pos) is tuple or type(pos) is list:
-			return math.sqrt((self.x-pos[0])**2 + (self.y-pos[1])**2))
+			return math.sqrt((self.x-pos[0])**2 + (self.y-pos[1])**2)
 			
 	def Add(self, delta):
 		#move this vector a certain x and y
@@ -41,11 +41,11 @@ class Vector:
 		return self.Dot(other)
 	
 	def __str__(self):
-		print 'Vector(', self.x, ',' self.y, ')'
+		print 'Vector(', self.x, ',', self.y, ')'
 	
 	def Magnitude(self):
 		#returns the magnitude of the vector
-		return math.sqrt((self.x)**2 + (self.y)**2))
+		return math.sqrt((self.x)**2 + (self.y)**2)
 		
 	def Unit(self):
 		#returns the unit vector (its magnitude will be 1)
