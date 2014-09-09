@@ -1,5 +1,5 @@
 import pygame
-
+import math
 from Vector import Vector
 from bullet import *
 
@@ -70,27 +70,29 @@ def BuckDown(game, enemy, count, spread, speed, spriteName):
 
 
 class SeagullA:
-	def __init__(self, init, game, player, spriteName):
+	def __init__(self, init, game, player):
 		self.game = game
 		game.gameObjects.append(self)
+		self._id_ = len(game.gameObjects) - 1
+		self.player = player
 		self.frame = 0
-		self.position = init
-		self.image = spriteName
+		self.position = init.copy()
+		self.image = pygame.image.load("Art Stuff\\test.png").convert_alpha()
 	
 	def update(self):
-		if frame < 20:
-			self.position += Vector(0, 2)
-		elif frame == 25:
-			BuckTarget(self.game, self, player.getPosition(), 5, math.radians(15), "shell")
-		elif frame > 30:
-			self.position -= Vector(0, 2)
-		frame+=1
+		if self.frame < 20:
+			self.position.Add((0, 2))
+		#elif self.frame == 25:
+			#BuckTarget(self.game, self, self.player.getPosition(), 5, math.radians(15), 5, "test")
+		elif self.frame > 40:
+			self.position.Add((0, -2))
+		self.frame+=1
 	
-	def draw(self):
-		if screen.get_rect().collidepoint(self.position.x, self.position.y):
+	def draw(self, screen):
+		if screen.get_rect().inflate(80,80).collidepoint(self.position.x, self.position.y):
 			screen.blit(self.image, (self.position.x, self.position.y))
 		else:
 			del self
 			
 	def __del__ (self):
-		game.gameObjects.pop(self._id_)
+		self.game.gameObjects.pop(self._id_)

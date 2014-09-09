@@ -1,4 +1,5 @@
 import pygame
+import math
 
 class Snowball:
 	def __init__(self, playerX, playerY):

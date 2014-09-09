@@ -1,4 +1,5 @@
 import pygame, sys, random, fileinput
+import math
 from player import Player
 from snowball import Snowball
 from Vector import Vector
@@ -53,13 +54,24 @@ def processPlayerEvents(player):
 gameRunning = True
 game = Engine(screen)
 player = Player(game)
+frame = 0
 
 while gameRunning:
 	clock.tick(60)
 	processPlayerEvents(player)
 	screen.blit(levelOneBackground, levelOneBackground.get_rect(), [0, 0, 600, 800])
+	
+	#frame actions
+	if(frame == 60):	
+		SeagullA(Vector(300, -10), game, player)
+	
+	#update 
 	game.update()
+	
+	#collision
+	
+	#draw
 	game.draw()
 	pygame.display.flip()
-	
+	frame+=1
 
