@@ -4,10 +4,9 @@ from Vector import Vector
 from bullet import *
 
 class Tracers:
-	def __init__(game, enemy, player, count, frameOffset, speed, spriteName):
+	def __init__(self, game, enemy, player, count, frameOffset, speed, spriteName):
 		self.game = game
 		game.gameObjects.append(self)
-		self._id_ = len(game.gameObjects)
 		self.enemy = enemy
 		self.player = player
 		self.count = count
@@ -17,24 +16,23 @@ class Tracers:
 		self.frame = 0
 		
 	def update(self):
-		if(frame%frameOffset == 0):
-			LinearBullet(enemy.position, player.getPosition(), self.speed, self.game)
+		if(self.frame%self.frameOffset == 0):
+			LinearBullet(self.enemy.position, self.player.getPosition(), self.speed, self.game, self.spriteName)
 			self.count-= 1
 			if(self.count == 0):
-				del self
+				self.__del()
 		self.frame+=1
 	
-	def draw(self):
+	def draw(self, screen):
 		return
 		
-	def __del__ (self):
-		game.gameObjects.pop(self._id_)
+	def __del (self):
+		self.game.flag(self)
 
 class TracersOffset:
-	def __init__(game, enemy, player, offset, count, frameOffset, speed, spriteName):
+	def __init__(self, game, enemy, player, offset, count, frameOffset, speed, spriteName):
 		self.game = game
 		game.gameObjects.append(self)
-		self._id_ = len(game.gameObjects)
 		self.enemy = enemy
 		self.player = player
 		self.count = count
@@ -46,17 +44,17 @@ class TracersOffset:
 		
 	def update(self):
 		if(frame%frameOffset == 0):
-			LinearBullet(enemy.position, player.getPosition() + self.offset, self.speed, self.game)
+			LinearBullet(self.enemy.position, self.player.getPosition() + self.offset, self.speed, self.game, self.spriteName)
 			self.count-=1
 			if(self.count == 0):
-				del self
+				self.__del()
 		self.frame+=1
 	
-	def draw(self):
+	def draw(self, screen):
 		return
 		
-	def __del__ (self):
-		game.gameObjects.pop(self._id_)
+	def __del (self):
+		self.game.flag(self)
 	
 def BuckTarget(game, enemy, target, count, spread, speed, spriteName):
 	t = target.copy()
@@ -73,19 +71,18 @@ class Enemy:
 	def __init__(self, init, game, player):
 		self.game = game
 		game.gameObjects.append(self)
-		self._id_ = len(game.gameObjects) - 1
 		self.player = player
 		self.frame = 0
 		self.position = init.copy()
 
 	def draw(self, screen):
-		if screen.get_rect().inflate(80,80).collidepoint(self.position.x, self.position.y):
-			screen.blit(self.image, (self.position.x, self.position.y))
+		if screen.get_rect().inflate(80,80).collidepoint(self.position.x - self.image.get_width()/2, self.position.y - self.image.get_height()/2):
+			screen.blit(self.image, (self.position.x - self.image.get_width()/2, self.position.y - self.image.get_height()/2))
 		else:
-			self.__del__()
+			self.__del()
 			
-	def __del__ (self):
-		self.game.flag(self._id_)
+	def __del (self):
+		self.game.flag(self)
 	
 class SeagullA(Enemy):
 	def __init__(self, init, game, player):
@@ -104,5 +101,28 @@ class SeagullA(Enemy):
 	def draw(self, screen):
 		Enemy.draw(self, screen)
 			
-	def __del__ (self):
-		Enemy.__del__(self)
+	def __del (self):
+		Enemy.__del(self)
+		
+class SeagullB(Enemy):
+	def __init__(self, init, game, player):
+		Enemy.__init__(self, init, game, player)
+		self.image = pygame.image.load("Art Stuff\\test.png").convert_alpha()
+		self.t = None
+	
+	def update(self):
+		if self.frame < 20:
+			self.position.Add((0, 2))
+		elif self.frame == 25:
+			self.t = Tracers(self.game, self, self.player, 10, 7, 5, "rock")
+		elif self.frame > 100:
+			self.position.Add((0, -2))
+		self.frame+=1
+	
+	def draw(self, screen):
+		Enemy.draw(self, screen)
+			
+	def __del (self):
+		Enemy.__del(self)
+		if self.t != None:
+			self.t.__del()
