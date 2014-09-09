@@ -60,7 +60,7 @@ class TracersOffset:
 	
 def BuckTarget(game, enemy, target, count, spread, speed, spriteName):
 	t = target.copy()
-	t.RotateAround(enemy.position, spread * (count)/ 2)
+	t.RotateAround(enemy.position, spread * (count - 1)/ 2)
 	for n in range(count):
 		b = LinearBullet(enemy.position, t, speed, game, spriteName)
 		t.RotateAround(enemy.position, -spread)
@@ -69,7 +69,7 @@ def BuckDown(game, enemy, count, spread, speed, spriteName):
 	BuckTarget(game, enemy, Vector(10000, enemy.y) ,count, spread, speed, spriteName)
 
 
-class SeagullA:
+class Enemy:
 	def __init__(self, init, game, player):
 		self.game = game
 		game.gameObjects.append(self)
@@ -77,6 +77,19 @@ class SeagullA:
 		self.player = player
 		self.frame = 0
 		self.position = init.copy()
+
+	def draw(self, screen):
+		if screen.get_rect().inflate(80,80).collidepoint(self.position.x, self.position.y):
+			screen.blit(self.image, (self.position.x, self.position.y))
+		else:
+			self.__del__()
+			
+	def __del__ (self):
+		self.game.flag(self._id_)
+	
+class SeagullA(Enemy):
+	def __init__(self, init, game, player):
+		Enemy.__init__(self, init, game, player)
 		self.image = pygame.image.load("Art Stuff\\test.png").convert_alpha()
 	
 	def update(self):
@@ -89,10 +102,7 @@ class SeagullA:
 		self.frame+=1
 	
 	def draw(self, screen):
-		if screen.get_rect().inflate(80,80).collidepoint(self.position.x, self.position.y):
-			screen.blit(self.image, (self.position.x, self.position.y))
-		else:
-			self.__del__()
+		Enemy.draw(self, screen)
 			
 	def __del__ (self):
-		self.game.flag(self._id_)
+		Enemy.__del__(self)

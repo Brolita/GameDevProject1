@@ -72,7 +72,11 @@ while gameRunning:
 	#frame actions
 	if(frame == 60):	
 		SeagullA(Vector(300, -10), game, player)
-	
+		
+	if(frame == 120):	
+		SeagullA(Vector(150, -10), game, player)
+		SeagullA(Vector(450, -10), game, player)
+		
 	#update 
 	game.update()
 	
