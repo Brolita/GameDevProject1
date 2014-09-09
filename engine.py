@@ -4,19 +4,24 @@ import math
 class Engine:
 	def __init__(self, screen):
 		self.gameObjects = []
+		self.flags = []
 		self.screen = screen
 		
 	def update(self):
 		for i in range(len(self.gameObjects)):
-			#try:
-				self.gameObjects[i].update()
-			#except(AttributeError):
-			#	print self.gameObjects[i].__class__, "is listed as a gameobject but has no update function"
-	
+			self.gameObjects[i].update()
+			self.gameObjects[i]._id_ = i			
+			
 	def draw(self):
 		for i in range(len(self.gameObjects)):
-			#try:
-				self.gameObjects[i].draw(self.screen)
-			#except(AttributeError):
-			#	print self.gameObjects[i].__class__, "is listed as a gameobject but has no draw function"
-	
+			self.gameObjects[i].draw(self.screen)
+		
+		for i in range(len(self.flags)):
+			self.gameObjects.pop(self.flags[i])
+			for j in range(i, len(self.flags)):
+				if self.flags[i] < self.flags[j]:
+					self.flags[j]-=1
+		self.flags = []
+		
+	def flag(self, _id_):
+		self.flags.append(_id_)

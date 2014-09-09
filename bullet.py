@@ -16,19 +16,19 @@ class Bullet(pygame.sprite.Sprite):
 		if screen.get_rect().copy().inflate(40,40).collidepoint(self.position.x, self.position.y):
 			screen.blit(self.image, (self.position.x, self.position.y))
 		else:
-			del self
+			self.__del__()
 			
 	def __del__ (self):
-		game.gameObjects.pop(self._id_)
+		self.game.flag(self._id_)
 		
 class LinearBullet(Bullet):
 	def __init__(self, init, target, speed, game, spriteName):
 		self.position = init.copy()
 		self.target = target.copy()
 		self.speed = speed
-		pos = self.position
-		self.position.MoveToward(self.target, self.speed)
-		self.velocity = self.position - pos
+		pos = self.position.copy()
+		pos.MoveToward(self.target, self.speed)
+		self.velocity = pos - self.position
 		super(LinearBullet, self).__init__(game, spriteName)
 		
 	def update(self):

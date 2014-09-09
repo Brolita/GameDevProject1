@@ -59,8 +59,8 @@ class TracersOffset:
 		game.gameObjects.pop(self._id_)
 	
 def BuckTarget(game, enemy, target, count, spread, speed, spriteName):
-	t = target
-	t.RotateAround(enemy.position, spread * (count - 1)/ 2)
+	t = target.copy()
+	t.RotateAround(enemy.position, spread * (count)/ 2)
 	for n in range(count):
 		b = LinearBullet(enemy.position, t, speed, game, spriteName)
 		t.RotateAround(enemy.position, -spread)
@@ -82,8 +82,8 @@ class SeagullA:
 	def update(self):
 		if self.frame < 20:
 			self.position.Add((0, 2))
-		#elif self.frame == 25:
-			#BuckTarget(self.game, self, self.player.getPosition(), 5, math.radians(15), 5, "test")
+		elif self.frame == 25:
+			BuckTarget(self.game, self, self.player.getPosition(), 5, math.radians(7.5), 5, "seashell")
 		elif self.frame > 40:
 			self.position.Add((0, -2))
 		self.frame+=1
@@ -92,7 +92,7 @@ class SeagullA:
 		if screen.get_rect().inflate(80,80).collidepoint(self.position.x, self.position.y):
 			screen.blit(self.image, (self.position.x, self.position.y))
 		else:
-			del self
+			self.__del__()
 			
 	def __del__ (self):
-		self.game.gameObjects.pop(self._id_)
+		self.game.flag(self._id_)

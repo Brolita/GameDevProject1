@@ -16,7 +16,7 @@ class Vector:
 			
 	def Add(self, delta):
 		#move this vector a certain x and y
-		if type(delta) is Vector:
+		if isinstance(delta, Vector):
 			self.x += delta.x
 			self.y += delta.y
 		elif type(delta) is tuple or type(delta) is list:
@@ -42,7 +42,7 @@ class Vector:
 		return Vector(-self.x, -self.y)
 		
 	def __mul__(self, other):
-		return self.Dot(other)
+		return Vector(self.x * other, self.y * other)
 	
 	def __str__(self):
 		return 'Vector(' + self.x.__str__() + ',' + self.y.__str__() + ')'
@@ -60,21 +60,26 @@ class Vector:
 	
 	def MoveToward(self, pos, dis):
 		#move this vector towards another point
+		Vector( (self.x - pos.x) * (dis / self.Difference(pos)), (self.y - pos.y) * (dis / self.Difference(pos)) )
 		if isinstance(pos, Vector):
-			self.Add( Vector( pos.x * (dis / self.Difference(pos)), pos.y * (dis / self.Difference(pos)) ) )
+			self.Add( Vector( (pos.x - self.x) * (dis / self.Difference(pos)), (pos.y - self.y) * (dis / self.Difference(pos)) ) )
 		elif type(pos) is tuple or type(pos) is list:
-			self.Add( Vector( pos[0] * (dis / self.Difference(pos)), pos[1] * (dis / self.Difference(pos)) ) )
+			self.Add( Vector( (pos[0] - self.x) * (dis / self.Difference(pos)), (pos[1] - self.y) * (dis / self.Difference(pos)) ) )
 		else:
 			print "type mismatch Vector.py, line 66:", center.__class__, "type given"
 	
 	def RotateAround(self, center, rad):
 		#rotate this vector around another
 		if isinstance(center, Vector):
-			self.x = (self.x - center.x) * math.cos(rad) - (self.y - center.y) * math.sin(rad) + center.x
-			self.y = (self.x - center.x) * math.sin(rad) + (self.y - center.y) * math.cos(rad) + center.y
+			ax = (self.x - center.x) * math.cos(rad) - (self.y - center.y) * math.sin(rad) + center.x
+			ay = (self.x - center.x) * math.sin(rad) + (self.y - center.y) * math.cos(rad) + center.y
+			self.x = ax
+			self.y = ay
 		elif type(center) is tuple or type(center) is list:
-			self.x = (self.x - center[0]) * math.cos(rad) - (self.y - center[1]) * math.sin(rad) + center[0]
-			self.y = (self.x - center[0]) * math.sin(rad) + (self.y - center[1]) * math.cos(rad) + center[1]
+			ax = (self.x - center[0]) * math.cos(rad) - (self.y - center[1]) * math.sin(rad) + center[0]
+			ay = (self.x - center[0]) * math.sin(rad) + (self.y - center[1]) * math.cos(rad) + center[1]
+			self.x = ax
+			self.y = ay
 		else:
 			print "type mismatch Vector.py, line 66:", center.__class__, "type given"
 	

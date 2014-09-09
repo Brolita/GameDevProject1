@@ -15,6 +15,6 @@ class Snowball:
 		self.rect = future
 			
 	def draw(self, screen):
-		print 'Snowball is drawing'
+		#print 'Snowball is drawing'
 		screen.blit(self.image, self.rect, [0, 0, 5, 5])
 		
