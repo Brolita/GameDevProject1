@@ -21,17 +21,23 @@ def processPlayerEvents(player):
 	
 			if event.key == pygame.K_UP:
 				player.moving[0] = True
+				player.moving[1] = False
 				
 			if event.key == pygame.K_DOWN:
 				player.moving[1] = True
+				player.moving[0] = False
 				
 			if event.key == pygame.K_LEFT:
 				player.moving[2] = True
+				player.moving[3] = False
 				
 			if event.key == pygame.K_RIGHT:
 				player.moving[3] = True
+				player.moving[2] = False
+				
 			if event.key == pygame.K_TAB:
 				player.getPosition()
+				
 			if event.key == pygame.K_SPACE:
 				player.firing = True
 				
