@@ -18,6 +18,7 @@ class Player:
 		self.fireCooldown = 5
 		self.canFire = True
 		self.game = game
+		self.name = 'Player'
 		game.gameObjects.append(self)
 	
 	def update(self):
@@ -68,6 +69,9 @@ class Player:
 		#print 'Player is currently at', self.rect.x + 16, ', ', self.rect.y + 48
 		return Vector(self.rect.x + 15, self.rect.y + 35)
 	
+	def get_rect(self):
+		return self.rect
+		
 	def draw(self, screen):
 		screen.blit(self.image, self.rect, [0, 0, 32, 48])
 		
