@@ -66,7 +66,6 @@ def BuckTarget(game, enemy, target, count, spread, speed, spriteName):
 def BuckDown(game, enemy, count, spread, speed, spriteName):
 	BuckTarget(game, enemy, Vector(enemy.position.x, 10000) ,count, spread, speed, spriteName)
 
-
 class Enemy:
 	def __init__(self, init, game, player):
 		self.game = game
@@ -81,9 +80,6 @@ class Enemy:
 		else:
 			self.__del()
 			
-	def get_rect(self):
-		return self.image.get_rect().move(self.position.x - self.image.get_width()/2, self.position.y - self.image.get_height()/2)
-			
 	def __del (self):
 		self.game.flag(self)
 	
@@ -92,6 +88,7 @@ class SeagullA(Enemy):
 		Enemy.__init__(self, init, game, player)
 		self.image = pygame.image.load("Art Stuff\\test.png").convert_alpha()
 		self.count=count
+	
 	def update(self):
 		if self.frame < 20:
 			self.position.Add((0, 2))
@@ -105,7 +102,7 @@ class SeagullA(Enemy):
 		Enemy.draw(self, screen)
 		
 	def get_rect(self):
-		Enemy.get_rect(self)
+		return self.image.get_rect().move(self.position.x - self.image.get_width()/2, self.position.y - self.image.get_height()/2)
 			
 	def __del (self):
 		Enemy.__del(self)
@@ -129,8 +126,8 @@ class SeagullB(Enemy):
 		Enemy.draw(self, screen)
 			
 	def get_rect(self):
-		Enemy.get_rect(self)		
-	
+		return self.image.get_rect().move(self.position.x - self.image.get_width()/2, self.position.y - self.image.get_height()/2)
+		
 	def __del (self):
 		Enemy.__del(self)
 		if self.t != None:
@@ -152,7 +149,7 @@ class PelicanA(Enemy):
 		Enemy.draw(self, screen)
 		
 	def get_rect(self):
-		Enemy.get_rect(self)
+		return self.image.get_rect().move(self.position.x - self.image.get_width()/2, self.position.y - self.image.get_height()/2)	
 			
 	def __del (self):
 		Enemy.__del(self)
@@ -174,7 +171,8 @@ class PelicanB(Enemy):
 		Enemy.draw(self, screen)
 			
 	def get_rect(self):
-		Enemy.get_rect(self)		
+		return self.image.get_rect().move(self.position.x - self.image.get_width()/2, self.position.y - self.image.get_height()/2)
+				
 	
 	def __del (self):
 		Enemy.__del(self)

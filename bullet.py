@@ -40,7 +40,7 @@ class LinearBullet(Bullet):
 		super(LinearBullet, self).draw(screen)
 		
 	def get_rect(self):
-		super(LinearBullet, self).get_rect()
+		return super(LinearBullet, self).get_rect()
 	
 	def __del(self):
 		super(LinearBullet, self).__del()
@@ -59,7 +59,7 @@ class CircularBullet(Bullet):
 		super(LinearBullet, self).draw(screen)
 		
 	def get_rect(self):
-		super(LinearBullet, self).get_rect()
+		return super(LinearBullet, self).get_rect()
 	
 	def __del(self):
 		super(LinearBullet, self).__del()
@@ -80,7 +80,7 @@ class SpiralBullet(Bullet):
 		super(LinearBullet, self).draw(screen)
 		
 	def get_rect(self):
-		super(LinearBullet, self).get_rect()
+		return super(LinearBullet, self).get_rect()
 	
 	def __del(self):
 		super(LinearBullet, self).__del()
