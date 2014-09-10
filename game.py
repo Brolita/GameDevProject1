@@ -14,7 +14,7 @@ clock = pygame.time.Clock()
 def processPlayerEvents(player):
 	for event in pygame.event.get():
 		if event.type == pygame.KEYDOWN:
-			print pygame.key.name(event.key)
+			#print pygame.key.name(event.key)
 			if event.key == pygame.K_ESCAPE:
 				sys.exit()
 	
@@ -40,6 +40,9 @@ def processPlayerEvents(player):
 			if event.key == pygame.K_SPACE:
 				player.firing = True
 				
+			if event.key == pygame.K_LSHIFT:
+				player.focus = True
+				
 		if event.type == pygame.KEYUP:
 			if event.key == pygame.K_UP:
 				player.moving[0] = False
@@ -56,6 +59,8 @@ def processPlayerEvents(player):
 			if event.key == pygame.K_SPACE:
 				player.firing = False
 				
+			if event.key == pygame.K_LSHIFT:
+				player.focus = False
 gameRunning = True
 game = Engine(screen)
 player = Player(game)

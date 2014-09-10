@@ -10,9 +10,10 @@ class Player:
 		self.rect = self.image.get_rect()
 		self.rect.x = 300
 		self.rect.y = 400
-		self.x_velocity = 3
-		self.y_velocity = 3
-		self.moving = [False, False, False, False] #up, down, left, right
+		self.x_velocity = 5
+		self.y_velocity = 5
+		self.moving = [False, False, False, False] #up, down, left, right, self.focus
+		self.focus = False
 		self.firing = False
 		self.snowballs = []
 		self.fireCooldown = 5
@@ -34,7 +35,10 @@ class Player:
 			self.canFire = False
 			
 		if self.moving[0]:
-			future = self.rect.move(0, -self.y_velocity)
+			if self.focus:
+				future = self.rect.move(0, -self.y_velocity/2.5)
+			else:
+				future = self.rect.move(0, -self.y_velocity)
 			if future.top < 0:
 				self.rect.top = 0
 				
@@ -42,7 +46,10 @@ class Player:
 				self.rect = future
 				
 		elif self.moving[1]:
-			future = self.rect.move(0, self.y_velocity)
+			if self.focus:
+				future = self.rect.move(0, self.y_velocity/2.5)
+			else:
+				future = self.rect.move(0, self.y_velocity)
 			if future.bottom > 800:
 				self.rect.bottom = 800
 				
@@ -50,7 +57,10 @@ class Player:
 				self.rect = future
 				
 		if self.moving[2]:
-			future = self.rect.move(-self.x_velocity, 0)
+			if self.focus:
+				future = self.rect.move(-self.x_velocity/2.5, 0)
+			else:
+				future = self.rect.move(-self.x_velocity, 0)
 			if future.left < 0:
 				self.rect.left = 0
 				
@@ -58,7 +68,10 @@ class Player:
 				self.rect = future
 				
 		elif self.moving[3]:
-			future = self.rect.move(self.x_velocity, 0)
+			if self.focus:
+				future = self.rect.move(self.x_velocity/2.5, 0)
+			else:
+				future = self.rect.move(self.x_velocity, 0)
 			if future.right > 600:
 				self.rect.right = 600
 				
