@@ -60,7 +60,7 @@ gameRunning = True
 game = Engine(screen)
 player = Player(game)
 frame = 0
-
+wave = 1
 
 
 while gameRunning:
@@ -69,7 +69,7 @@ while gameRunning:
 	screen.blit(levelOneBackground, levelOneBackground.get_rect(), [0, 0, 600, 800])
 	
 	#frame actions 
-	if True: #wave 1
+	if wave == 1: #wave 1
 		if frame==30:
 			SeagullA(Vector(300,-10),game,player,5)
 		if frame==60:
@@ -116,7 +116,13 @@ while gameRunning:
 			SeagullB(Vector(300,790),game,player,15)
 		if frame==480:
 			PelicanB(Vector(100,780),game,player,10,7)
+		if frame==900:
+			frame = 0
+			wave = 2
 	
+	
+	#if wave==2: #wave 2
+		#if fra
 
 	#update 
 	game.update()
