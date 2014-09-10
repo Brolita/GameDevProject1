@@ -1,4 +1,4 @@
-Script
+﻿Script
 
 START OF FIRST STAGE
 Penguin: (Hmmm...this jetpack handles better than I thought it would)
@@ -23,19 +23,35 @@ AFTER BOSS FIGHT
 Penguin: (I guess he really didn’t know where the Caribbean was).
 Penguin: (Maybe if I keep going in the right direction someone else will help me).
 
-AT BEGINNING OF SECOND STAGE
-Hawk: Calling unidentified bird… you are flying over restricted airspace. You will either land and register with our base or be shot down. You have 45 seconds to comply.
-Penguin: Wait…..what? Who are you?
-Hawk: Average registration is a period of about 2 days of paperwork and 4-6 weeks for processing. If you cooperate you should be free to go on your way unless there are issues.
-Penguin: I still don’t know what's going on?
-Hawk: You have 45 seconds to begin descent. the choice is yours. 
-Penguin: Have a nice day….(He seemed nice.) 
+
+RIGHT BEFORE SECOND STAGE BOSS FIGHT
+Flamingo: What are you? I've never seen something like you in the sky before?
+Penguin: I'm a Penguin.
+FLamingo: A Penguin?! In the sky?! Now that's unheard of.
+Penguin: I built a jet-pack.
+Flamingo: Do you think you are special?
+Penguin:umm....what?
+Flamingo: Trying to upstage me! The most beautiful Flamingo in the world.
+Penguin: I'm not trying to upstage anyone.
+Flamingo: Of course you are. That's why you've come to my skies to challange me to see who the most graceful creature in the sky is.
+Penguin: I didn't challenge anyone.
+Flamingo: LET THE CHALLENGE BEGIN.
 
 
-RIGHT BEFORE FIGHT
-Hawk: Calling hostile craft. You have been given sufficient time to comply with our orders. You will land immediately or be shot down.
-Penguin: Can’t we just be friends? 
-Hawk: Delta formation soldiers. This is not a drill!!
+
+//AT BEGINNING OF SECOND STAGE
+//Hawk: Calling unidentified bird… you are flying over restricted airspace. You will either land and register with our base or be shot down. You have 45 seconds to comply.
+//Penguin: Wait…..what? Who are you?
+//Hawk: Average registration is a period of about 2 days of paperwork and 4-6 weeks for processing. If you cooperate you should be free to go on your way unless there are issues.
+//Penguin: I still don’t know what's going on?
+//Hawk: You have 45 seconds to begin descent. the choice is yours. 
+//Penguin: Have a nice day….(He seemed nice.) 
+
+
+//RIGHT BEFORE FIGHT
+//Hawk: Calling hostile craft. You have been given sufficient time to comply with our orders. You will land immediately or be shot down.
+//Penguin: Can’t we just be friends? 
+//Hawk: Delta formation soldiers. This is not a drill!!
 
 BEGINNING OF 3RD STAGE
 Don Macaw:Now….what do we have here. I’ve never seen your kind before?
