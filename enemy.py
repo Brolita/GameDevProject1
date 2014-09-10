@@ -5,6 +5,7 @@ from bullet import *
 
 class Tracers:
 	def __init__(self, game, enemy, player, count, frameOffset, speed, spriteName):
+		self.name = 'Tracers'
 		self.game = game
 		game.gameObjects.append(self)
 		self.enemy = enemy
@@ -31,6 +32,7 @@ class Tracers:
 
 class TracersOffset:
 	def __init__(self, game, enemy, player, offset, count, frameOffset, speed, spriteName):
+		self.name = 'TracersOffset'
 		self.game = game
 		game.gameObjects.append(self)
 		self.enemy = enemy
@@ -68,6 +70,7 @@ def BuckDown(game, enemy, count, spread, speed, spriteName):
 
 class Enemy:
 	def __init__(self, init, game, player):
+		self.name = 'Enemy'
 		self.game = game
 		game.gameObjects.append(self)
 		self.player = player
@@ -85,6 +88,7 @@ class Enemy:
 	
 class SeagullA(Enemy):
 	def __init__(self, init, game, player,count):
+		self.name = 'SeagullA'
 		Enemy.__init__(self, init, game, player)
 		self.image = pygame.image.load("Art Stuff\\test.png").convert_alpha()
 		self.count=count
@@ -109,6 +113,7 @@ class SeagullA(Enemy):
 		
 class SeagullB(Enemy):
 	def __init__(self, init, game, player):
+		self.name = 'SeagullB'
 		Enemy.__init__(self, init, game, player)
 		self.image = pygame.image.load("Art Stuff\\test.png").convert_alpha()
 		self.t = None

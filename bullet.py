@@ -5,6 +5,7 @@ from engine import Engine
 
 class Bullet(pygame.sprite.Sprite):
 	def __init__ (self, game, spriteName):
+		self.name = 'Bullet'
 		self.spriteName = spriteName	
 		self.game = game
 		game.gameObjects.append(self)
@@ -25,6 +26,7 @@ class Bullet(pygame.sprite.Sprite):
 		
 class LinearBullet(Bullet):
 	def __init__(self, init, target, speed, game, spriteName):
+		self.name = 'Bullet'
 		self.position = init.copy()
 		self.target = target.copy()
 		self.speed = speed
@@ -47,6 +49,7 @@ class LinearBullet(Bullet):
 		
 class CircularBullet(Bullet):
 	def __init__(self, init, target, radialSpeed, game, spriteName):
+		self.name = 'Bullet'
 		self.position = init.copy()
 		self.target = target.copy()
 		self.radialSpeed = radialSpeed
@@ -66,6 +69,7 @@ class CircularBullet(Bullet):
 		
 class SpiralBullet(Bullet):
 	def __init__(self, init, target, radialSpeed, approachSpeed, game, spriteName):
+		self.name = 'Bullet'
 		self.position = init.copy()
 		self.target = target.copy()
 		self.radialSpeed = radialSpeed
