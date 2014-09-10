@@ -100,21 +100,29 @@ while gameRunning:
 			PelicanA(Vector(100,-10),game,player,10,7)
 		if frame==300:
 			SeagullA(Vector(200,-10),game,player,15)
-		if frame==320:
-			PelicanB(Vector(100,780),game,player,10,7)
 		if frame==350:
-			PelicanB(Vector(100,780),game,player,10,7)
-		if frame==380:
-			PelicanB(Vector(100,780),game,player,10,7)
+			SeagullA(Vector(300,-10),game,player,10)
 		if frame==400:
-			SeagullA(Vector(400,-10),game,player,15)
-		if frame==410:
-			PelicanB(Vector(100,780),game,player,10,7)
-		if frame==440:
-			PelicanB(Vector(100,780),game,player,10,7)
+			SeagullA(Vector(500,-10),game,player,11)
 		if frame==450:
-			SeagullB(Vector(300,790),game,player,15)
-		if frame==480:
+			SeagullA(Vector(200,-10),game,player,13)
+		if frame==470:
+			PelicanB(Vector(100,780),game,player,10,7)
+		if frame==500:
+			PelicanB(Vector(100,780),game,player,10,7)
+		if frame==500:
+			SeagullA(Vector(400,-10),game,player,12)
+		if frame==530:
+			PelicanB(Vector(100,780),game,player,10,7)
+		if frame==550:
+			SeagullA(Vector(100,-10),game,player,15)
+		if frame==560:
+			PelicanB(Vector(100,780),game,player,10,7)
+		if frame==600:
+			SeagullA(Vector(500,-10),game,player,12)
+		if frame==590:
+			PelicanB(Vector(100,780),game,player,10,7)
+		if frame==620:
 			PelicanB(Vector(100,780),game,player,10,7)
 		if frame==900:
 			frame = 0
