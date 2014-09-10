@@ -204,5 +204,3 @@ class PelicanC(Enemy):
 			
 	def flag(self):
 		Enemy.flag(self)
-		if self.t != None:
-			self.t.flag()
