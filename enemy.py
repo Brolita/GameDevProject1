@@ -107,7 +107,7 @@ class SeagullA(Enemy):
 		Enemy.draw(self, screen)
 		
 	def get_rect(self):
-		return self.image.get_rect().move(self.position.x - self.image.get_width()/2, self.position.y - self.image.get_height()/2)
+		Enemy.get_rect(self)
 			
 	def __del__(self):
 		Enemy.__del__(self)
@@ -130,7 +130,7 @@ class SeagullB(Enemy):
 		Enemy.draw(self, screen)
 		
 	def get_rect(self):
-		return self.image.get_rect().move(self.position.x - self.image.get_width()/2, self.position.y - self.image.get_height()/2)
+		Enemy.get_rect(self)
 			
 	def __del__(self):
 		Enemy.__del__(self)
@@ -152,7 +152,7 @@ class PelicanA(Enemy):
 		Enemy.draw(self, screen)
 		
 	def get_rect(self):
-		return self.image.get_rect().move(self.position.x - self.image.get_width()/2, self.position.y - self.image.get_height()/2)
+		Enemy.get_rect(self)
 			
 	def __del__(self):
 		Enemy.__del__(self)
@@ -176,7 +176,7 @@ class PelicanB(Enemy):
 		Enemy.draw(self, screen)
 		
 	def get_rect(self):
-		return self.image.get_rect().move(self.position.x - self.image.get_width()/2, self.position.y - self.image.get_height()/2)
+		Enemy.get_rect(self)
 			
 	def __del__(self):
 		Enemy.__del__(self)
@@ -200,7 +200,7 @@ class PelicanC(Enemy):
 		Enemy.draw(self, screen)
 		
 	def get_rect(self):
-		return self.image.get_rect().move(self.position.x - self.image.get_width()/2, self.position.y - self.image.get_height()/2)
+		Enemy.get_rect(self)
 			
 	def __del__(self):
 		Enemy.__del__(self)
