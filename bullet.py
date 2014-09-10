@@ -16,12 +16,12 @@ class Bullet(pygame.sprite.Sprite):
 		if screen.get_rect().copy().inflate(40,40).collidepoint(self.position.x, self.position.y):
 			screen.blit(self.image, (self.position.x - self.image.get_width()/2, self.position.y - self.image.get_height()/2))
 		else:
-			self.__del()
+			self.flag()
 			
 	def get_rect(self):
 		return self.image.get_rect().move(self.position.x - self.image.get_width()/2, self.position.y - self.image.get_height()/2)
 		
-	def __del (self):
+	def flag (self):
 		self.game.flag(self)
 		
 class LinearBullet(Bullet):
@@ -44,8 +44,8 @@ class LinearBullet(Bullet):
 	def get_rect(self):
 		return super(LinearBullet, self).get_rect()
 	
-	def __del(self):
-		super(LinearBullet, self).__del()
+	def flag(self):
+		super(LinearBullet, self).flag()
 		
 class CircularBullet(Bullet):
 	def __init__(self, init, target, radialSpeed, game, spriteName):
@@ -64,8 +64,8 @@ class CircularBullet(Bullet):
 	def get_rect(self):
 		return super(LinearBullet, self).get_rect()
 	
-	def __del(self):
-		super(LinearBullet, self).__del()
+	def flag(self):
+		super(LinearBullet, self).flag()
 		
 class SpiralBullet(Bullet):
 	def __init__(self, init, target, radialSpeed, approachSpeed, game, spriteName):
@@ -86,5 +86,5 @@ class SpiralBullet(Bullet):
 	def get_rect(self):
 		return super(LinearBullet, self).get_rect()
 	
-	def __del(self):
-		super(LinearBullet, self).__del()
+	def flag(self):
+		super(LinearBullet, self).flag()

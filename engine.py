@@ -4,7 +4,7 @@ import math
 class Engine:
 	def __init__(self, screen):
 		self.gameObjects = []
-		self.flags = []
+		self.flags = set([])	
 		self.screen = screen
 		
 	def update(self):
@@ -17,7 +17,7 @@ class Engine:
 						# check if Player has been hit by a bullet
 							collisionDetected = j.get_rect().collidepoint((i.getPosition().x, i.getPosition().y))
 							if collisionDetected == True:
-								self.gameObjects.remove(j)
+								j.flag()
 								print 'Player has been hit!'
 								
 						# check if Player has shot an enemy
@@ -25,8 +25,8 @@ class Engine:
 							collisionDetected = j.get_rect().colliderect(i.get_rect())
 							if collisionDetected == True:
 								print 'Player shot an enemy!'
-								self.gameObjects.remove(i)
-								self.gameObjects.remove(j)
+								i.flag()
+								j.flag()
 																		   
 						# check if Player has collided with an enemy
 						if i.name == 'Player' and j.name == 'Enemy':
@@ -43,4 +43,4 @@ class Engine:
 				self.gameObjects.remove(self.flags.pop())
 		
 	def flag(self, obj):
-		self.flags.append(obj)
+		self.flags.add(obj)
