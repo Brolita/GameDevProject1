@@ -12,10 +12,10 @@ class Engine:
 			i.update()	
 			if i.name != 'Tracers' and i.name != 'TracersOffset':
 				for j in self.gameObjects:
-					if i != j and j.name != 'Tracers' and j.name != 'TracersOffset':
-						collisionDetected = i.get_rect().colliderect(j.get_rect())
-						if collisionDetected == True:
-							if i.name == 'Player' and j.name == 'Bullet':
+					if i != j and j.name != 'Tracers' and j.name != 'TracersOffset':	
+						if i.name == 'Player' and j.name == 'Bullet':
+							collisionDetected = j.get_rect().collidepoint((i.getPosition().x, i.getPosition().y))
+							if collisionDetected == True:
 								print 'Player has been hit!'
 						
 	def draw(self):
