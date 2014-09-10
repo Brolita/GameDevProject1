@@ -27,7 +27,7 @@ class Tracers:
 	def draw(self, screen):
 		return
 		
-	def __del (self):
+	def __del__(self):
 		self.game.flag(self)
 
 class TracersOffset:
@@ -55,7 +55,7 @@ class TracersOffset:
 	def draw(self, screen):
 		return
 		
-	def __del (self):
+	def __del__(self):
 		self.game.flag(self)
 	
 def BuckTarget(game, enemy, target, count, spread, speed, spriteName):
@@ -81,12 +81,12 @@ class Enemy:
 		if screen.get_rect().inflate(300,300).collidepoint(self.position.x - self.image.get_width()/2, self.position.y - self.image.get_height()/2):
 			screen.blit(self.image, (self.position.x - self.image.get_width()/2, self.position.y - self.image.get_height()/2))
 		else:
-			self.__del()
+			self.__del__()
 			
 	def get_rect(self):
 		return self.image.get_rect().move(self.position.x - self.image.get_width()/2, self.position.y - self.image.get_height()/2)
 			
-	def __del (self):
+	def __del__(self):
 		self.game.flag(self)
 	
 class SeagullA(Enemy):
@@ -107,10 +107,10 @@ class SeagullA(Enemy):
 		Enemy.draw(self, screen)
 		
 	def get_rect(self):
-		Enemy.get_rect(self)
+		return self.image.get_rect().move(self.position.x - self.image.get_width()/2, self.position.y - self.image.get_height()/2)
 			
-	def __del (self):
-		Enemy.__del(self)
+	def __del__(self):
+		Enemy.__del__(self)
 		
 class SeagullB(Enemy):
 	def __init__(self, init, game, player,count):
@@ -130,10 +130,10 @@ class SeagullB(Enemy):
 		Enemy.draw(self, screen)
 		
 	def get_rect(self):
-		Enemy.get_rect(self)
+		return self.image.get_rect().move(self.position.x - self.image.get_width()/2, self.position.y - self.image.get_height()/2)
 			
-	def __del (self):
-		Enemy.__del(self)
+	def __del__(self):
+		Enemy.__del__(self)
 	
 class PelicanA(Enemy):
 	def __init__(self, init, game, player,timebetween,speed):
@@ -152,12 +152,12 @@ class PelicanA(Enemy):
 		Enemy.draw(self, screen)
 		
 	def get_rect(self):
-		Enemy.get_rect(self)
+		return self.image.get_rect().move(self.position.x - self.image.get_width()/2, self.position.y - self.image.get_height()/2)
 			
-	def __del (self):
-		Enemy.__del(self)
+	def __del__(self):
+		Enemy.__del__(self)
 		if self.t != None:
-			self.t.__del()
+			self.t.__del__()
 			
 class PelicanB(Enemy):
 	def __init__(self, init, game, player,timebetween,speed):
@@ -176,12 +176,12 @@ class PelicanB(Enemy):
 		Enemy.draw(self, screen)
 		
 	def get_rect(self):
-		Enemy.get_rect(self)
+		return self.image.get_rect().move(self.position.x - self.image.get_width()/2, self.position.y - self.image.get_height()/2)
 			
-	def __del (self):
-		Enemy.__del(self)
+	def __del__(self):
+		Enemy.__del__(self)
 		if self.t != None:
-			self.t.__del()
+			self.t.__del__()
 			
 			
 class PelicanC(Enemy):
@@ -200,9 +200,9 @@ class PelicanC(Enemy):
 		Enemy.draw(self, screen)
 		
 	def get_rect(self):
-		Enemy.get_rect(self)
+		return self.image.get_rect().move(self.position.x - self.image.get_width()/2, self.position.y - self.image.get_height()/2)
 			
-	def __del (self):
-		Enemy.__del(self)
+	def __del__(self):
+		Enemy.__del__(self)
 		if self.t != None:
-			self.t.__del()
+			self.t.__del__()
