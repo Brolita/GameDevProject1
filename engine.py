@@ -22,9 +22,8 @@ class Engine:
 		for i in range(len(self.gameObjects)):
 			self.gameObjects[i].draw(self.screen)
 		
-		if self.flags:
-			while self.flags:
-				self.gameObjects.remove(self.flags.pop())
+		while self.flags:
+			self.gameObjects.remove(self.flags.pop())
 		
 	def flag(self, obj):
 		self.flags.append(obj)
