@@ -85,15 +85,15 @@ class Enemy:
 		self.game.flag(self)
 	
 class SeagullA(Enemy):
-	def __init__(self, init, game, player):
+	def __init__(self, init, game, player,count):
 		Enemy.__init__(self, init, game, player)
 		self.image = pygame.image.load("Art Stuff\\test.png").convert_alpha()
-	
+		self.count=count
 	def update(self):
 		if self.frame < 20:
 			self.position.Add((0, 2))
 		elif self.frame == 25:
-			BuckTarget(self.game, self, self.player.getPosition(), 5, math.radians(7.5), 5, "seashell")
+			BuckTarget(self.game, self, self.player.getPosition(), self.count, math.radians(7.5), 5, "seashell")
 		elif self.frame > 40:
 			self.position.Add((0, -2))
 		self.frame+=1
