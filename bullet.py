@@ -17,6 +17,9 @@ class Bullet(pygame.sprite.Sprite):
 		else:
 			self.__del()
 			
+	def get_rect(self):
+		return self.image.get_rect().move(self.position.x - self.image.get_width()/2, self.position.y - self.image.get_height()/2)
+		
 	def __del (self):
 		self.game.flag(self)
 		
@@ -35,6 +38,9 @@ class LinearBullet(Bullet):
 		
 	def draw(self, screen):
 		super(LinearBullet, self).draw(screen)
+		
+	def get_rect(self):
+		super(LinearBullet, self).get_rect()
 	
 	def __del(self):
 		super(LinearBullet, self).__del()
@@ -51,6 +57,9 @@ class CircularBullet(Bullet):
 	
 	def draw(self, screen):
 		super(LinearBullet, self).draw(screen)
+		
+	def get_rect(self):
+		super(LinearBullet, self).get_rect()
 	
 	def __del(self):
 		super(LinearBullet, self).__del()
@@ -69,6 +78,9 @@ class SpiralBullet(Bullet):
 	
 	def draw(self, screen):
 		super(LinearBullet, self).draw(screen)
+		
+	def get_rect(self):
+		super(LinearBullet, self).get_rect()
 	
 	def __del(self):
 		super(LinearBullet, self).__del()

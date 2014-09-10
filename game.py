@@ -70,29 +70,41 @@ while gameRunning:
 	
 	#frame actions 
 	if frame == 60:	
-		SeagullA(Vector(300, -10), game, player)
+		s = SeagullA(Vector(300, -10), game, player)
+	if frame == 61:
+		print s.get_rect()
 		
-	if frame == 120:	
+	elif frame == 120:	
 		SeagullA(Vector(150, -10), game, player)
 		SeagullA(Vector(450, -10), game, player)
 		
-	if frame == 150:
+	elif frame == 150:
 		SeagullB(Vector(200, -10), game, player)
 	
-	if frame == 210:
+	elif frame == 210:
 		SeagullB(Vector(400, -10), game, player)
 		
-	if frame == 275:
+	elif frame == 275:
 		SeagullA(Vector(100, -10), game, player)
 	
-	if frame == 300:
-		SeagullB(Vector(350, -10), game, player)
+	elif frame == 300:
+		SeagullB(Vector(300, -10), game, player)
 		
-	if frame == 315:
+	elif frame == 315:
 		SeagullA(Vector(500, -10), game, player)
 		
-	if frame == 330:
-		SeagullB(Vector(250, -10), game, player)
+	elif frame >= 400 and frame <= 520:
+		if frame%20 == 0:
+			PelicanA(Vector(50, -10), game, player)
+		
+	elif frame >= 680 and frame <= 800:
+		if frame%20 == 0:
+			PelicanA(Vector(550, -10), game, player)
+		
+	elif frame == 960:
+		PelicanB(Vector(100, -10), game, player)
+		PelicanB(Vector(300, -10), game, player)
+		PelicanB(Vector(500, -10), game, player)
 	
 	#update 
 	game.update()

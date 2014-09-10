@@ -64,7 +64,7 @@ def BuckTarget(game, enemy, target, count, spread, speed, spriteName):
 		t.RotateAround(enemy.position, -spread)
 
 def BuckDown(game, enemy, count, spread, speed, spriteName):
-	BuckTarget(game, enemy, Vector(10000, enemy.y) ,count, spread, speed, spriteName)
+	BuckTarget(game, enemy, Vector(enemy.position.x, 10000) ,count, spread, speed, spriteName)
 
 
 class Enemy:
@@ -80,6 +80,9 @@ class Enemy:
 			screen.blit(self.image, (self.position.x - self.image.get_width()/2, self.position.y - self.image.get_height()/2))
 		else:
 			self.__del()
+			
+	def get_rect(self):
+		return self.image.get_rect().move(self.position.x - self.image.get_width()/2, self.position.y - self.image.get_height()/2)
 			
 	def __del (self):
 		self.game.flag(self)
@@ -100,6 +103,9 @@ class SeagullA(Enemy):
 	
 	def draw(self, screen):
 		Enemy.draw(self, screen)
+		
+	def get_rect(self):
+		Enemy.get_rect(self)
 			
 	def __del (self):
 		Enemy.__del(self)
@@ -114,7 +120,7 @@ class SeagullB(Enemy):
 		if self.frame < 20:
 			self.position.Add((0, 2))
 		elif self.frame == 25:
-			self.t = Tracers(self.game, self, self.player, 10, 7, 5, "rock")
+			self.t = Tracers(self.game, self, self.player, 10, 7, 5, "seashell")
 		elif self.frame > 100:
 			self.position.Add((0, -2))
 		self.frame+=1
@@ -122,7 +128,53 @@ class SeagullB(Enemy):
 	def draw(self, screen):
 		Enemy.draw(self, screen)
 			
+	def get_rect(self):
+		Enemy.get_rect(self)		
+	
 	def __del (self):
 		Enemy.__del(self)
 		if self.t != None:
 			self.t.__del()
+	
+class PelicanA(Enemy):
+	def __init__(self, init, game, player):
+		Enemy.__init__(self, init, game, player)
+		self.image = pygame.image.load("Art Stuff\\test.png").convert_alpha()
+		self.t = None
+	
+	def update(self):
+		self.position.Add((0, 5))
+		if self.frame == 25:
+			self.t = Tracers(self.game, self, self.player, 40, 10, 7, "rock")
+		self.frame+=1
+	
+	def draw(self, screen):
+		Enemy.draw(self, screen)
+		
+	def get_rect(self):
+		Enemy.get_rect(self)
+			
+	def __del (self):
+		Enemy.__del(self)
+		if self.t != None:
+			self.t.__del()
+			
+class PelicanB(Enemy):
+	def __init__(self, init, game, player):
+		Enemy.__init__(self, init, game, player)
+		self.image = pygame.image.load("Art Stuff\\test.png").convert_alpha()
+	
+	def update(self):
+		self.position.Add((0, 5))
+		if self.frame%50 == 0:
+			BuckDown(self.game, self, 4, math.radians(10), 7, "rock")
+		self.frame+=1
+	
+	def draw(self, screen):
+		Enemy.draw(self, screen)
+			
+	def get_rect(self):
+		Enemy.get_rect(self)		
+	
+	def __del (self):
+		Enemy.__del(self)

@@ -66,7 +66,7 @@ class Player:
 				
 	def getPosition(self):
 		#print 'Player is currently at', self.rect.x + 16, ', ', self.rect.y + 48
-		return Vector(self.rect.x + 16, self.rect.y + 48)
+		return Vector(self.rect.x + 15, self.rect.y + 35)
 	
 	def draw(self, screen):
 		screen.blit(self.image, self.rect, [0, 0, 32, 48])
