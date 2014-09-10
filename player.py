@@ -5,7 +5,6 @@ from snowball import Snowball
 
 class Player:
 	def __init__ (self, game):
-		print 'Made a snowball!'
 		self.image = pygame.image.load("Art Stuff\penguin.png").convert_alpha()
 		self.rect = self.image.get_rect()
 		self.rect.x = 300
@@ -14,7 +13,6 @@ class Player:
 		self.y_velocity = 3
 		self.moving = [False, False, False, False] #up, down, left, right
 		self.firing = False
-		self.snowballs = []
 		self.fireCooldown = 5
 		self.canFire = True
 		self.game = game
@@ -28,8 +26,7 @@ class Player:
 			self.fireCooldown = 0
 			
 		if (self.firing and self.canFire):
-			snowball = Snowball(self.rect.x, self.rect.y)
-			self.snowballs.append(snowball)
+			snowball = Snowball(self.rect.x, self.rect.y, self.game)
 			self.fireCooldown = 5
 			self.canFire = False
 			
@@ -75,7 +72,7 @@ class Player:
 	def draw(self, screen):
 		screen.blit(self.image, self.rect, [0, 0, 32, 48])
 		
-		for projectile in self.snowballs:
-			projectile.update(screen)
-			if projectile.rect.y < -5:
-				self.snowballs.remove(projectile)
+		#for projectile in self.snowballs:
+		#	projectile.update(screen)
+		#	if projectile.rect.y < -5:
+		#		self.snowballs.remove(projectile)

@@ -88,7 +88,7 @@ class Enemy:
 	
 class SeagullA(Enemy):
 	def __init__(self, init, game, player,count):
-		self.name = 'SeagullA'
+		self.name = 'Enemy'
 		Enemy.__init__(self, init, game, player)
 		self.image = pygame.image.load("Art Stuff\\test.png").convert_alpha()
 		self.count=count
@@ -113,7 +113,7 @@ class SeagullA(Enemy):
 		
 class SeagullB(Enemy):
 	def __init__(self, init, game, player):
-		self.name = 'SeagullB'
+		self.name = 'Enemy'
 		Enemy.__init__(self, init, game, player)
 		self.image = pygame.image.load("Art Stuff\\test.png").convert_alpha()
 		self.t = None
@@ -140,6 +140,7 @@ class SeagullB(Enemy):
 	
 class PelicanA(Enemy):
 	def __init__(self, init, game, player):
+		self.name = 'Enemy'
 		Enemy.__init__(self, init, game, player)
 		self.image = pygame.image.load("Art Stuff\\test.png").convert_alpha()
 		self.t = None
@@ -163,6 +164,7 @@ class PelicanA(Enemy):
 			
 class PelicanB(Enemy):
 	def __init__(self, init, game, player):
+		self.name = 'Enemy'
 		Enemy.__init__(self, init, game, player)
 		self.image = pygame.image.load("Art Stuff\\test.png").convert_alpha()
 	
