@@ -1,5 +1,4 @@
-import pygame, sys, random, fileinput
-import math
+import pygame, sys, random, fileinput, math
 from player import Player
 from snowball import Snowball
 from Vector import Vector
@@ -69,9 +68,31 @@ while gameRunning:
 	processPlayerEvents(player)
 	screen.blit(levelOneBackground, levelOneBackground.get_rect(), [0, 0, 600, 800])
 	
-	#frame actions
-	if(frame == 60):	
+	#frame actions 
+	if frame == 60:	
 		SeagullA(Vector(300, -10), game, player)
+		
+	if frame == 120:	
+		SeagullA(Vector(150, -10), game, player)
+		SeagullA(Vector(450, -10), game, player)
+		
+	if frame == 150:
+		SeagullB(Vector(200, -10), game, player)
+	
+	if frame == 210:
+		SeagullB(Vector(400, -10), game, player)
+		
+	if frame == 275:
+		SeagullA(Vector(100, -10), game, player)
+	
+	if frame == 300:
+		SeagullB(Vector(350, -10), game, player)
+		
+	if frame == 315:
+		SeagullA(Vector(500, -10), game, player)
+		
+	if frame == 330:
+		SeagullB(Vector(250, -10), game, player)
 	
 	#update 
 	game.update()
@@ -82,4 +103,5 @@ while gameRunning:
 	game.draw()
 	pygame.display.flip()
 	frame+=1
+	
 

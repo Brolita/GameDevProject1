@@ -1,0 +1,16 @@
+enemy list
+Stage 1
+Enemies: seagull, pelican
+Boss: albatross
+ 
+Stage 2:
+Enemies: dove, hummingbird
+Boss: flamingo, hawk
+ 
+Stage 3:
+Enemies:  parrots, tucans
+Boss: macaws(both randow and blue)
+
+projectiles
+Stage 1:
+seashell, rock
