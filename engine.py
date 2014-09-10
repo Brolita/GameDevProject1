@@ -17,9 +17,6 @@ class Engine:
 						if collisionDetected == True:
 							if i.name == 'Player' and j.name == 'Bullet':
 								print 'Player has been hit!'
-							
-							elif j.name == 'Player' and i.name == 'Bullet':
-								print 'Player has been hit!'
 						
 	def draw(self):
 		for i in range(len(self.gameObjects)):
