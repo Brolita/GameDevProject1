@@ -377,7 +377,7 @@ while gameRunning:
 	
 	if True: # enemy test
 		if frame==0:
-			HummingbirdA(Vector(300,-10),game,player,1,4,50)
+			HummingbirdB(Vector(300,-10),game,player,1,4,50)
 	#update 
 	game.update()
 	#collision
