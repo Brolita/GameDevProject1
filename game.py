@@ -375,9 +375,41 @@ while gameRunning:
 	
 	
 	
-	if True: # enemy test
-		if frame==0:
-			DoveB(Vector(300,-10),game,player,20,5)
+	if False: # level 2 wave 1
+		if frame==30:
+			HummingbirdA(Vector(300,-10),game,player,1,2,50)
+		if frame==60:
+			HummingbirdA(Vector(400,-10),game,player,1,2,50)
+		if frame==90:
+			HummingbirdA(Vector(500,-10),game,player,1,3,50)
+		if frame==120:
+			HummingbirdA(Vector(200,-10),game,player,1,3,50)
+		if frame==150:
+			HummingbirdA(Vector(500,-10),game,player,1,4,50)
+		if frame==180:
+			HummingbirdA(Vector(100,-10),game,player,1,4,50)
+		if frame==210:
+			HummingbirdA(Vector(200,-10),game,player,1,5,50)
+		if frame==240:
+			HummingbirdA(Vector(300,-10),game,player,1,5,50)
+		if frame==270:
+			HummingbirdA(Vector(400,-10),game,player,1,6,50)
+		if frame==300:
+			HummingbirdA(Vector(300,-10),game,player,1,6,50)
+		if frame==330:
+			HummingbirdA(Vector(500,-10),game,player,1,7,50)
+		if frame==360:
+			HummingbirdA(Vector(100,-10),game,player,1,7,50)
+		if frame==390:
+			HummingbirdA(Vector(200,-10),game,player,1,8,50)
+		if frame==420:
+			HummingbirdA(Vector(400,-10),game,player,1,8,50)
+		if frame==450:
+			HummingbirdA(Vector(300,-10),game,player,1,9,50)
+		if frame==480:
+			HummingbirdA(Vector(200,-10),game,player,1,9,50)
+		if frame==610:
+			HummingbirdA(Vector(500,-10),game,player,1,10,50)
 	#update 
 	game.update()
 	#collision
