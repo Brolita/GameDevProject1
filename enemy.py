@@ -92,7 +92,7 @@ class Enemy:
 class SeagullA(Enemy):
 	def __init__(self, init, game, player,count):
 		Enemy.__init__(self, init, game, player)
-		self.image = pygame.image.load("Art Stuff\\seagull.png").convert_alpha()
+		self.image = get("seagull")
 		self.count=count
 	def update(self):
 		if self.frame < 20:
@@ -115,7 +115,7 @@ class SeagullA(Enemy):
 class SeagullB(Enemy):
 	def __init__(self, init, game, player,count):
 		Enemy.__init__(self, init, game, player)
-		self.image = pygame.image.load("Art Stuff\\seagull.png").convert_alpha()
+		self.image = Image.get("seagull")
 		self.count=count
 	def update(self):
 		if self.frame < 20:
@@ -138,7 +138,7 @@ class SeagullB(Enemy):
 class PelicanA(Enemy):
 	def __init__(self, init, game, player,timebetween,speed):
 		Enemy.__init__(self, init, game, player)
-		self.image = pygame.image.load("Art Stuff\\pelican.png").convert_alpha()
+		self.image = Image.get("pelican")
 		self.t = None
 		self.timebetween=timebetween
 		self.speed=speed
@@ -162,7 +162,7 @@ class PelicanA(Enemy):
 class PelicanB(Enemy):
 	def __init__(self, init, game, player,timebetween,speed):
 		Enemy.__init__(self, init, game, player)
-		self.image = pygame.image.load("Art Stuff\\pelican.png").convert_alpha()
+		self.image = Image.get("pelican")
 		self.t = None
 		self.timebetween=timebetween
 		self.speed=speed
@@ -187,7 +187,7 @@ class PelicanB(Enemy):
 class PelicanC(Enemy):
 	def __init__(self, init, game, player,timebetween,speed):
 		Enemy.__init__(self, init, game, player)
-		self.image = pygame.image.load("Art Stuff\\pelican.png").convert_alpha()
+		self.image = Image.get("pelican")
 		self.timebetween=timebetween
 		self.speed=speed;
 	def update(self):

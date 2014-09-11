@@ -1,7 +1,8 @@
-import pygame
-import math
+import pygame, math
 from Vector import Vector
 from engine import Engine
+from image import Image
+
 
 class Bullet(pygame.sprite.Sprite):
 	def __init__ (self, game, spriteName):
@@ -10,7 +11,7 @@ class Bullet(pygame.sprite.Sprite):
 		self.game = game
 		game.gameObjects.append(self)
 		pygame.sprite.Sprite.__init__(self)
-		self.image = pygame.image.load('Art Stuff\\' + spriteName + '.png')
+		self.image = Image.get(spriteName)
 	
 	def draw (self, screen):
 		if screen.get_rect().copy().inflate(40,40).collidepoint(self.position.x, self.position.y):

@@ -1,10 +1,11 @@
 import pygame
 import math
+from image import Image
 
 class Snowball:
 	def __init__(self, playerX, playerY, game):
 		self.name = 'Snowball'
-		self.image = pygame.image.load("Art Stuff\snowball.png").convert_alpha()
+		self.image = Image.get('snowball')
 		self.rect = self.image.get_rect()
 		self.rect.x = playerX + 11
 		self.rect.y = playerY - 5
