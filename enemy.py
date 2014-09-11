@@ -255,3 +255,27 @@ class HummingbirdB(Enemy):
 	
 	def get_rect(self):
 		return self.image.get_rect().move(self.position.x-self.image.get_width()/2,self.position.y-self.image.get_height()/2)
+
+class DoveA(Enemy):
+	def __init__(self,init,game,player):
+		Enemy.__init__(self,init,game,player)
+		self.image=pygame.image.load("Art Stuff\\dove.png").convert_alpha()
+	def update(self):
+		if self.frame<25:
+			self.position.Add((0,2))
+		else:
+			if self.position.x<self.player.rect.x+16:
+				self.position.Add((2,0))
+			if self.position.x>self.player.rect.x+16:
+				self.position.Add((-2,0))
+			if self.position.y<self.player.rect.y+24:
+				self.position.Add((0,2))
+			if self.position.y>self.player.rect.y+24:
+				self.position.Add((0,-2))
+		self.frame+=1
+			
+	def draw(self,screen):
+		Enemy.draw(self,screen)
+	
+	def get_rect(self):
+		return self.image.get_rect().move(self.position.x-self.image.get_width()/2,self.position.y-self.image.get_height()/2)
