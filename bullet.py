@@ -14,7 +14,7 @@ class Bullet(pygame.sprite.Sprite):
 		self.image = Image.get(spriteName)
 	
 	def draw (self, screen):
-		if screen.get_rect().copy().inflate(40,40).collidepoint(self.position.x, self.position.y):
+		if screen.get_rect().move(-100, 0).inflate(-160,40).collidepoint(self.position.x, self.position.y):
 			screen.blit(self.image, (self.position.x - self.image.get_width()/2, self.position.y - self.image.get_height()/2))
 		else:
 			self.flag()

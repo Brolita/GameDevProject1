@@ -78,7 +78,7 @@ class Enemy:
 		self.position = init.copy()
 
 	def draw(self, screen):
-		if screen.get_rect().inflate(300,300).collidepoint(self.position.x - self.image.get_width()/2, self.position.y - self.image.get_height()/2):
+		if screen.get_rect().move(-100, 0).inflate(200,300).collidepoint(self.position.x, self.position.y):
 			screen.blit(self.image, (self.position.x - self.image.get_width()/2, self.position.y - self.image.get_height()/2))
 		else:
 			self.flag()
@@ -92,7 +92,7 @@ class Enemy:
 class SeagullA(Enemy):
 	def __init__(self, init, game, player,count):
 		Enemy.__init__(self, init, game, player)
-		self.image = get("seagull")
+		self.image = Image.get("seagull")
 		self.count=count
 	def update(self):
 		if self.frame < 20:

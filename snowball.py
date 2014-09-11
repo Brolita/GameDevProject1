@@ -19,7 +19,7 @@ class Snowball:
 			
 	def draw(self, screen):
 		#print 'Snowball is drawing'
-		if screen.get_rect().inflate(300,300).colliderect(self.rect):
+		if screen.get_rect().move(-100, 0).inflate(200,300).colliderect(self.rect):
 			screen.blit(self.image, self.rect, [0, 0, 5, 5])
 		else:
 			self.flag()

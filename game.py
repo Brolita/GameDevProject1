@@ -7,7 +7,7 @@ from bullet import *
 from enemy import *
 
 pygame.init()
-screen = pygame.display.set_mode((600, 800))
+screen = pygame.display.set_mode((800, 800))
 levelOneBackground = pygame.image.load('Art Stuff\level one background.png')
 clock = pygame.time.Clock()
 
@@ -323,15 +323,15 @@ while gameRunning:
 	
 	if False:  #wave6
 		if frame==30:
-			SeagullA(Vector(100,-10),game,player,14)
-			SeagullA(Vector(200,-10),game,player,14)
-			SeagullA(Vector(300,-10),game,player,14)
-			SeagullA(Vector(400,-10),game,player,14)
-			SeagullA(Vector(500,-10),game,player,14)
-			SeagullA(Vector(150,-10),game,player,14)
-			SeagullA(Vector(250,-10),game,player,14)
-			SeagullA(Vector(350,-10),game,player,14)
-			SeagullA(Vector(450,-10),game,player,14)
+			SeagullA(Vector(100,-10),game,player,20)
+			SeagullA(Vector(200,-10),game,player,20)
+			SeagullA(Vector(300,-10),game,player,20)
+			SeagullA(Vector(400,-10),game,player,20)
+			SeagullA(Vector(500,-10),game,player,20)
+			SeagullA(Vector(150,-10),game,player,20)
+			SeagullA(Vector(250,-10),game,player,20)
+			SeagullA(Vector(350,-10),game,player,20)
+			SeagullA(Vector(450,-10),game,player,20)
 		if frame==100:
 			PelicanC(Vector(100,-10),game,player,10,7)
 			PelicanC(Vector(500,-10),game,player,10,7)
@@ -375,7 +375,7 @@ while gameRunning:
 	
 	
 	
-	if False: # level 2 wave 1
+	if True: # level 2 wave 1
 		if frame==30:
 			HummingbirdA(Vector(300,-10),game,player,1,2,50)
 		if frame==60:
