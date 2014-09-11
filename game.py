@@ -377,7 +377,7 @@ while gameRunning:
 	
 	if True: # enemy test
 		if frame==0:
-			DoveA(Vector(300,-10),game,player)
+			DoveB(Vector(300,-10),game,player,20,5)
 	#update 
 	game.update()
 	#collision

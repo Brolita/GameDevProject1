@@ -305,3 +305,32 @@ class DoveA(Enemy):
 	
 	def get_rect(self):
 		return self.image.get_rect().move(self.position.x-self.image.get_width()/2,self.position.y-self.image.get_height()/2)
+		
+class DoveB(Enemy):
+	def __init__(self,init,game,player,timebetween,speed):
+		Enemy.__init__(self,init,game,player)
+		self.image=pygame.image.load("Art Stuff\\dove.png").convert_alpha()
+		self.t=None
+		self.timebetween=timebetween
+		self.speed=speed
+	def update(self):
+		if self.frame<25:
+			self.position.Add((0,2))
+		if self.frame==25:
+			self.t = Tracers(self.game, self, self.player, 40, self.timebetween, self.speed, "rock")
+		else:
+			if self.position.x<self.player.rect.x+16:
+				self.position.Add((2,0))
+			if self.position.x>self.player.rect.x+16:
+				self.position.Add((-2,0))
+			if self.position.y<self.player.rect.y+24:
+				self.position.Add((0,2))
+			if self.position.y>self.player.rect.y+24:
+				self.position.Add((0,-2))
+		self.frame+=1
+			
+	def draw(self,screen):
+		Enemy.draw(self,screen)
+	
+	def get_rect(self):
+		return self.image.get_rect().move(self.position.x-self.image.get_width()/2,self.position.y-self.image.get_height()/2)
