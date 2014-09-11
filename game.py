@@ -74,7 +74,7 @@ while gameRunning:
 	screen.blit(levelOneBackground, levelOneBackground.get_rect(), [0, 0, 600, 800])
 	
 	#frame actions 
-	if True: #wave 1
+	if False: #wave 1
 		if frame==30:
 			SeagullA(Vector(300,-10),game,player,5)
 		if frame==60:
@@ -372,9 +372,14 @@ while gameRunning:
 			SeagullA(Vector(300,-10),game,player,5)
 		if frame==670:
 			SeagullA(Vector(300,-10),game,player,5)
+	
+	
+	
+	if True: # enemy test
+		if frame==0:
+			HummingbirdA(Vector(300,-10),game,player,1,4,50)
 	#update 
 	game.update()
-	
 	#collision
 	
 	#draw

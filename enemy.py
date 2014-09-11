@@ -182,8 +182,7 @@ class PelicanB(Enemy):
 		Enemy.flag(self)
 		if self.t != None:
 			self.t.flag()
-			
-			
+						
 class PelicanC(Enemy):
 	def __init__(self, init, game, player,timebetween,speed):
 		Enemy.__init__(self, init, game, player)
@@ -204,3 +203,29 @@ class PelicanC(Enemy):
 			
 	def flag(self):
 		Enemy.flag(self)
+
+class HummingbirdA(Enemy):
+	def __init__(self, init,game,player,direction,buck,timebetween):
+		Enemy.__init__(self,init,game,player)
+		self.image=pygame.image.load("Art Stuff\\hummingbird.png").convert_alpha()
+		self.direction=direction
+		self.buck=buck
+		self.timebetween=timebetween
+	def update(self):
+		if self.frame<25:
+			self.position.Add((0,2))
+		else:
+			self.position.Add((self.direction*4,0))
+		if self.position.x>=570:
+			self.direction=-1
+		if self.position.x<=30:
+			self.direction=1
+		if (self.frame-25)%self.timebetween==0:
+			BuckTarget(self.game,self,Vector(self.position.x,99999),self.buck,math.radians(7.5),5,"seashell")
+		self.frame+=1
+	
+	def draw(self, screen):
+		Enemy.draw(self, screen)
+	
+	def get_rect(self):
+		return self.image.get_rect().move(self.position.x-self.image.get_width()/2,self.position.y-self.image.get_height()/2)
