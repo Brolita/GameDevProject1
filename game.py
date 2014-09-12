@@ -3,12 +3,15 @@ from player import Player
 from snowball import Snowball
 from Vector import Vector
 from engine import Engine
+from sidebar import Sidebar
 from bullet import *
 from enemy import *
+
 
 pygame.init()
 screen = pygame.display.set_mode((800, 800))
 levelOneBackground = pygame.image.load('Art Stuff\level one background.png')
+sidebar = Sidebar()
 clock = pygame.time.Clock()
 
 def processPlayerEvents(player):
@@ -62,7 +65,7 @@ def processPlayerEvents(player):
 			if event.key == pygame.K_LSHIFT:
 				player.focus = False
 gameRunning = True
-game = Engine(screen)
+game = Engine(screen, sidebar)
 player = Player(game)
 frame = 0
 
@@ -416,6 +419,7 @@ while gameRunning:
 	
 	#draw
 	game.draw()
+	sidebar.draw(screen)
 	pygame.display.flip()
 	frame+=1
 	

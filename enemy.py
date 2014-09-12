@@ -221,7 +221,7 @@ class HummingbirdA(Enemy):
 		if self.position.x<=30:
 			self.direction=1
 		if (self.frame-25)%self.timebetween==0:
-			BuckTarget(self.game,self,Vector(self.position.x,99999),self.buck,math.radians(7.5),5,"seashell")
+			BuckTarget(self.game,self,Vector(self.position.x,99999),self.buck,math.radians(7.5),3,"seashell")
 		self.frame+=1
 	
 	def draw(self, screen):

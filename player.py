@@ -5,7 +5,6 @@ from snowball import Snowball
 
 class Player:
 	def __init__ (self, game):
-		print 'Made a snowball!'
 		self.image = pygame.image.load("Art Stuff\penguin.png").convert_alpha()
 		self.rect = self.image.get_rect()
 		self.rect.x = 300
@@ -20,6 +19,7 @@ class Player:
 		self.canFire = True
 		self.game = game
 		self.name = 'Player'
+		self.invinsibility = 0
 		game.gameObjects.append(self)
 	
 	def update(self):
@@ -78,9 +78,12 @@ class Player:
 			else:
 				self.rect = future
 				
+		if self.invinsibility != 0:
+			self.invinsibility-= 1
+				
 	def getPosition(self):
 		#print 'Player is currently at', self.rect.x + 16, ', ', self.rect.y + 48
-		return Vector(self.rect.x + 15, self.rect.y + 35)
+		return Vector(self.rect.x + 15, self.rect.y + 15)
 	
 	def get_rect(self):
 		return self.rect
