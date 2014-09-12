@@ -411,7 +411,7 @@ while gameRunning:
 		if frame==610:
 			HummingbirdA(Vector(500,-10),game,player,1,10,50)
 			
-	if True: #level2 wave2
+	if False: #level2 wave2
 		if frame==30: 
 			HummingbirdC(Vector(300,-10),game,player,1,5,30)
 		if frame==60:
@@ -443,6 +443,54 @@ while gameRunning:
 		if frame==560:
 			HummingbirdA(Vector(200,-10),game,player,1,6,30)
 			HummingbirdA(Vector(400,-10),game,player,-1,6,30)
+	if True: #Level2 wave3
+		if frame==30:
+			DoveA(Vector(300,-10),game,player)
+			DoveA(Vector(200,-10),game,player)
+			DoveA(Vector(100,-10),game,player)
+			DoveA(Vector(400,-10),game,player)
+			DoveA(Vector(500,-10),game,player)
+		if frame==60:
+			HummingbirdA(Vector(200,-10),game,player,1,6,30)
+			HummingbirdA(Vector(400,-10),game,player,1,6,30)
+		if frame==90:
+			DoveB(Vector(500,-10),game,player,50,9)
+			DoveB(Vector(100,-10),game,player,50,9)
+		if frame==120:
+			HummingbirdC(Vector(200,-10),game,player,1,3,30)
+		if frame==150:
+			HummingbirdC(Vector(400,-10),game,player,-1,4,30)
+			DoveB(Vector(500,-10),game,player,50,9)
+		if frame==180:
+			HummingbirdC(Vector(400,-10),game,player,1,3,30)
+		if frame==200:
+			DoveA(Vector(200,-10),game,player)
+			DoveA(Vector(400,-10),game,player)
+		if frame==210:
+			HummingbirdC(Vector(100,-10),game,player,-1,4,30)
+		if frame==240:
+			HummingbirdC(Vector(500,-10),game,player,1,3,30)
+		if frame==250:
+			DoveB(Vector(300,-10),game,player,50,9)
+		if frame==270:
+			HummingbirdB(Vector(200,-10),game,player,1,10,60)
+			HummingbirdB(Vector(400,-10),game,player,-1,10,60)
+		if frame==300:
+			DoveB(Vector(100,-10),game,player,50,9)
+		if frame==350:
+			DoveB(Vector(400,-10),game,player,50,9)
+		if frame==400:
+			DoveB(Vector(300,-10),game,player,50,9)
+		if frame==430:
+			HummingbirdC(Vector(100,-10),game,player,1,4,30)
+		if frame==460:
+			HummingbirdB(Vector(500,-10),game,player,1,5,30)
+		if frame==500:
+			DoveB(Vector(200,-10),game,player,50,9)
+		if frame==530:
+			HummingbirdA(Vector(200,-10),game,player,1,10,30)
+		if frame==560:
+			HummingbirdA(Vector(300,-10),game,player,-1,11,30)
 	#update 
 	game.update()
 	#collision
