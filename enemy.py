@@ -291,13 +291,13 @@ class DoveA(Enemy):
 			self.position.Add((0,2))
 		else:
 			if self.position.x<self.player.rect.x+16:
-				self.position.Add((2,0))
+				self.position.Add((3,0))
 			if self.position.x>self.player.rect.x+16:
-				self.position.Add((-2,0))
+				self.position.Add((-3,0))
 			if self.position.y<self.player.rect.y+24:
-				self.position.Add((0,2))
+				self.position.Add((0,3))
 			if self.position.y>self.player.rect.y+24:
-				self.position.Add((0,-2))
+				self.position.Add((0,-3))
 		self.frame+=1
 			
 	def draw(self,screen):
@@ -320,13 +320,13 @@ class DoveB(Enemy):
 			self.t = Tracers(self.game, self, self.player, 40, self.timebetween, self.speed, "rock")
 		else:
 			if self.position.x<self.player.rect.x+16:
-				self.position.Add((2,0))
+				self.position.Add((3,0))
 			if self.position.x>self.player.rect.x+16:
-				self.position.Add((-2,0))
+				self.position.Add((-3,0))
 			if self.position.y<self.player.rect.y+24:
-				self.position.Add((0,2))
+				self.position.Add((0,3))
 			if self.position.y>self.player.rect.y+24:
-				self.position.Add((0,-2))
+				self.position.Add((0,-3))
 		self.frame+=1
 			
 	def draw(self,screen):
