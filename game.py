@@ -494,7 +494,7 @@ while gameRunning:
 			HummingbirdA(Vector(200,-10),game,player,1,10,30)
 		if frame==560:
 			HummingbirdA(Vector(300,-10),game,player,-1,11,30)
-	if True: #level 2 wave 4
+	if False: #level 2 wave 4
 		if frame==30:
 			HummingbirdA(Vector(200,-10),game,player,1,5,30)
 			HummingbirdA(Vector(400,-10),game,player,-1,5,30)
@@ -537,7 +537,128 @@ while gameRunning:
 			HummingbirdB(Vector(500,-10),game,player,-1,9,30)
 			DoveB(Vector(200,-10),game,player,50,9)
 			DoveB(Vector(400,-10),game,player,50,9)
-		
+	if False: #Level 2 wave 5
+		if frame==30:
+			DoveC(Vector(300,-10),game,player,5)
+		if frame==50:
+			HummingbirdB(Vector(300,-10),game,player,1,4,30)
+		if frame==60:
+			DoveC(Vector(200,-10),game,player,5)
+		if frame==90:
+			DoveC(Vector(500,-10),game,player,5)
+		if frame==100:
+			HummingbirdB(Vector(400,-10),game,player,-1,5,30)
+		if frame==120:
+			DoveC(Vector(500,-10),game,player,5)
+		if frame==150:
+			DoveC(Vector(100,-10),game,player,5)
+			HummingbirdB(Vector(200,-10),game,player,1,5,30)
+		if frame==180:
+			DoveC(Vector(200,-10),game,player,5)
+		if frame==200:
+			HummingbirdB(Vector(300,-10),game,player,-1,5,30)
+		if frame==210:
+			DoveC(Vector(500,-10),game,player,5)
+		if frame==240:
+			DoveC(Vector(200,-10),game,player,5)
+		if frame==250:
+			HummingbirdB(Vector(400,-10),game,player,1,5,30)
+		if frame==270:
+			DoveC(Vector(500,-10),game,player,5)
+		if frame==300:
+			DoveC(Vector(400,-10),game,player,5)
+			HummingbirdB(Vector(100,-10),game,player,-1,5,30)
+		if frame==330:
+			DoveC(Vector(200,-10),game,player,5)
+		if frame==350:
+			HummingbirdB(Vector(500,-10),game,player,1,5,30)
+		if frame==360:
+			DoveC(Vector(100,-10),game,player,5)
+		if frame==390:
+			DoveC(Vector(300,-10),game,player,5)
+		if frame==400:
+			HummingbirdB(Vector(100,-10),game,player,-1,5,30)
+		if frame==420:
+			DoveC(Vector(500,-10),game,player,5)
+		if frame==450:
+			DoveC(Vector(400,-10),game,player,5)
+			HummingbirdB(Vector(200,-10),game,player,1,5,30)
+		if frame==480:
+			DoveC(Vector(500,-10),game,player,5)
+		if frame==500:
+			HummingbirdB(Vector(100,-10),game,player,-1,5,30)
+		if frame==510:
+			DoveC(Vector(300,-10),game,player,5)
+		if frame==540:
+			DoveC(Vector(400,-10),game,player,5)
+		if frame==550:
+			HummingbirdB(Vector(300,-10),game,player,1,5,30)
+		if frame==570:
+			DoveC(Vector(200,-10),game,player,5)
+		if frame==600:
+			DoveC(Vector(500,-10),game,player,5)
+			HummingbirdB(Vector(200,-10),game,player,1,5,30)
+	if True:	#Level 2 Wave 6
+		if frame==30:
+			DoveA(Vector(100,-10),game,player)
+		if frame==50:
+			DoveC(Vector(200,-10),game,player,4)
+		if frame==60:
+			DoveA(Vector(300,-10),game,player)
+		if frame==90:
+			DoveA(Vector(200,-10),game,player)
+		if frame==100:
+			DoveC(Vector(500,-10),game,player,5)
+		if frame==120:
+			DoveA(Vector(100,-10),game,player)
+		if frame==150:
+			DoveA(Vector(400,-10),game,player)
+			DoveC(Vector(500,-10),game,player,5)
+		if frame==180:
+			DoveA(Vector(200,-10),game,player)
+		if frame==200:
+			DoveC(Vector(400,-10),game,player,5)
+		if frame==210:
+			DoveA(Vector(500,-10),game,player)
+		if frame==240:
+			DoveA(Vector(300,-10),game,player)
+		if frame==250:
+			DoveC(Vector(200,-10),game,player,5)
+		if frame==270:
+			DoveA(Vector(400,-10),game,player)
+		if frame==300:
+			DoveA(Vector(200,-10),game,player)
+			DoveC(Vector(100,-10),game,player,5)
+		if frame==330:
+			DoveA(Vector(500,-10),game,player)
+		if frame==350:
+			DoveC(Vector(200,-10),game,player,5)
+		if frame==360:
+			DoveA(Vector(300,-10),game,player)
+		if frame==390:
+			DoveA(Vector(200,-10),game,player)
+		if frame==400:
+			DoveC(Vector(300,-10),game,player,5)
+		if frame==420:
+			DoveA(Vector(100,-10),game,player)
+		if frame==450:
+			DoveA(Vector(400,-10),game,player)
+			DoveC(Vector(20,-10),game,player,5)
+		if frame==480:
+			DoveA(Vector(100,-10),game,player)
+		if frame==500:
+			DoveC(Vector(200,-10),game,player,5)
+		if frame==510:
+			DoveA(Vector(400,-10),game,player)
+		if frame==540:
+			DoveA(Vector(300,-10),game,player)
+		if frame==550:
+			DoveC(Vector(200,-10),game,player,5)
+		if frame==570:
+			DoveA(Vector(400,-10),game,player)
+		if frame==600:
+			DoveA(Vector(200,-10),game,player)
+			DoveC(Vector(500,-10),game,player,5)
 	#update 
 	game.update()
 	#collision
