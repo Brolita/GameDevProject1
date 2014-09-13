@@ -334,3 +334,31 @@ class DoveB(Enemy):
 	
 	def get_rect(self):
 		return self.image.get_rect().move(self.position.x-self.image.get_width()/2,self.position.y-self.image.get_height()/2)
+	
+class DoveC(Enemy):
+	def __init__(self,init,game,player,count):
+		Enemy.__init__(self,init,game,player)
+		self.image=pygame.image.load("Art Stuff\\dove.png").convert_alpha()
+		self.t=None
+		self.count=count
+	def update(self):
+		if self.frame<25:
+			self.position.Add((0,2))
+		if self.frame%25==0:
+			BuckTarget(self.game, self, self.player.getPosition(), self.count, math.radians(7.5), 5, "seashell")
+		else:
+			if self.position.x<self.player.rect.x+16:
+				self.position.Add((3,0))
+			if self.position.x>self.player.rect.x+16:
+				self.position.Add((-3,0))
+			if self.position.y<self.player.rect.y+24:
+				self.position.Add((0,3))
+			if self.position.y>self.player.rect.y+24:
+				self.position.Add((0,-3))
+		self.frame+=1
+			
+	def draw(self,screen):
+		Enemy.draw(self,screen)
+	
+	def get_rect(self):
+		return self.image.get_rect().move(self.position.x-self.image.get_width()/2,self.position.y-self.image.get_height()/2)
