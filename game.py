@@ -503,7 +503,7 @@ while gameRunning:
 			HummingbirdA(Vector(200,-10),game,player,1,10,30)
 		if frame==560:
 			HummingbirdA(Vector(300,-10),game,player,-1,11,30)
-	if True: #level 2 wave 4
+	if False: #level 2 wave 4
 		if frame==30:
 			HummingbirdA(Vector(200,-10),game,player,1,5,30)
 			HummingbirdA(Vector(400,-10),game,player,-1,5,30)
@@ -546,6 +546,331 @@ while gameRunning:
 			HummingbirdB(Vector(500,-10),game,player,-1,9,30)
 			DoveB(Vector(200,-10),game,player,50,9)
 			DoveB(Vector(400,-10),game,player,50,9)
+	if False: #Level 2 wave 5
+		if frame==30:
+			DoveC(Vector(300,-10),game,player,5)
+		if frame==50:
+			HummingbirdB(Vector(300,-10),game,player,1,4,30)
+		if frame==60:
+			DoveC(Vector(200,-10),game,player,5)
+		if frame==90:
+			DoveC(Vector(500,-10),game,player,5)
+		if frame==100:
+			HummingbirdB(Vector(400,-10),game,player,-1,5,30)
+		if frame==120:
+			DoveC(Vector(500,-10),game,player,5)
+		if frame==150:
+			DoveC(Vector(100,-10),game,player,5)
+			HummingbirdB(Vector(200,-10),game,player,1,5,30)
+		if frame==180:
+			DoveC(Vector(200,-10),game,player,5)
+		if frame==200:
+			HummingbirdB(Vector(300,-10),game,player,-1,5,30)
+		if frame==210:
+			DoveC(Vector(500,-10),game,player,5)
+		if frame==240:
+			DoveC(Vector(200,-10),game,player,5)
+		if frame==250:
+			HummingbirdB(Vector(400,-10),game,player,1,5,30)
+		if frame==270:
+			DoveC(Vector(500,-10),game,player,5)
+		if frame==300:
+			DoveC(Vector(400,-10),game,player,5)
+			HummingbirdB(Vector(100,-10),game,player,-1,5,30)
+		if frame==330:
+			DoveC(Vector(200,-10),game,player,5)
+		if frame==350:
+			HummingbirdB(Vector(500,-10),game,player,1,5,30)
+		if frame==360:
+			DoveC(Vector(100,-10),game,player,5)
+		if frame==390:
+			DoveC(Vector(300,-10),game,player,5)
+		if frame==400:
+			HummingbirdB(Vector(100,-10),game,player,-1,5,30)
+		if frame==420:
+			DoveC(Vector(500,-10),game,player,5)
+		if frame==450:
+			DoveC(Vector(400,-10),game,player,5)
+			HummingbirdB(Vector(200,-10),game,player,1,5,30)
+		if frame==480:
+			DoveC(Vector(500,-10),game,player,5)
+		if frame==500:
+			HummingbirdB(Vector(100,-10),game,player,-1,5,30)
+		if frame==510:
+			DoveC(Vector(300,-10),game,player,5)
+		if frame==540:
+			DoveC(Vector(400,-10),game,player,5)
+		if frame==550:
+			HummingbirdB(Vector(300,-10),game,player,1,5,30)
+		if frame==570:
+			DoveC(Vector(200,-10),game,player,5)
+		if frame==600:
+			DoveC(Vector(500,-10),game,player,5)
+			HummingbirdB(Vector(200,-10),game,player,1,5,30)
+	if False:	#Level 2 Wave 6
+		if frame==30:
+			DoveA(Vector(100,-10),game,player)
+		if frame==50:
+			DoveC(Vector(200,-10),game,player,4)
+		if frame==60:
+			DoveA(Vector(300,-10),game,player)
+		if frame==90:
+			DoveA(Vector(200,-10),game,player)
+		if frame==100:
+			DoveC(Vector(500,-10),game,player,5)
+		if frame==120:
+			DoveA(Vector(100,-10),game,player)
+		if frame==150:
+			DoveA(Vector(400,-10),game,player)
+			DoveC(Vector(500,-10),game,player,5)
+		if frame==180:
+			DoveA(Vector(200,-10),game,player)
+		if frame==200:
+			DoveC(Vector(400,-10),game,player,5)
+		if frame==210:
+			DoveA(Vector(500,-10),game,player)
+		if frame==240:
+			DoveA(Vector(300,-10),game,player)
+		if frame==250:
+			DoveC(Vector(200,-10),game,player,5)
+		if frame==270:
+			DoveA(Vector(400,-10),game,player)
+		if frame==300:
+			DoveA(Vector(200,-10),game,player)
+			DoveC(Vector(100,-10),game,player,5)
+		if frame==330:
+			DoveA(Vector(500,-10),game,player)
+		if frame==350:
+			DoveC(Vector(200,-10),game,player,5)
+		if frame==360:
+			DoveA(Vector(300,-10),game,player)
+		if frame==390:
+			DoveA(Vector(200,-10),game,player)
+		if frame==400:
+			DoveC(Vector(300,-10),game,player,5)
+		if frame==420:
+			DoveA(Vector(100,-10),game,player)
+		if frame==450:
+			DoveA(Vector(400,-10),game,player)
+			DoveC(Vector(20,-10),game,player,5)
+		if frame==480:
+			DoveA(Vector(100,-10),game,player)
+		if frame==500:
+			DoveC(Vector(200,-10),game,player,5)
+		if frame==510:
+			DoveA(Vector(400,-10),game,player)
+		if frame==540:
+			DoveA(Vector(300,-10),game,player)
+		if frame==550:
+			DoveC(Vector(200,-10),game,player,5)
+		if frame==570:
+			DoveA(Vector(400,-10),game,player)
+		if frame==600:
+			DoveA(Vector(200,-10),game,player)
+			DoveC(Vector(500,-10),game,player,5)
+	if False: #Level 3 wave 1
+		if frame==30:
+			ToucanA(Vector(300,-10),game,player,5,5,15)
+		if frame==60:
+			ToucanA(Vector(500,-10),game,player,4,5,15)
+		if frame==90:
+			ToucanA(Vector(100,-10),game,player,4,5,15)
+		if frame==120:
+			ToucanA(Vector(200,-10),game,player,4,5,15)
+			ToucanA(Vector(400,-10),game,player,5,5,15)
+		if frame==150:
+			ToucanA(Vector(300,-10),game,player,6,5,15)
+		if frame==180:
+			ToucanA(Vector(100,-10),game,player,5,5,15)
+		if frame==210:
+			ToucanA(Vector(500,-10),game,player,5,5,15)
+		if frame==240:
+			ToucanA(Vector(100,-10),game,player,6,5,15)
+		if frame==270:
+			ToucanA(Vector(400,-10),game,player,5,5,15)
+		if frame==300:
+			ToucanA(Vector(200,-10),game,player,6,5,15)
+		if frame==330:
+			ToucanA(Vector(400,-10),game,player,5,5,15)
+		if frame==360:
+			ToucanA(Vector(500,-10),game,player,6,5,15)
+		if frame==390:
+			ToucanA(Vector(300,-10),game,player,6,5,15)
+		if frame==420:
+			ToucanA(Vector(500,-10),game,player,6,5,15)
+		if frame==450:
+			ToucanA(Vector(100,-10),game,player,6,5,15)
+		if frame==480:
+			ToucanA(Vector(300,-10),game,player,5,5,15)
+		if frame==510:
+			ToucanA(Vector(400,-10),game,player,6,5,15)
+		if frame==540:
+			ToucanA(Vector(500,-10),game,player,5,5,15)
+		if frame==570:
+			ToucanA(Vector(100,-10),game,player,6,5,15)
+		if frame==600:
+			ToucanA(Vector(500,-10),game,player,6,5,15)
+	if False: #Level 3 wave 2
+		if frame==30:
+			ToucanB(Vector(300,-10),game,player,5,15)
+		if frame==90:
+			ToucanB(Vector(100,-10),game,player,5,15)
+			ToucanB(Vector(500,-10),game,player,5,15)
+		if frame==150:
+			ToucanB(Vector(200,-10),game,player,7,15)
+		if frame==210:
+			ToucanB(Vector(400,-10),game,player,7,15)
+		if frame==270:
+			ToucanB(Vector(200,-10),game,player,6,15)
+			ToucanB(Vector(500,-10),game,player,6,15)
+		if frame==330:
+			ToucanB(Vector(300,-10),game,player,8,15)
+		if frame==390:
+			ToucanB(Vector(400,-10),game,player,7,15)
+		if frame==450:
+			ToucanB(Vector(300,-10),game,player,11,15)
+		if frame==510:
+			ToucanB(Vector(500,-10),game,player,11,15)
+		if frame==570:
+			ToucanB(Vector(100,-10),game,player,8,15)
+	if False:	#Level 3 wave 3
+		if frame==30:
+			BlueparrotA(Vector(300,-10),game,player,1,4,30)
+		if frame==60:
+			BlueparrotA(Vector(100,-10),game,player,-1,3,30)
+		if frame==90:
+			BlueparrotA(Vector(300,-10),game,player,1,3,30)
+		if frame==120:
+			BlueparrotA(Vector(200,-10),game,player,-1,3,30)
+		if frame==150:
+			BlueparrotA(Vector(100,-10),game,player,1,3,30)
+		if frame==180:
+			BlueparrotA(Vector(400,-10),game,player,-1,3,30)
+		if frame==210:
+			BlueparrotA(Vector(100,-10),game,player,1,4,30)
+		if frame==240:
+			BlueparrotA(Vector(200,-10),game,player,-1,4,30)
+		if frame==270:
+			BlueparrotA(Vector(400,-10),game,player,1,4,30)
+		if frame==300:
+			BlueparrotA(Vector(200,-10),game,player,-1,4,30)
+		if frame==330:
+			BlueparrotA(Vector(300,-10),game,player,1,3,30)
+		if frame==360:
+			BlueparrotA(Vector(100,-10),game,player,-1,4,30)
+		if frame==390:
+			BlueparrotA(Vector(300,-10),game,player,1,4,30)
+		if frame==420:
+			BlueparrotA(Vector(500,-10),game,player,-1,3,30)
+		if frame==450:
+			BlueparrotA(Vector(300,-10),game,player,1,3,30)
+		if frame==480:
+			BlueparrotA(Vector(200,-10),game,player,-1,3,30)
+		if frame==510:
+			BlueparrotA(Vector(300,-10),game,player,1,3,30)
+		if frame==540:
+			BlueparrotA(Vector(400,-10),game,player,-1,3,30)
+		if frame==570:
+			BlueparrotA(Vector(500,-10),game,player,1,3,30)
+		if frame==600:
+			BlueparrotA(Vector(200,-10),game,player,-1,4,30)
+	if False: #Level 3 wave 4
+		if frame==30:
+			ToucanA(Vector(100,-10),game,player,6,5,15)
+			ToucanA(Vector(200,-10),game,player,6,5,15)
+			ToucanA(Vector(300,-10),game,player,6,5,15)
+			ToucanA(Vector(400,-10),game,player,6,5,15)
+			ToucanA(Vector(500,-10),game,player,6,5,15)
+		if frame==130:
+			ToucanA(Vector(300,-10),game,player,15,5,15)
+		if frame==260:
+			ToucanB(Vector(100,-10),game,player,10,15)
+			ToucanB(Vector(500,-10),game,player,10,15)
+		if frame==480:
+			ToucanA(Vector(200,-10),game,player,7,5,15)
+			ToucanA(Vector(400,-10),game,player,7,5,15)
+			BlueparrotA(Vector(300,-10),game,player,1,4,30)
+		if frame==540:
+			BlueparrotA(Vector(500,-10),game,player,-1,5,30)
+			BlueparrotA(Vector(100,-10),game,player,-1,5,30)
+		if frame==570:
+			BlueparrotA(Vector(200,-10),game,player,1,5,30)
+			BlueparrotA(Vector(400,-10),game,player,1,5,30)
+		if frame==600:
+			BlueparrotA(Vector(300,-10),game,player,-1,5,30)
+	if False:  #Level 3 wave 5
+		if frame==30:
+			BlueparrotB(Vector(300,-10),game,player,1,30,7)
+		if frame==60:
+			BlueparrotB(Vector(500,-10),game,player,-1,30,7)
+		if frame==90:
+			BlueparrotB(Vector(100,-10),game,player,1,30,7)
+		if frame==120:
+			BlueparrotB(Vector(400,-10),game,player,-1,30,7)
+		if frame==150:
+			BlueparrotB(Vector(200,-10),game,player,1,30,7)
+		if frame==180:
+			BlueparrotA(Vector(300,-10),game,player,-1,5,30)
+		if frame==210:
+			BlueparrotA(Vector(300,-10),game,player,1,5,30)
+		if frame==240:
+			BlueparrotB(Vector(100,-10),game,player,-1,30,7)
+		if frame==270:
+			BlueparrotA(Vector(500,-10),game,player,1,5,30)
+		if frame==300:
+			BlueparrotB(Vector(100,-10),game,player,-1,30,7)
+		if frame==330:
+			BlueparrotB(Vector(500,-10),game,player,1,30,7)
+		if frame==360:
+			BlueparrotB(Vector(400,-10),game,player,-1,30,7)
+		if frame==390:
+			BlueparrotA(Vector(500,-10),game,player,1,5,30)
+		if frame==420:
+			BlueparrotA(Vector(100,-10),game,player,-1,5,30)
+		if frame==450:
+			BlueparrotA(Vector(300,-10),game,player,1,5,30)
+		if frame==480:
+			BlueparrotA(Vector(200,-10),game,player,-1,5,30)
+		if frame==510:
+			BlueparrotA(Vector(400,-10),game,player,1,5,30)
+		if frame==540:
+			BlueparrotB(Vector(100,-10),game,player,-1,30,7)
+		if frame==570:
+			BlueparrotA(Vector(300,-10),game,player,1,5,30)
+		if frame==600:
+			BlueparrotA(Vector(100,-10),game,player,-1,5,30)
+	if True: #Level 3 wave 6
+		if frame==30:
+			ToucanA(Vector(100,-10),game,player,5,4,30)  #For some reason that 4 needs to be a 4 to spawn 3 bucks. don't ask why. I don't know  --Nick
+		if frame==50:
+			BlueparrotB(Vector(400,-10),game,player,1,30,7)
+		if frame==90:
+			ToucanA(Vector(200,-10),game,player,5,4,30)
+		if frame==150:
+			ToucanA(Vector(400,-10),game,player,5,4,30)
+			BlueparrotB(Vector(300,-10),game,player,-1,30,7)
+		if frame==210:
+			ToucanA(Vector(100,-10),game,player,5,4,30)
+		if frame==250:
+			BlueparrotB(Vector(500,-10),game,player,1,30,7)
+		if frame==270:
+			ToucanA(Vector(400,-10),game,player,5,4,30)
+		if frame==330:
+			ToucanA(Vector(500,-10),game,player,5,4,30)
+		if frame==350:
+			BlueparrotB(Vector(100,-10),game,player,-1,30,7)
+		if frame==390:
+			ToucanA(Vector(400,-10),game,player,5,4,30)
+		if frame==450:
+			ToucanA(Vector(100,-10),game,player,5,4,30)
+			BlueparrotB(Vector(500,-10),game,player,1,30,7)
+		if frame==510:
+			ToucanA(Vector(300,-10),game,player,5,4,30)
+		if frame==550:
+			BlueparrotB(Vector(200,-10),game,player,-1,30,7)
+		if frame==570:
+			ToucanA(Vector(100,-10),game,player,5,4,30)
+			
 		
 	#update 
 	game.update()

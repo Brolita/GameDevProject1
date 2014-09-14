@@ -339,3 +339,139 @@ class DoveB(Enemy):
 	
 	def get_rect(self):
 		return self.image.get_rect().move(self.position.x-self.image.get_width()/2,self.position.y-self.image.get_height()/2)
+	
+class DoveC(Enemy):
+	def __init__(self,init,game,player,count):
+		Enemy.__init__(self,init,game,player)
+		self.image=pygame.image.load("Art Stuff\\dove.png").convert_alpha()
+		self.t=None
+		self.count=count
+	def update(self):
+		if self.frame<25:
+			self.position.Add((0,2))
+		if self.frame%25==0:
+			BuckTarget(self.game, self, self.player.getPosition(), self.count, math.radians(7.5), 5, "seashell")
+		else:
+			if self.position.x<self.player.rect.x+16:
+				self.position.Add((3,0))
+			if self.position.x>self.player.rect.x+16:
+				self.position.Add((-3,0))
+			if self.position.y<self.player.rect.y+24:
+				self.position.Add((0,3))
+			if self.position.y>self.player.rect.y+24:
+				self.position.Add((0,-3))
+		self.frame+=1
+			
+	def draw(self,screen):
+		Enemy.draw(self,screen)
+	
+	def get_rect(self):
+		return self.image.get_rect().move(self.position.x-self.image.get_width()/2,self.position.y-self.image.get_height()/2)
+		
+class ToucanA(Enemy):
+	def __init__(self, init, game, player,count,amount,timebetween):
+		Enemy.__init__(self, init, game, player)
+		self.image = Image.get("toucan")
+		self.count=count
+		self.amount=amount
+		self.i=0
+		self.timebetween=timebetween
+	def update(self):
+		if self.frame < 20:
+			self.position.Add((0, 2))
+		elif (self.frame>=25) and ((self.frame-5)%self.timebetween==0):
+			if self.i<self.amount:
+				BuckTarget(self.game, self, self.player.getPosition(), self.count, math.radians(7.5), 5, "blueflower8x8")
+				self.i+=1
+		elif self.frame > 40+((self.amount-1)*10):
+			self.position.Add((0, -2))
+		self.frame+=1
+	
+	def draw(self, screen):
+		Enemy.draw(self, screen)
+		
+	def get_rect(self):
+		return self.image.get_rect().move(self.position.x - self.image.get_width()/2, self.position.y - self.image.get_height()/2)
+			
+	def flag(self):
+		Enemy.flag(self)
+
+class ToucanB(Enemy):
+	def __init__(self, init, game, player,amount,timebetween):
+		Enemy.__init__(self, init, game, player)
+		self.image = Image.get("toucan")
+		self.amount=amount
+		self.i=0
+		self.timebetween=timebetween
+	def update(self):
+		if self.frame < 20:
+			self.position.Add((0, 2))
+		elif (self.frame>=25) and ((self.frame-5)%self.timebetween==0):
+			if self.i<self.amount:
+				BuckTarget(self.game, self, self.player.getPosition(), self.i+1, math.radians(7.5), 5, "redflower10x10")
+				self.i+=1
+		elif self.frame > 40+((self.amount-1)*10):
+			self.position.Add((0, -2))
+		self.frame+=1
+	
+	def draw(self, screen):
+		Enemy.draw(self, screen)
+		
+	def get_rect(self):
+		return self.image.get_rect().move(self.position.x - self.image.get_width()/2, self.position.y - self.image.get_height()/2)
+			
+	def flag(self):
+		Enemy.flag(self)
+
+class BlueparrotA(Enemy):
+	def __init__(self, init,game,player,direction,buck,timebetween):
+		Enemy.__init__(self,init,game,player)
+		self.image=pygame.image.load("Art Stuff\\blueparrot.png").convert_alpha()
+		self.direction=direction
+		self.buck=buck
+		self.timebetween=timebetween
+	def update(self):
+		if self.frame<25:
+			self.position.Add((0,2))
+		else:
+			self.position.Add((self.direction*4,4))
+		if self.position.x>=570:
+			self.direction=-1
+		if self.position.x<=30:
+			self.direction=1
+		if (self.frame-25)%self.timebetween==0:
+			BuckTarget(self.game,self,self.player.getPosition(),self.buck,math.radians(7.5),5,"blueflower8x8")
+		self.frame+=1
+	
+	def draw(self, screen):
+		Enemy.draw(self, screen)
+	
+	def get_rect(self):
+		return self.image.get_rect().move(self.position.x-self.image.get_width()/2,self.position.y-self.image.get_height()/2)
+
+class BlueparrotB(Enemy):
+	def __init__(self, init,game,player,direction,timebetween,speed):
+		Enemy.__init__(self,init,game,player)
+		self.image=pygame.image.load("Art Stuff\\blueparrot.png").convert_alpha()
+		self.direction=direction
+		self.timebetween=timebetween
+		self.t=None
+		self.speed=speed
+	def update(self):
+		if self.frame<25:
+			self.position.Add((0,2))
+		else:
+			self.position.Add((self.direction*4,4))
+		if self.position.x>=570:
+			self.direction=-1
+		if self.position.x<=30:
+			self.direction=1
+		self.frame+=1
+		if self.frame==25:
+			self.t = Tracers(self.game, self, self.player, 40, self.timebetween, self.speed, "redflower10x10")
+	
+	def draw(self, screen):
+		Enemy.draw(self, screen)
+	
+	def get_rect(self):
+		return self.image.get_rect().move(self.position.x-self.image.get_width()/2,self.position.y-self.image.get_height()/2)
