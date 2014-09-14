@@ -120,7 +120,7 @@ class Player:
 		#	if projectile.rect.y < -5:
 		#		self.snowballs.remove(projectile)
 	
-	def dash(self, sidebar)
+	def dash(self, sidebar):
 		self.dash = True
 		self.dashLength = 0
 		sidebar.dash -= 1

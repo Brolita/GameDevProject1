@@ -41,7 +41,7 @@ def processPlayerEvents(player):
 				player.moving[2] = False
 				
 			if event.key == pygame.K_TAB:
-				player.getPosition()
+				print player.getPosition()
 				
 			if event.key == pygame.K_SPACE:
 				player.firing = True

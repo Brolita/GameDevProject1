@@ -235,6 +235,9 @@ class HummingbirdA(Enemy):
 	def get_rect(self):
 		return self.image.get_rect().move(self.position.x-self.image.get_width()/2,self.position.y-self.image.get_height()/2)
 		
+	def flag(self):
+		Enemy.flag(self)
+		
 class HummingbirdB(Enemy):
 	def __init__(self, init,game,player,direction,buck,timebetween):
 		Enemy.__init__(self,init,game,player)
@@ -286,7 +289,10 @@ class HummingbirdC(Enemy):
 	
 	def get_rect(self):
 		return self.image.get_rect().move(self.position.x-self.image.get_width()/2,self.position.y-self.image.get_height()/2)
-		
+	
+	def flag(self):
+		Enemy.flag(self)	
+	
 class DoveA(Enemy):
 	def __init__(self,init,game,player):
 		Enemy.__init__(self,init,game,player)
@@ -310,7 +316,10 @@ class DoveA(Enemy):
 	
 	def get_rect(self):
 		return self.image.get_rect().move(self.position.x-self.image.get_width()/2,self.position.y-self.image.get_height()/2)
-		
+			
+	def flag(self):
+		Enemy.flag(self)	
+
 class DoveB(Enemy):
 	def __init__(self,init,game,player,timebetween,speed):
 		Enemy.__init__(self,init,game,player)
@@ -339,7 +348,12 @@ class DoveB(Enemy):
 	
 	def get_rect(self):
 		return self.image.get_rect().move(self.position.x-self.image.get_width()/2,self.position.y-self.image.get_height()/2)
-	
+		
+	def flag(self):
+		Enemy.flag(self)
+		if self.t != None:
+			self.t.flag()
+
 class DoveC(Enemy):
 	def __init__(self,init,game,player,count):
 		Enemy.__init__(self,init,game,player)
@@ -368,6 +382,10 @@ class DoveC(Enemy):
 	def get_rect(self):
 		return self.image.get_rect().move(self.position.x-self.image.get_width()/2,self.position.y-self.image.get_height()/2)
 		
+	def flag(self):
+		Enemy.flag(self)	
+
+		
 class ToucanA(Enemy):
 	def __init__(self, init, game, player,count,amount,timebetween):
 		Enemy.__init__(self, init, game, player)
@@ -395,6 +413,9 @@ class ToucanA(Enemy):
 			
 	def flag(self):
 		Enemy.flag(self)
+	
+	def flag(self):
+		Enemy.flag(self)	
 
 class ToucanB(Enemy):
 	def __init__(self, init, game, player,amount,timebetween):
@@ -422,6 +443,9 @@ class ToucanB(Enemy):
 			
 	def flag(self):
 		Enemy.flag(self)
+	
+	def flag(self):
+		Enemy.flag(self)	
 
 class BlueparrotA(Enemy):
 	def __init__(self, init,game,player,direction,buck,timebetween):
@@ -448,6 +472,9 @@ class BlueparrotA(Enemy):
 	
 	def get_rect(self):
 		return self.image.get_rect().move(self.position.x-self.image.get_width()/2,self.position.y-self.image.get_height()/2)
+	
+	def flag(self):
+		Enemy.flag(self)	
 
 class BlueparrotB(Enemy):
 	def __init__(self, init,game,player,direction,timebetween,speed):
@@ -475,3 +502,8 @@ class BlueparrotB(Enemy):
 	
 	def get_rect(self):
 		return self.image.get_rect().move(self.position.x-self.image.get_width()/2,self.position.y-self.image.get_height()/2)
+	
+	def flag(self):
+		Enemy.flag(self)	
+		if self.t != None:
+			self.t.flag()
