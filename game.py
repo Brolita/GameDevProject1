@@ -78,7 +78,7 @@ game = Engine(screen, sidebar)
 player = Player(game)
 frame = 0
 
-
+wave = 1
 
 while gameRunning:
 	clock.tick(60)
@@ -86,7 +86,7 @@ while gameRunning:
 	screen.blit(levelOneBackground, levelOneBackground.get_rect(), [0, 0, 600, 800])
 	
 	#frame actions 
-	if False: #wave 1
+	if wave == 5: #wave 5
 		if frame==30:
 			SeagullA(Vector(300,-10),game,player,5)
 		if frame==60:
@@ -101,18 +101,16 @@ while gameRunning:
 			SeagullA(Vector(500,-10),game,player,9)
 		if frame==130:
 			SeagullA(Vector(100,-10),game,player,10)
-		if frame==150:
+		if frame==170:
 			PelicanA(Vector(100,-10),game,player,10,7)
-		if frame==180:
-			PelicanA(Vector(100,-10),game,player,10,7)
-		if frame==210:
+		if frame==200:
 			PelicanA(Vector(100,-10),game,player,10,7)
 		if frame==240:
 			PelicanA(Vector(100,-10),game,player,10,7)
-		if frame==250:
-			SeagullA(Vector(300,-10),game,player,15)
 		if frame==270:
 			PelicanA(Vector(100,-10),game,player,10,7)
+		if frame==250:
+			SeagullA(Vector(300,-10),game,player,15)
 		if frame==300:
 			PelicanA(Vector(100,-10),game,player,10,7)
 		if frame==300:
@@ -124,26 +122,29 @@ while gameRunning:
 		if frame==450:
 			SeagullA(Vector(200,-10),game,player,13)
 		if frame==470:
-			PelicanB(Vector(100,780),game,player,10,7)
+			PelicanB(Vector(500,780),game,player,10,7)
 		if frame==500:
-			PelicanB(Vector(100,780),game,player,10,7)
+			PelicanB(Vector(500,780),game,player,10,7)
 		if frame==500:
 			SeagullA(Vector(400,-10),game,player,12)
 		if frame==530:
-			PelicanB(Vector(100,780),game,player,10,7)
+			PelicanB(Vector(500,780),game,player,10,7)
 		if frame==550:
 			SeagullA(Vector(100,-10),game,player,15)
 		if frame==560:
-			PelicanB(Vector(100,780),game,player,10,7)
+			PelicanB(Vector(500,780),game,player,10,7)
 		if frame==600:
 			SeagullA(Vector(500,-10),game,player,12)
 		if frame==590:
-			PelicanB(Vector(100,780),game,player,10,7)
+			PelicanB(Vector(500,780),game,player,10,7)
 		if frame==620:
-			PelicanB(Vector(100,780),game,player,10,7)
+			PelicanB(Vector(500,780),game,player,10,7)
+		if frame==800:
+			wave += 1
+			frame = 0
 	
 	
-	if False: #Wave 2
+	if wave == 6: #wave 6
 		if frame==30:
 			PelicanC(Vector(500,-10),game,player,20,7)
 		if frame==50:
@@ -226,51 +227,48 @@ while gameRunning:
 			SeagullA(Vector(400,-10),game,player,5)
 		if frame==652:
 			SeagullA(Vector(500,-10),game,player,8)
+		if frame==800:
+			wave += 1
+			frame = 0
 	
 	
-	if False: # wave3 increase time between enemies
-		if frame==30:
+	if wave == 2: #wave 2
+		if frame==40:
 			SeagullA(Vector(300,-10),game,player,9)
-		if frame==60:
+		if frame==80:
 			SeagullB(Vector(400,790),game,player,9)
-		if frame==90:
-			SeagullA(Vector(200,-10),game,player,8)
 		if frame==120:
-			SeagullB(Vector(100,790),game,player,8)
-		if frame==150:
-			SeagullA(Vector(300,-10),game,player,9)
-		if frame==180:
-			SeagullB(Vector(200,790),game,player,8)
-		if frame==210:
-			SeagullA(Vector(500,-10),game,player,9)
-		if frame==240:
-			SeagullB(Vector(400,790),game,player,8)
-		if frame==270:
-			SeagullA(Vector(100,-10),game,player,9)
-		if frame==300:
-			SeagullB(Vector(100,790),game,player,8)
-		if frame==330:
-			SeagullA(Vector(500,-10),game,player,9)
-		if frame==360:
-			SeagullB(Vector(300,790),game,player,9)
-		if frame==390:
 			SeagullA(Vector(200,-10),game,player,8)
-		if frame==420:
-			SeagullB(Vector(500,790),game,player,9)
-		if frame==450:
+		if frame==160:
+			SeagullA(Vector(300,-10),game,player,9)
+		if frame==200:
+			SeagullB(Vector(200,790),game,player,8)
+		if frame==240:
+			SeagullA(Vector(500,-10),game,player,9)
+		if frame==280:
+			SeagullB(Vector(400,790),game,player,8)
+		if frame==320:
 			SeagullA(Vector(100,-10),game,player,9)
+		if frame==360:
+			SeagullB(Vector(100,790),game,player,8)
+		if frame==400:
+			SeagullA(Vector(500,-10),game,player,9)
+		if frame==440:
+			SeagullB(Vector(300,790),game,player,9)
 		if frame==480:
-			SeagullB(Vector(400,790),game,player,9)
-		if frame==510:
-			SeagullA(Vector(200,-10),game,player,9)
-		if frame==540:
-			SeagullB(Vector(100,790),game,player,9)
-		if frame==570:
-			SeagullA(Vector(400,-10),game,player,9)
-		if frame==600:
+			SeagullA(Vector(200,-10),game,player,8)
+		if frame==520:
 			SeagullB(Vector(500,790),game,player,9)
+		if frame==560:
+			SeagullA(Vector(100,-10),game,player,9)
+		if frame==600:
+			SeagullB(Vector(400,790),game,player,9)
+		if frame==800:
+			wave += 1
+			frame = 0
 	
-	if False: #wave4
+	
+	if wave == 1: #wave 1
 		if frame==50:
 			SeagullA(Vector(100,-10),game,player,3)
 		if frame==100:
@@ -297,10 +295,12 @@ while gameRunning:
 			SeagullA(Vector(400,-10),game,player,5)
 		if frame==650:
 			SeagullA(Vector(100,-10),game,player,6)
+		if frame==800:
+			wave += 1
+			frame = 0
 	
 	
-	
-	if False: # wave5
+	if wave == 3: #wave 3
 		if frame==30:
 			SeagullA(Vector(300,-10),game,player,5)
 		if frame==50:
@@ -331,9 +331,12 @@ while gameRunning:
 			PelicanA(Vector(100,-10),game,player,20,7)
 		if frame==570:
 			SeagullA(Vector(300,-10),game,player,5)
+		if frame==800:
+			wave += 1
+			frame = 0
 	
 	
-	if False:  #wave6
+	if wave == 4: #wave 4
 		if frame==30:
 			SeagullA(Vector(100,-10),game,player,20)
 			SeagullA(Vector(200,-10),game,player,20)
@@ -384,10 +387,12 @@ while gameRunning:
 			SeagullA(Vector(300,-10),game,player,5)
 		if frame==670:
 			SeagullA(Vector(300,-10),game,player,5)
+		if frame==800:
+			wave += 1
+			frame = 0
 	
 	
-	
-	if False: # level 2 wave 1
+	if wave == 7: #level 2 wave 1
 		if frame==30:
 			HummingbirdA(Vector(300,-10),game,player,1,2,50)
 		if frame==60:
@@ -423,7 +428,8 @@ while gameRunning:
 		if frame==610:
 			HummingbirdA(Vector(500,-10),game,player,1,10,50)
 			
-	if False: #level2 wave2
+			
+	if wave == 8: #level2 wave2
 		if frame==30: 
 			HummingbirdC(Vector(300,-10),game,player,1,5,30)
 		if frame==60:
@@ -455,7 +461,9 @@ while gameRunning:
 		if frame==560:
 			HummingbirdA(Vector(200,-10),game,player,1,6,30)
 			HummingbirdA(Vector(400,-10),game,player,-1,6,30)
-	if False: #Level2 wave3
+	
+	
+	if wave == 9: #Level2 wave3
 		if frame==30:
 			DoveA(Vector(300,-10),game,player)
 			DoveA(Vector(200,-10),game,player)
@@ -503,7 +511,9 @@ while gameRunning:
 			HummingbirdA(Vector(200,-10),game,player,1,10,30)
 		if frame==560:
 			HummingbirdA(Vector(300,-10),game,player,-1,11,30)
-	if False: #level 2 wave 4
+	
+	
+	if wave == 10: #level 2 wave 4
 		if frame==30:
 			HummingbirdA(Vector(200,-10),game,player,1,5,30)
 			HummingbirdA(Vector(400,-10),game,player,-1,5,30)
@@ -546,7 +556,9 @@ while gameRunning:
 			HummingbirdB(Vector(500,-10),game,player,-1,9,30)
 			DoveB(Vector(200,-10),game,player,50,9)
 			DoveB(Vector(400,-10),game,player,50,9)
-	if False: #Level 2 wave 5
+	
+	
+	if wave == 11: #Level 2 wave 5
 		if frame==30:
 			DoveC(Vector(300,-10),game,player,5)
 		if frame==50:
@@ -607,7 +619,9 @@ while gameRunning:
 		if frame==600:
 			DoveC(Vector(500,-10),game,player,5)
 			HummingbirdB(Vector(200,-10),game,player,1,5,30)
-	if False:	#Level 2 Wave 6
+	
+	
+	if wave == 12:	#Level 2 Wave 6
 		if frame==30:
 			DoveA(Vector(100,-10),game,player)
 		if frame==50:
@@ -668,7 +682,9 @@ while gameRunning:
 		if frame==600:
 			DoveA(Vector(200,-10),game,player)
 			DoveC(Vector(500,-10),game,player,5)
-	if False: #Level 3 wave 1
+	
+	
+	if wave == 13: #Level 3 wave 1
 		if frame==30:
 			ToucanA(Vector(300,-10),game,player,5,5,15)
 		if frame==60:
@@ -710,7 +726,9 @@ while gameRunning:
 			ToucanA(Vector(100,-10),game,player,6,5,15)
 		if frame==600:
 			ToucanA(Vector(500,-10),game,player,6,5,15)
-	if False: #Level 3 wave 2
+	
+	
+	if wave == 14: #Level 3 wave 2
 		if frame==30:
 			ToucanB(Vector(300,-10),game,player,5,15)
 		if frame==90:
@@ -733,7 +751,9 @@ while gameRunning:
 			ToucanB(Vector(500,-10),game,player,11,15)
 		if frame==570:
 			ToucanB(Vector(100,-10),game,player,8,15)
-	if False:	#Level 3 wave 3
+	
+	
+	if wave == 15:	#Level 3 wave 3
 		if frame==30:
 			BlueparrotA(Vector(300,-10),game,player,1,4,30)
 		if frame==60:
@@ -774,7 +794,9 @@ while gameRunning:
 			BlueparrotA(Vector(500,-10),game,player,1,3,30)
 		if frame==600:
 			BlueparrotA(Vector(200,-10),game,player,-1,4,30)
-	if False: #Level 3 wave 4
+	
+	
+	if wave == 16: #Level 3 wave 4
 		if frame==30:
 			ToucanA(Vector(100,-10),game,player,6,5,15)
 			ToucanA(Vector(200,-10),game,player,6,5,15)
@@ -798,7 +820,9 @@ while gameRunning:
 			BlueparrotA(Vector(400,-10),game,player,1,5,30)
 		if frame==600:
 			BlueparrotA(Vector(300,-10),game,player,-1,5,30)
-	if False:  #Level 3 wave 5
+	
+	
+	if wave == 17:  #Level 3 wave 5
 		if frame==30:
 			BlueparrotB(Vector(300,-10),game,player,1,30,7)
 		if frame==60:
@@ -839,7 +863,9 @@ while gameRunning:
 			BlueparrotA(Vector(300,-10),game,player,1,5,30)
 		if frame==600:
 			BlueparrotA(Vector(100,-10),game,player,-1,5,30)
-	if True: #Level 3 wave 6
+	
+	
+	if wave == 18: #Level 3 wave 6
 		if frame==30:
 			ToucanA(Vector(100,-10),game,player,5,4,30)  #For some reason that 4 needs to be a 4 to spawn 3 bucks. don't ask why. I don't know  --Nick
 		if frame==50:

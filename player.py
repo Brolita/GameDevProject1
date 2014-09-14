@@ -2,6 +2,27 @@ import pygame
 import math
 from Vector import Vector
 from snowball import Snowball
+from image import Image
+
+class Dialouge:
+	def __init__(self, image, dialouge, game, callback):
+		self.game = game
+		self.callback = callback
+		game.gameObjects.append(self)
+		self.Image.get("
+	
+	def update(self):
+		for event in pygame.event.get():
+			if event.type == pygame.KEYDOWN:
+				if event.key == pygame.K_SPACE:
+					self.flag()
+					self.callback()
+					
+	def draw(self):
+		
+	
+	def flag(self):
+		self.game.flag(self)
 
 class Player:
 	def __init__ (self, game):

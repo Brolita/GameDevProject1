@@ -9,10 +9,10 @@ class Engine:
 		self.sidebar = sidebar
 		
 	def playerHit(self, i):
-		i.invinsibility = 30
+		i.invinsibility = 120
 		for j in self.gameObjects:
 			if j.name == 'Bullet':
-				collisionDetected = j.get_rect().colliderect(pygame.Rect(i.getPosition().x - 100, i.getPosition().y - 100, 200, 200))
+				collisionDetected = j.get_rect().colliderect(pygame.Rect(i.getPosition().x - 200, i.getPosition().y - 200, 400, 400))
 				if collisionDetected:
 					j.flag()
 		self.sidebar.lives -= 1
