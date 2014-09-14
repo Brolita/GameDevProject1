@@ -23,6 +23,9 @@ class Tracers:
 			if(self.count == 0):
 				self.__del()
 		self.frame+=1
+		print self.enemy
+		if self.enemy == None:
+			self.flag()
 	
 	def draw(self, screen):
 		return
@@ -51,6 +54,8 @@ class TracersOffset:
 			if(self.count == 0):
 				self.__del()
 		self.frame+=1
+		if self.enemy == None:
+			self.flag()
 	
 	def draw(self, screen):
 		return

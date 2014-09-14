@@ -20,6 +20,8 @@ class Player:
 		self.game = game
 		self.name = 'Player'
 		self.invinsibility = 0
+		self.dash = False
+		self.dashLength = 0
 		game.gameObjects.append(self)
 	
 	def update(self):
@@ -33,6 +35,28 @@ class Player:
 			self.snowballs.append(snowball)
 			self.fireCooldown = 5
 			self.canFire = False
+		
+		#if self.dash:
+		#	a = math.sqrt(2)
+		#	if self.moving[0]:
+		#		if self.moving[2]:
+		#			self.rect = self.rect.move(
+		#		elif self.moving[3]:
+		#			
+		#		else:
+					
+		#	elif self.moving[1]:
+		#		if self.moving[2]:
+		#			
+		#		elif self.moving[3]:
+		#			
+		#		else:
+					
+		#	elif self.moving[2]:
+					
+		#	elif self.moving[3]:
+			
+		#	self.dashLength += 1
 			
 		if self.moving[0]:
 			if self.focus:
@@ -95,3 +119,8 @@ class Player:
 		#	projectile.update(screen)
 		#	if projectile.rect.y < -5:
 		#		self.snowballs.remove(projectile)
+	
+	def dash(self, sidebar)
+		self.dash = True
+		self.dashLength = 0
+		sidebar.dash -= 1

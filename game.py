@@ -21,6 +21,9 @@ def processPlayerEvents(player):
 			if event.key == pygame.K_ESCAPE:
 				sys.exit()
 	
+			if player.dash:
+				return
+	
 			if event.key == pygame.K_UP:
 				player.moving[0] = True
 				player.moving[1] = False
@@ -46,7 +49,13 @@ def processPlayerEvents(player):
 			if event.key == pygame.K_LSHIFT:
 				player.focus = True
 				
+			if event.key == pygame.K_z:
+				player.dash(sidebar)
+				
 		if event.type == pygame.KEYUP:
+			if player.dash:
+				return
+		
 			if event.key == pygame.K_UP:
 				player.moving[0] = False
 				
