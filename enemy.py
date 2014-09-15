@@ -23,7 +23,6 @@ class Tracers:
 			if(self.count == 0):
 				self.__del()
 		self.frame+=1
-		print self.enemy
 		if self.enemy == None:
 			self.flag()
 	
@@ -79,13 +78,14 @@ class Enemy:
 	def setSidebar(sidebar):
 		Enemy.sidebar = sidebar
 
-	def __init__(self, init, game, player):
+	def __init__(self, init, game, player, points):
 		self.name = 'Enemy'
 		self.game = game
 		game.gameObjects.append(self)
 		self.player = player
 		self.frame = 0
 		self.position = init.copy()
+		self.points = points
 
 	def draw(self, screen):
 		if screen.get_rect().move(-100, 0).inflate(200,300).collidepoint(self.position.x, self.position.y):
@@ -96,12 +96,16 @@ class Enemy:
 	def get_rect(self):
 		return self.image.get_rect().move(self.position.x - self.image.get_width()/2, self.position.y - self.image.get_height()/2)
 			
+	def hit(self):
+		self.game.sidebar.points += self.points
+		self.flag()
+		
 	def flag(self):
 		self.game.flag(self)
 	
 class SeagullA(Enemy):
 	def __init__(self, init, game, player,count):
-		Enemy.__init__(self, init, game, player)
+		Enemy.__init__(self, init, game, player, 100)
 		self.image = Image.get("seagull")
 		self.count=count
 	def update(self):
@@ -119,12 +123,15 @@ class SeagullA(Enemy):
 	def get_rect(self):
 		return self.image.get_rect().move(self.position.x - self.image.get_width()/2, self.position.y - self.image.get_height()/2)
 			
+	def hit(self):
+		Enemy.hit(self)
+	
 	def flag(self):
 		Enemy.flag(self)
 		
 class SeagullB(Enemy):
 	def __init__(self, init, game, player,count):
-		Enemy.__init__(self, init, game, player)
+		Enemy.__init__(self, init, game, player, 100)
 		self.image = Image.get("seagull")
 		self.count=count
 	def update(self):
@@ -141,13 +148,16 @@ class SeagullB(Enemy):
 		
 	def get_rect(self):
 		return self.image.get_rect().move(self.position.x - self.image.get_width()/2, self.position.y - self.image.get_height()/2)
+			
+	def hit(self):
+		Enemy.hit(self)
 			
 	def flag(self):
 		Enemy.flag(self)
 	
 class PelicanA(Enemy):
 	def __init__(self, init, game, player,timebetween,speed):
-		Enemy.__init__(self, init, game, player)
+		Enemy.__init__(self, init, game, player, 50)
 		self.image = Image.get("pelican")
 		self.t = None
 		self.timebetween=timebetween
@@ -163,7 +173,10 @@ class PelicanA(Enemy):
 		
 	def get_rect(self):
 		return self.image.get_rect().move(self.position.x - self.image.get_width()/2, self.position.y - self.image.get_height()/2)
-			
+	
+	def hit(self):
+		Enemy.hit(self)
+	
 	def flag(self):
 		Enemy.flag(self)
 		if self.t != None:
@@ -171,7 +184,7 @@ class PelicanA(Enemy):
 			
 class PelicanB(Enemy):
 	def __init__(self, init, game, player,timebetween,speed):
-		Enemy.__init__(self, init, game, player)
+		Enemy.__init__(self, init, game, player, 50)
 		self.image = Image.get("pelican")
 		self.t = None
 		self.timebetween=timebetween
@@ -188,6 +201,9 @@ class PelicanB(Enemy):
 	def get_rect(self):
 		return self.image.get_rect().move(self.position.x - self.image.get_width()/2, self.position.y - self.image.get_height()/2)
 			
+	def hit(self):
+		Enemy.hit(self)
+		
 	def flag(self):
 		Enemy.flag(self)
 		if self.t != None:
@@ -195,7 +211,7 @@ class PelicanB(Enemy):
 						
 class PelicanC(Enemy):
 	def __init__(self, init, game, player,timebetween,speed):
-		Enemy.__init__(self, init, game, player)
+		Enemy.__init__(self, init, game, player, 50)
 		self.image = Image.get("pelican")
 		self.timebetween=timebetween
 		self.speed=speed;
@@ -211,12 +227,15 @@ class PelicanC(Enemy):
 	def get_rect(self):
 		return self.image.get_rect().move(self.position.x - self.image.get_width()/2, self.position.y - self.image.get_height()/2)
 			
+	def hit(self):
+		Enemy.hit(self)
+		
 	def flag(self):
 		Enemy.flag(self)
 
 class HummingbirdA(Enemy):
 	def __init__(self, init,game,player,direction,buck,timebetween):
-		Enemy.__init__(self,init,game,player)
+		Enemy.__init__(self,init,game,player, 100)
 		self.image=pygame.image.load("Art Stuff\\hummingbird.png").convert_alpha()
 		self.direction=direction
 		self.buck=buck
@@ -240,12 +259,15 @@ class HummingbirdA(Enemy):
 	def get_rect(self):
 		return self.image.get_rect().move(self.position.x-self.image.get_width()/2,self.position.y-self.image.get_height()/2)
 		
+	def hit(self):
+		Enemy.hit(self)
+		
 	def flag(self):
 		Enemy.flag(self)
 		
 class HummingbirdB(Enemy):
 	def __init__(self, init,game,player,direction,buck,timebetween):
-		Enemy.__init__(self,init,game,player)
+		Enemy.__init__(self,init,game,player,100)
 		self.image=pygame.image.load("Art Stuff\\hummingbird.png").convert_alpha()
 		self.direction=direction
 		self.buck=buck
@@ -269,9 +291,15 @@ class HummingbirdB(Enemy):
 	def get_rect(self):
 		return self.image.get_rect().move(self.position.x-self.image.get_width()/2,self.position.y-self.image.get_height()/2)
 
+	def hit(self):
+		Enemy.hit(self)
+		
+	def flag(self):
+		Enemy.flag(self)
+		
 class HummingbirdC(Enemy):
 	def __init__(self, init,game,player,direction,buck,timebetween):
-		Enemy.__init__(self,init,game,player)
+		Enemy.__init__(self,init,game,player,100)
 		self.image=pygame.image.load("Art Stuff\\hummingbird.png").convert_alpha()
 		self.direction=direction
 		self.buck=buck
@@ -295,12 +323,15 @@ class HummingbirdC(Enemy):
 	def get_rect(self):
 		return self.image.get_rect().move(self.position.x-self.image.get_width()/2,self.position.y-self.image.get_height()/2)
 	
+	def hit(self):
+		Enemy.hit(self)
+		
 	def flag(self):
 		Enemy.flag(self)	
 	
 class DoveA(Enemy):
 	def __init__(self,init,game,player):
-		Enemy.__init__(self,init,game,player)
+		Enemy.__init__(self,init,game,player,50)
 		self.image=pygame.image.load("Art Stuff\\dove.png").convert_alpha()
 	def update(self):
 		if self.frame<25:
@@ -322,12 +353,15 @@ class DoveA(Enemy):
 	def get_rect(self):
 		return self.image.get_rect().move(self.position.x-self.image.get_width()/2,self.position.y-self.image.get_height()/2)
 			
+	def hit(self):
+		Enemy.hit(self)
+		
 	def flag(self):
 		Enemy.flag(self)	
 
 class DoveB(Enemy):
 	def __init__(self,init,game,player,timebetween,speed):
-		Enemy.__init__(self,init,game,player)
+		Enemy.__init__(self,init,game,player,50)
 		self.image=pygame.image.load("Art Stuff\\dove.png").convert_alpha()
 		self.t=None
 		self.timebetween=timebetween
@@ -354,6 +388,9 @@ class DoveB(Enemy):
 	def get_rect(self):
 		return self.image.get_rect().move(self.position.x-self.image.get_width()/2,self.position.y-self.image.get_height()/2)
 		
+	def hit(self):
+		Enemy.hit(self)
+		
 	def flag(self):
 		Enemy.flag(self)
 		if self.t != None:
@@ -361,7 +398,7 @@ class DoveB(Enemy):
 
 class DoveC(Enemy):
 	def __init__(self,init,game,player,count):
-		Enemy.__init__(self,init,game,player)
+		Enemy.__init__(self,init,game,player,50)
 		self.image=pygame.image.load("Art Stuff\\dove.png").convert_alpha()
 		self.t=None
 		self.count=count
@@ -387,12 +424,15 @@ class DoveC(Enemy):
 	def get_rect(self):
 		return self.image.get_rect().move(self.position.x-self.image.get_width()/2,self.position.y-self.image.get_height()/2)
 		
+	def hit(self):
+		Enemy.hit(self)
+		
 	def flag(self):
 		Enemy.flag(self)	
 
 class ToucanA(Enemy):
 	def __init__(self, init, game, player,count,amount,timebetween):
-		Enemy.__init__(self, init, game, player)
+		Enemy.__init__(self, init, game, player, 150)
 		self.image = Image.get("toucan")
 		self.count=count
 		self.amount=amount
@@ -415,15 +455,15 @@ class ToucanA(Enemy):
 	def get_rect(self):
 		return self.image.get_rect().move(self.position.x - self.image.get_width()/2, self.position.y - self.image.get_height()/2)
 			
-	def flag(self):
-		Enemy.flag(self)
-	
+	def hit(self):
+		Enemy.hit(self)
+		
 	def flag(self):
 		Enemy.flag(self)	
 
 class ToucanB(Enemy):
 	def __init__(self, init, game, player,amount,timebetween):
-		Enemy.__init__(self, init, game, player)
+		Enemy.__init__(self, init, game, player, 150)
 		self.image = Image.get("toucan")
 		self.amount=amount
 		self.i=0
@@ -445,15 +485,15 @@ class ToucanB(Enemy):
 	def get_rect(self):
 		return self.image.get_rect().move(self.position.x - self.image.get_width()/2, self.position.y - self.image.get_height()/2)
 			
+	def hit(self):
+		Enemy.hit(self)
+		
 	def flag(self):
 		Enemy.flag(self)
-	
-	def flag(self):
-		Enemy.flag(self)	
 
 class BlueparrotA(Enemy):
 	def __init__(self, init,game,player,direction,buck,timebetween):
-		Enemy.__init__(self,init,game,player)
+		Enemy.__init__(self,init,game,player, 100)
 		self.image=pygame.image.load("Art Stuff\\blueparrot.png").convert_alpha()
 		self.direction=direction
 		self.buck=buck
@@ -477,12 +517,15 @@ class BlueparrotA(Enemy):
 	def get_rect(self):
 		return self.image.get_rect().move(self.position.x-self.image.get_width()/2,self.position.y-self.image.get_height()/2)
 	
+	def hit(self):
+		Enemy.hit(self)
+		
 	def flag(self):
 		Enemy.flag(self)	
 
 class BlueparrotB(Enemy):
 	def __init__(self, init,game,player,direction,timebetween,speed):
-		Enemy.__init__(self,init,game,player)
+		Enemy.__init__(self,init,game,player, 100)
 		self.image=pygame.image.load("Art Stuff\\blueparrot.png").convert_alpha()
 		self.direction=direction
 		self.timebetween=timebetween
@@ -507,6 +550,9 @@ class BlueparrotB(Enemy):
 	def get_rect(self):
 		return self.image.get_rect().move(self.position.x-self.image.get_width()/2,self.position.y-self.image.get_height()/2)
 	
+	def hit(self):
+		Enemy.hit(self)
+		
 	def flag(self):
 		Enemy.flag(self)	
 		if self.t != None:

@@ -5,15 +5,14 @@ from snowball import Snowball
 from image import Image
 
 class Dialogue:
-	font = None
 	def __init__(self, image, d, c, game, player, ref, delay = 0):
 		self.name = "Dialogue"
 		self.game = game
 		game.gameObjects.append(self)
-		if Dialogue.font == None:
-			Dialogue.font = pygame.font.SysFont("monospace",15)
+		if Image.font == None:
+			Image.font = pygame.font.SysFont("monospace",22)
 		self.image = Image.get(image)
-		self.value = Dialogue.font.render(d, 1, c)
+		self.value = Image.font.render(d, 1, c)
 		self.player = player
 		self.lock = player.firing
 		self.ref = ref
@@ -69,28 +68,6 @@ class Player:
 			self.snowballs.append(snowball)
 			self.fireCooldown = 5
 			self.canFire = False
-		
-		#if self.dash:
-		#	a = math.sqrt(2)
-		#	if self.moving[0]:
-		#		if self.moving[2]:
-		#			self.rect = self.rect.move(
-		#		elif self.moving[3]:
-		#			
-		#		else:
-					
-		#	elif self.moving[1]:
-		#		if self.moving[2]:
-		#			
-		#		elif self.moving[3]:
-		#			
-		#		else:
-					
-		#	elif self.moving[2]:
-					
-		#	elif self.moving[3]:
-			
-		#	self.dashLength += 1
 			
 		if self.moving[0]:
 			if self.focus:

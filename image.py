@@ -2,6 +2,7 @@ import pygame
 
 class Image(object):
 	data = {}
+	font = None
 	@staticmethod
 	def get(k):
 		if k not in Image.data:

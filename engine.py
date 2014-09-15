@@ -74,7 +74,7 @@ class Engine:
 						collisionDetected = j.get_rect().colliderect(i.get_rect())
 						if collisionDetected == True:
 							i.flag()
-							j.flag()
+							j.hit()
 						
 					# check if Player has shot an boss
 					if i.name == 'Snowball' and j.name == 'Boss':
