@@ -2,7 +2,8 @@ import pygame
 
 class Image(object):
 	data = {}
-	font = python.font.SysFont("monospace",15)
+	pygame.font.init()
+	font = pygame.font.SysFont("monospace",15)
 	@staticmethod
 	def get(k):
 		if k not in Image.data:

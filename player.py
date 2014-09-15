@@ -9,7 +9,7 @@ class Dialouge:
 		self.game = game
 		self.callback = callback
 		game.gameObjects.append(self)
-		self.Image.get("
+		#.Image.get("
 	
 	def update(self):
 		for event in pygame.event.get():
@@ -19,7 +19,7 @@ class Dialouge:
 					self.callback()
 					
 	def draw(self):
-		
+		a = 5
 	
 	def flag(self):
 		self.game.flag(self)
