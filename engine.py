@@ -40,7 +40,7 @@ class Engine:
 				collisionDetected = j.get_rect().colliderect(pygame.Rect(i.getPosition().x - 200, i.getPosition().y - 200, 400, 400))
 				if collisionDetected:
 					j.flag()
-		self.sidebar.lives -= 1
+		self.sidebar.lives -= 1			
 		
 	def update(self):
 		if len(self.gameObjects) > 500:
@@ -61,20 +61,28 @@ class Engine:
 						if collisionDetected == True:
 							j.flag()
 							self.playerHit(i)
-							
+														   
+					# check if Player has collided with an enemy
+					if i.name == 'Player' and j.name == 'Enemy':
+						collisionDetected = j.get_rect().collidepoint((i.getPosition().x, i.getPosition().y))
+						if collisionDetected == True:
+							self.playerHit(i)
+							j.flag()
+
 					# check if Player has shot an enemy
 					if i.name == 'Snowball' and j.name == 'Enemy':
 						collisionDetected = j.get_rect().colliderect(i.get_rect())
 						if collisionDetected == True:
 							i.flag()
 							j.flag()
-																	   
-					# check if Player has collided with an enemy
-					if i.name == 'Player' and j.name == 'Enemy':
-						collisionDetected = j.get_rect().collidepoint((i.getPosition().x, i.getPosition().y))
-						if collisionDetected == True:
-							print 'Player has collided with an enemy!'
 						
+					# check if Player has shot an boss
+					if i.name == 'Snowball' and j.name == 'Boss':
+						collisionDetected = j.get_rect().colliderect(i.get_rect())
+						if collisionDetected == True:
+							i.flag()
+							j.hit()
+										
 	def draw(self):
 		if self.flags:
 			while self.flags:

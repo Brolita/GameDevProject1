@@ -390,7 +390,6 @@ class DoveC(Enemy):
 	def flag(self):
 		Enemy.flag(self)	
 
-		
 class ToucanA(Enemy):
 	def __init__(self, init, game, player,count,amount,timebetween):
 		Enemy.__init__(self, init, game, player)
@@ -512,3 +511,44 @@ class BlueparrotB(Enemy):
 		Enemy.flag(self)	
 		if self.t != None:
 			self.t.flag()
+			
+			
+class Boss(Enemy):
+	def __init__(self, init, game, player, health):
+		Enemy.__init__(init, game, player)
+		self.name = 'Boss'
+		self.health = health
+	
+	def hit(self):
+		health -= 1
+		if health == 0:
+			self.flag()
+	
+	def draw(self, screen):
+		Enemy.draw(self, screen)
+		
+	def get_rect(self):
+		return self.image.get_rect().move(self.position.x - self.image.get_width()/2, self.position.y - self.image.get_height()/2)
+			
+	def flag(self):
+		Enemy.flag(self)
+		
+class ExampleBoss(Boss):
+	def __init__(self, init, game, player, health):
+		Boss.__init__(init, game, player, health)
+		self.image = Image.get("test")
+	
+	def hit(self):
+		Boss.hit(self)
+	
+	def update(self):
+		print "here you go nick, sorry for the delay"
+	
+	def draw(self, screen):
+		Boss.draw(self, screen)
+		
+	def get_rect(self):
+		return self.image.get_rect().move(self.position.x - self.image.get_width()/2, self.position.y - self.image.get_height()/2)
+			
+	def flag(self):
+		Boss.flag(self)
