@@ -32,6 +32,8 @@ class Engine:
 			self.wave = 0
 			
 		self.d =  None
+		self.sidebar.points = 0
+		self.sidebar.lives =4
 		
 	def playerHit(self, i):
 		i.invinsibility = 120

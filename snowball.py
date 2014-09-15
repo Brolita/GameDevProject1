@@ -9,7 +9,7 @@ class Snowball:
 		self.rect = self.image.get_rect()
 		self.rect.x = playerX + 11
 		self.rect.y = playerY - 5
-		self.yVelocity = -11
+		self.yVelocity = -16
 		self.game = game
 		game.gameObjects.append(self)
 		

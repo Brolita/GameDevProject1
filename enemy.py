@@ -72,6 +72,32 @@ def BuckTarget(game, enemy, target, count, spread, speed, spriteName):
 def BuckDown(game, enemy, count, spread, speed, spriteName):
 	BuckTarget(game, enemy, Vector(enemy.position.x, 10000) ,count, spread, speed, spriteName)
 
+class Explosion:
+	def __init__(self, init, game, name):
+		self.game = game
+		game.gameObjects.append(self)
+		self.frame = 0
+		self.name = name
+		self.image = Image.get(name+"_explode1")
+		self.position = init.copy()
+	
+	def update(self):
+		if self.frame > 4:
+			self.image = Image.get(self.name+"_explode2")
+		if self.frame > 8:
+			self.flag()
+		self.frame += 1
+			
+	def draw(self, screen):
+		if screen.get_rect().move(-100, 0).inflate(100,100).collidepoint(self.position.x, self.position.y):
+			screen.blit(self.image, (self.position.x - self.image.get_width()/2, self.position.y - self.image.get_height()/2))
+		else:
+			self.flag()
+			
+	def flag(self):
+		self.game.flag(self)
+		
+	
 class Enemy:
 	sidebar = None
 	@staticmethod
@@ -88,7 +114,7 @@ class Enemy:
 		self.points = points
 
 	def draw(self, screen):
-		if screen.get_rect().move(-100, 0).inflate(200,300).collidepoint(self.position.x, self.position.y):
+		if screen.get_rect().move(-100, 0).inflate(self.image.get_width()*2 + 10,self.image.get_height()*2 + 10).collidepoint(self.position.x, self.position.y):
 			screen.blit(self.image, (self.position.x - self.image.get_width()/2, self.position.y - self.image.get_height()/2))
 		else:
 			self.flag()
@@ -127,6 +153,7 @@ class SeagullA(Enemy):
 		Enemy.hit(self)
 	
 	def flag(self):
+		Explosion(self.position, self.game, "seagull")
 		Enemy.flag(self)
 		
 class SeagullB(Enemy):
@@ -153,6 +180,7 @@ class SeagullB(Enemy):
 		Enemy.hit(self)
 			
 	def flag(self):
+		Explosion(self.position, self.game, "seagull")
 		Enemy.flag(self)
 	
 class PelicanA(Enemy):
@@ -178,6 +206,7 @@ class PelicanA(Enemy):
 		Enemy.hit(self)
 	
 	def flag(self):
+		Explosion(self.position, self.game, "pelican")
 		Enemy.flag(self)
 		if self.t != None:
 			self.t.flag()
@@ -205,6 +234,7 @@ class PelicanB(Enemy):
 		Enemy.hit(self)
 		
 	def flag(self):
+		Explosion(self.position, self.game, "pelican")
 		Enemy.flag(self)
 		if self.t != None:
 			self.t.flag()
@@ -231,12 +261,13 @@ class PelicanC(Enemy):
 		Enemy.hit(self)
 		
 	def flag(self):
+		Explosion(self.position, self.game, "pelican")
 		Enemy.flag(self)
 
 class HummingbirdA(Enemy):
 	def __init__(self, init,game,player,direction,buck,timebetween):
 		Enemy.__init__(self,init,game,player, 100)
-		self.image=pygame.image.load("Art Stuff\\hummingbird.png").convert_alpha()
+		self.image=Image.get("hummingbird")
 		self.direction=direction
 		self.buck=buck
 		self.timebetween=timebetween
@@ -263,12 +294,13 @@ class HummingbirdA(Enemy):
 		Enemy.hit(self)
 		
 	def flag(self):
+		Explosion(self.position, self.game, "hummingbird")
 		Enemy.flag(self)
 		
 class HummingbirdB(Enemy):
 	def __init__(self, init,game,player,direction,buck,timebetween):
 		Enemy.__init__(self,init,game,player,100)
-		self.image=pygame.image.load("Art Stuff\\hummingbird.png").convert_alpha()
+		self.image=Image.get("hummingbird")
 		self.direction=direction
 		self.buck=buck
 		self.timebetween=timebetween
@@ -295,12 +327,13 @@ class HummingbirdB(Enemy):
 		Enemy.hit(self)
 		
 	def flag(self):
+		Explosion(self.position, self.game, "hummingbird")
 		Enemy.flag(self)
 		
 class HummingbirdC(Enemy):
 	def __init__(self, init,game,player,direction,buck,timebetween):
 		Enemy.__init__(self,init,game,player,100)
-		self.image=pygame.image.load("Art Stuff\\hummingbird.png").convert_alpha()
+		self.image=Image.get("hummingbird")
 		self.direction=direction
 		self.buck=buck
 		self.timebetween=timebetween
@@ -327,12 +360,13 @@ class HummingbirdC(Enemy):
 		Enemy.hit(self)
 		
 	def flag(self):
+		Explosion(self.position, self.game, "hummingbird")
 		Enemy.flag(self)	
 	
 class DoveA(Enemy):
 	def __init__(self,init,game,player):
 		Enemy.__init__(self,init,game,player,50)
-		self.image=pygame.image.load("Art Stuff\\dove.png").convert_alpha()
+		self.image=Image.get("dove")
 	def update(self):
 		if self.frame<25:
 			self.position.Add((0,2))
@@ -357,12 +391,13 @@ class DoveA(Enemy):
 		Enemy.hit(self)
 		
 	def flag(self):
+		Explosion(self.position, self.game, "dove")
 		Enemy.flag(self)	
 
 class DoveB(Enemy):
 	def __init__(self,init,game,player,timebetween,speed):
 		Enemy.__init__(self,init,game,player,50)
-		self.image=pygame.image.load("Art Stuff\\dove.png").convert_alpha()
+		self.image=Image.get("dove")
 		self.t=None
 		self.timebetween=timebetween
 		self.speed=speed
@@ -392,6 +427,7 @@ class DoveB(Enemy):
 		Enemy.hit(self)
 		
 	def flag(self):
+		Explosion(self.position, self.game, "dove")
 		Enemy.flag(self)
 		if self.t != None:
 			self.t.flag()
@@ -399,7 +435,7 @@ class DoveB(Enemy):
 class DoveC(Enemy):
 	def __init__(self,init,game,player,count):
 		Enemy.__init__(self,init,game,player,50)
-		self.image=pygame.image.load("Art Stuff\\dove.png").convert_alpha()
+		self.image=Image.get("dove")
 		self.t=None
 		self.count=count
 	def update(self):
@@ -428,6 +464,7 @@ class DoveC(Enemy):
 		Enemy.hit(self)
 		
 	def flag(self):
+		Explosion(self.position, self.game, "dove")
 		Enemy.flag(self)	
 
 class ToucanA(Enemy):
@@ -459,6 +496,7 @@ class ToucanA(Enemy):
 		Enemy.hit(self)
 		
 	def flag(self):
+		Explosion(self.position, self.game, "toucan")
 		Enemy.flag(self)	
 
 class ToucanB(Enemy):
@@ -489,12 +527,13 @@ class ToucanB(Enemy):
 		Enemy.hit(self)
 		
 	def flag(self):
+		Explosion(self.position, self.game, "toucan")
 		Enemy.flag(self)
 
 class BlueparrotA(Enemy):
 	def __init__(self, init,game,player,direction,buck,timebetween):
 		Enemy.__init__(self,init,game,player, 100)
-		self.image=pygame.image.load("Art Stuff\\blueparrot.png").convert_alpha()
+		self.image=Image.get("blueparrot")
 		self.direction=direction
 		self.buck=buck
 		self.timebetween=timebetween
@@ -521,12 +560,13 @@ class BlueparrotA(Enemy):
 		Enemy.hit(self)
 		
 	def flag(self):
+		Explosion(self.position, self.game, "blueparrot")
 		Enemy.flag(self)	
 
 class BlueparrotB(Enemy):
 	def __init__(self, init,game,player,direction,timebetween,speed):
 		Enemy.__init__(self,init,game,player, 100)
-		self.image=pygame.image.load("Art Stuff\\blueparrot.png").convert_alpha()
+		self.image=Image.get("blueparrot")
 		self.direction=direction
 		self.timebetween=timebetween
 		self.t=None
@@ -554,6 +594,7 @@ class BlueparrotB(Enemy):
 		Enemy.hit(self)
 		
 	def flag(self):
+		Explosion(self.position, self.game, "blueparrot")
 		Enemy.flag(self)	
 		if self.t != None:
 			self.t.flag()

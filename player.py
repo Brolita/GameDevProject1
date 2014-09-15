@@ -48,7 +48,7 @@ class Player:
 		self.focus = False
 		self.firing = False
 		self.snowballs = []
-		self.fireCooldown = 5
+		self.fireCooldown = 3
 		self.canFire = True
 		self.game = game
 		self.name = 'Player'
