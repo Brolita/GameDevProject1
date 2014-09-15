@@ -20,6 +20,12 @@ class Engine:
 	def update(self):
 		if len(self.gameObjects) > 500:
 			print "Warning! over 500 gameobject to be rendered, expect slow down. # of gameObjects", len(self.gameObjects)
+		
+		for i in self.gameObjects:
+			if i.name == "Dialouge":
+				i.update()
+				
+		
 		for i in self.gameObjects:
 			i.update()
 			if i.name == 'Player' or i.name == 'Snowball':
@@ -47,12 +53,12 @@ class Engine:
 							print 'Player has collided with an enemy!'
 						
 	def draw(self):
-		for i in range(len(self.gameObjects)):
-			self.gameObjects[i].draw(self.screen)
-		
 		if self.flags:
 			while self.flags:
 				self.gameObjects.remove(self.flags.pop())
+		
+		for i in range(len(self.gameObjects)):
+			self.gameObjects[i].draw(self.screen)
 		
 	def flag(self, obj):
 		self.flags.add(obj)

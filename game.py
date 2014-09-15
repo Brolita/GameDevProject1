@@ -1,5 +1,5 @@
 import pygame, sys, random, fileinput, math
-from player import Player
+from player import *
 from snowball import Snowball
 from Vector import Vector
 from engine import Engine
@@ -21,8 +21,8 @@ def processPlayerEvents(player):
 			if event.key == pygame.K_ESCAPE:
 				sys.exit()
 	
-			if player.dash:
-				return
+			#if player.dash:
+			#	return
 	
 			if event.key == pygame.K_UP:
 				player.moving[0] = True
@@ -49,12 +49,12 @@ def processPlayerEvents(player):
 			if event.key == pygame.K_LSHIFT:
 				player.focus = True
 				
-			if event.key == pygame.K_z:
-				player.dash(sidebar)
+			#if event.key == pygame.K_z:
+			#	player.dash(sidebar)
 				
 		if event.type == pygame.KEYUP:
-			if player.dash:
-				return
+			#if player.dash:
+			#	return
 		
 			if event.key == pygame.K_UP:
 				player.moving[0] = False
@@ -78,7 +78,8 @@ game = Engine(screen, sidebar)
 player = Player(game)
 frame = 0
 
-wave = 1
+wave = 0
+Dialogue("penguin_ava1", "bleh", game, player)
 
 while gameRunning:
 	clock.tick(60)

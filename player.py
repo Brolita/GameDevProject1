@@ -4,22 +4,25 @@ from Vector import Vector
 from snowball import Snowball
 from image import Image
 
-class Dialouge:
-	def __init__(self, image, dialouge, game, callback):
+class Dialogue:
+	font = None
+	def __init__(self, image, D, game, player):
+		self.name = "Dialogue"
 		self.game = game
-		self.callback = callback
 		game.gameObjects.append(self)
-		self.Image.get("
+		if Dialogue.font == None:
+			Dialogue.font = pygame.font.SysFont("monospace",15)
+		self.image = Image.get(image)
+		self.s = D
+		self.player = player
 	
 	def update(self):
-		for event in pygame.event.get():
-			if event.type == pygame.KEYDOWN:
-				if event.key == pygame.K_SPACE:
-					self.flag()
-					self.callback()
-					
-	def draw(self):
-		
+		if self.player.firing:
+			self.flag()
+			
+	def draw(self, screen):
+		screen.blit(self.image, (40, 600))
+		screen.blit(Image.get("textbox"), (110, 581))
 	
 	def flag(self):
 		self.game.flag(self)
@@ -41,7 +44,7 @@ class Player:
 		self.game = game
 		self.name = 'Player'
 		self.invinsibility = 0
-		self.dash = False
+		#self.dash = False
 		self.dashLength = 0
 		game.gameObjects.append(self)
 	
