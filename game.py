@@ -16,6 +16,9 @@ clock = pygame.time.Clock()
 mainMenuNewGame = pygame.image.load('Art Stuff\MenuNewGame.png')
 mainMenuHighScores = pygame.image.load('Art Stuff\MenuHighScores.png')
 mainMenuExit = pygame.image.load('Art Stuff\MenuExit.png')
+pauseMenuResume = pygame.image.load('Art Stuff\PauseMenuResume.png')
+pauseMenuRestart = pygame.image.load('Art Stuff\PauseMenuRestart.png')
+pauseMenuExit = pygame.image.load('Art Stuff\PauseMenuExit.png')
 #print 'levelOneBackground has loaded as ', levelOneBackground
 #print 'mainMenuNewGame has loaded as ', mainMenuNewGame
 #print 'mainMenuHighScores has loaded as ', mainMenuHighScores
@@ -25,7 +28,85 @@ player = Player(game)
 frame = 0
 gameOpen = True
 currentMenuScreen = mainMenuNewGame
+currentPauseScreen = pauseMenuResume
 screenSelect = [True, False, False]
+pauseSelect = [True, False, False]
+
+def pauseScreen():
+	currentPauseScreen = pauseMenuResume
+	keepPlaying = True # Conditional for when the player quits the current game via the pause menu
+	paused = True
+	pauseSelect[0] = True
+	pauseSelect[1] = False
+	pauseSelect[2] = False
+	while paused:
+		clock.tick(60)
+		screen.blit(currentPauseScreen, (250, 325)) #[250, 325, 550, 475]
+		currentPauseScreen, paused, keepPlaying = processPauseEvents(currentPauseScreen, pauseMenuResume, pauseMenuRestart, pauseMenuExit)
+		pygame.display.flip()
+	
+	if keepPlaying:
+		return True
+	
+	else:
+		return False
+
+def processPauseEvents(currentPauseScreen, pauseMenuResume, pauseMenuRestart, pauseMenuExit):
+	for event in pygame.event.get():
+		if event.type == pygame.MOUSEMOTION:
+			#Ignore it because this game is being a fuck right now
+			#print 'lalalala i am a dummy'
+			a = 5
+			
+		if event.type == pygame.KEYDOWN:
+			if event.key == pygame.K_ESCAPE:
+				return currentPauseScreen, False, True
+			
+			elif event.key == pygame.K_RETURN:
+				if pauseSelect[0] == True:
+					return currentPauseScreen, False, True
+					
+				elif pauseSelect[1] == True:
+					# TODO: Restart selected
+					a = 5
+					
+				elif pauseSelect[2] == True:
+					return currentPauseScreen, False, False
+					
+			elif event.key == pygame.K_UP:
+				if pauseSelect[0] == True: #Resume Selected
+					pauseSelect[0] = False
+					pauseSelect[2] = True
+					currentPauseScreen = pauseMenuExit
+				
+				elif pauseSelect[1] == True: #Restart Selected
+					pauseSelect[1] = False
+					pauseSelect[0] = True
+					currentPauseScreen = pauseMenuResume
+					
+				elif pauseSelect[2] == True: #Exit Selected
+					pauseSelect[2] = False
+					pauseSelect[1] = True
+					currentPauseScreen = pauseMenuRestart
+					
+			elif event.key == pygame.K_DOWN:
+				print 'Turn down for what'
+				if pauseSelect[0] == True: #Resume Selected
+					pauseSelect[0] = False
+					pauseSelect[1] = True
+					currentPauseScreen = pauseMenuRestart
+						
+				elif pauseSelect[1] == True: #Restart Selected
+					pauseSelect[1] = False
+					pauseSelect[2] = True
+					currentPauseScreen = pauseMenuExit
+					
+				elif pauseSelect[2] == True: #Exit Selected
+					pauseSelect[2] = False
+					pauseSelect[0] = True
+					currentPauseScreen = pauseMenuResume
+		
+	return currentPauseScreen, True, True
 
 def processPlayerEvents(player, gameRunning):
 	gameRunning = True
@@ -34,7 +115,8 @@ def processPlayerEvents(player, gameRunning):
 			#print pygame.key.name(event.key)
 			if event.key == pygame.K_ESCAPE:
 				gameRunning = False
-	
+				gameRunning = pauseScreen()
+				
 			#if player.dash:
 			#	return
 	
@@ -100,6 +182,7 @@ def mainGameProcess(frame):
 		
 		if wave == 0:
 			Dialogue("penguin_ava1", "Bleh", (200,255,255), game, player)
+			wave += 1
 		
 		#frame actions 
 		if wave == 5: #wave 5
