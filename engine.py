@@ -7,6 +7,31 @@ class Engine:
 		self.flags = set([])	
 		self.screen = screen
 		self.sidebar = sidebar
+		self.frame = 0
+		self.wave = 0
+		self.d =  None
+		
+	def restart(self, s = False):
+		for i in self.gameObjects:
+			i.flag()
+		if s:
+			if wave <= 6:
+				wave = 0
+			elif wave <= 9:
+				wave = 7
+			elif wave <= 15:
+				wave = 10
+			elif wave <= 18:
+				wave = 16
+			elif wave <= 24:
+				wave = 19
+			else:
+				wave = 25
+		else:
+			self.frame = 0
+			self.wave = 0
+			
+		self.d =  None
 		
 	def playerHit(self, i):
 		i.invinsibility = 120
