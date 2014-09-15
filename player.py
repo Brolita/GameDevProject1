@@ -6,14 +6,14 @@ from image import Image
 
 class Dialogue:
 	font = None
-	def __init__(self, image, D, game, player):
+	def __init__(self, image, d, c, game, player):
 		self.name = "Dialogue"
 		self.game = game
 		game.gameObjects.append(self)
 		if Dialogue.font == None:
 			Dialogue.font = pygame.font.SysFont("monospace",15)
 		self.image = Image.get(image)
-		self.s = D
+		self.value = Dialogue.font.render(d, 1, c)
 		self.player = player
 	
 	def update(self):
@@ -23,6 +23,8 @@ class Dialogue:
 	def draw(self, screen):
 		screen.blit(self.image, (40, 600))
 		screen.blit(Image.get("textbox"), (110, 581))
+		screen.blit(self.value, (120, 591))
+		
 	
 	def flag(self):
 		self.game.flag(self)
