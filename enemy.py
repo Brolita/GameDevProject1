@@ -74,6 +74,11 @@ def BuckDown(game, enemy, count, spread, speed, spriteName):
 	BuckTarget(game, enemy, Vector(enemy.position.x, 10000) ,count, spread, speed, spriteName)
 
 class Enemy:
+	sidebar = None
+	@staticmethod
+	def setSidebar(sidebar):
+		Enemy.sidebar = sidebar
+
 	def __init__(self, init, game, player):
 		self.name = 'Enemy'
 		self.game = game

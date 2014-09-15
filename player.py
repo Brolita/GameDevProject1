@@ -6,7 +6,7 @@ from image import Image
 
 class Dialogue:
 	font = None
-	def __init__(self, image, d, c, game, player):
+	def __init__(self, image, d, c, game, player, ref, delay = 0):
 		self.name = "Dialogue"
 		self.game = game
 		game.gameObjects.append(self)
@@ -15,16 +15,24 @@ class Dialogue:
 		self.image = Image.get(image)
 		self.value = Dialogue.font.render(d, 1, c)
 		self.player = player
+		self.lock = player.firing
+		self.ref = ref
+		self.delay = delay
 	
 	def update(self):
-		if self.player.firing:
+		if self.lock and not self.player.firing:
+			self.lock = False
+			
+		if self.player.firing and not self.lock:
 			self.flag()
 			
 	def draw(self, screen):
-		screen.blit(self.image, (40, 600))
-		screen.blit(Image.get("textbox"), (110, 581))
-		screen.blit(self.value, (120, 591))
-		
+		if self.delay == 0:
+			screen.blit(self.image, (40, 600))
+			screen.blit(Image.get("textbox"), (110, 581))
+			screen.blit(self.value, (120, 591))
+		else: 
+			self.delay -= 1
 	
 	def flag(self):
 		self.game.flag(self)
@@ -150,3 +158,19 @@ class Player:
 		self.dash = True
 		self.dashLength = 0
 		sidebar.dash -= 1
+		
+	def flag(self):
+		self.rect.x = 300
+		self.rect.y = 400
+		self.x_velocity = 5
+		self.y_velocity = 5
+		self.moving = [False, False, False, False] #up, down, left, right, self.focus
+		self.focus = False
+		self.firing = False
+		self.snowballs = []
+		self.fireCooldown = 5
+		self.canFire = True
+		self.name = 'Player'
+		self.invinsibility = 0
+		#self.dash = False
+		self.dashLength = 0

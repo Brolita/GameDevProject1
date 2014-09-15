@@ -11,15 +11,13 @@ from enemy import *
 pygame.init()
 screen = pygame.display.set_mode((800, 800))
 levelOneBackground = pygame.image.load('Art Stuff\level one background.png')
-sidebar = Sidebar()
-clock = pygame.time.Clock()
 mainMenuNewGame = pygame.image.load('Art Stuff\MenuNewGame.png')
 mainMenuHighScores = pygame.image.load('Art Stuff\MenuHighScores.png')
 mainMenuExit = pygame.image.load('Art Stuff\MenuExit.png')
-#print 'levelOneBackground has loaded as ', levelOneBackground
-#print 'mainMenuNewGame has loaded as ', mainMenuNewGame
-#print 'mainMenuHighScores has loaded as ', mainMenuHighScores
-#print 'mainMenuExit has loaded as ', mainMenuExit
+
+sidebar = Sidebar()
+Enemy.setSidebar(sidebar)
+clock = pygame.time.Clock()
 game = Engine(screen, sidebar)
 player = Player(game)
 frame = 0
@@ -90,19 +88,33 @@ def processPlayerEvents(player, gameRunning):
 	
 	return gameRunning
 				
-def mainGameProcess(frame):
+def mainGameProcess(frame, restart = True):
 	gameRunning = True
-	wave = 0
+	if restart:
+		for i in game.gameObjects:
+			i.flag() 
+		wave = 0
+		d = None	
+	
 	while gameRunning:
 		clock.tick(60)
 		gameRunning = processPlayerEvents(player, gameRunning)
 		screen.blit(levelOneBackground, levelOneBackground.get_rect(), [0, 0, 600, 800])
 		
 		if wave == 0:
-			Dialogue("penguin_ava1", "Bleh", (200,255,255), game, player)
-		
+			if d not in game.gameObjects or d is None:
+				if d is None:
+					d = Dialogue("penguin_ava1", "Bleh", (200,255,255), game, player, 1)
+				elif d.ref == 1:
+					d = Dialogue("penguin_ava1", "Meh", (200,255,255), game, player, d.ref + 1, 4)
+				elif d.ref == 2:
+					d = Dialogue("penguin_ava1", "Bleh", (200,255,255), game, player, d.ref + 1, 4)
+				else:
+					frame = 0
+					wave += 1
+				
 		#frame actions 
-		if wave == 5: #wave 5
+		if wave == 5: #level 1 wave 5
 			if frame==30:
 				SeagullA(Vector(300,-10),game,player,5)
 			if frame==60:
@@ -160,7 +172,7 @@ def mainGameProcess(frame):
 				frame = 0
 		
 		
-		if wave == 6: #wave 6
+		if wave == 6: #level 1 wave 6
 			if frame==30:
 				PelicanC(Vector(500,-10),game,player,20,7)
 			if frame==50:
@@ -248,7 +260,7 @@ def mainGameProcess(frame):
 				frame = 0
 		
 		
-		if wave == 2: #wave 2
+		if wave == 2: #level 1 wave 2
 			if frame==40:
 				SeagullA(Vector(300,-10),game,player,9)
 			if frame==80:
@@ -284,7 +296,7 @@ def mainGameProcess(frame):
 				frame = 0
 		
 		
-		if wave == 1: #wave 1
+		if wave == 1: #level 1 wave 1
 			if frame==50:
 				SeagullA(Vector(100,-10),game,player,3)
 			if frame==100:
@@ -316,7 +328,7 @@ def mainGameProcess(frame):
 				frame = 0
 		
 		
-		if wave == 3: #wave 3
+		if wave == 3: #level 1 wave 3
 			if frame==30:
 				SeagullA(Vector(300,-10),game,player,5)
 			if frame==50:
@@ -352,7 +364,7 @@ def mainGameProcess(frame):
 				frame = 0
 		
 		
-		if wave == 4: #wave 4
+		if wave == 4: #level 1 wave 4
 			if frame==30:
 				SeagullA(Vector(100,-10),game,player,20)
 				SeagullA(Vector(200,-10),game,player,20)

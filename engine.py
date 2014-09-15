@@ -36,13 +36,11 @@ class Engine:
 						if collisionDetected == True:
 							j.flag()
 							self.playerHit(i)
-							print 'Player has been hit!'
 							
 					# check if Player has shot an enemy
 					if i.name == 'Snowball' and j.name == 'Enemy':
 						collisionDetected = j.get_rect().colliderect(i.get_rect())
 						if collisionDetected == True:
-							print 'Player shot an enemy!'
 							i.flag()
 							j.flag()
 																	   
