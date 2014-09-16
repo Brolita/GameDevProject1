@@ -17,6 +17,8 @@ mainMenuExit = Image.get('MenuExit')
 pauseMenuResume = Image.get('PauseMenuResume')
 pauseMenuRestart = Image.get('PauseMenuRestart')
 pauseMenuExit = Image.get('PauseMenuExit')
+gameOverRetry = Image.get('GameOverRetry')
+gameOverExit = Image.get('GameOverExit')
 sidebar = Sidebar()
 game = Engine(screen, sidebar)
 Enemy.setSidebar(sidebar)
@@ -27,21 +29,79 @@ game.frame = 0
 gameOpen = True
 currentMenuScreen = mainMenuNewGame
 currentPauseScreen = pauseMenuResume
+currentQuitScreen = gameOverRetry
 screenSelect = [True, False, False]
 pauseSelect = [True, False, False]
+quitSelect = [True, False]
 
 def gameOverScreen():
+	currentQuitScreen = gameOverRetry
 	print "Game Over"
 	#its too shocking to just go to gameover from 
 	#last death so do something here as well
+	retry = False
+	quit = False
 	while True:
-		processGameOverEvents(None, None)
+		if retry:
+			game.restart('soft')
+			sidebar.lives = 4
+			return True
+		elif quit:
+			sidebar.lives = 4
+			return False
+		clock.tick(60)
+		screen.blit(currentQuitScreen, (250,325))
+		currentQuitScreen, retry, quit = processGameOverEvents(currentQuitScreen, gameOverRetry, gameOverExit)
+		pygame.display.flip()
 		
 	#if you call game.restart('soft')
 	#and then exit this function with 
 	#return True the game will restart 
 	#to the last level or boss return 
 	#False will return to main menu
+
+def processGameOverEvents(currentQuitScreen, gameOverRetry, gameOverExit):
+	for event in pygame.event.get():
+		if event.type == pygame.KEYDOWN:
+			if event.key == pygame.K_ESCAPE:
+				sys.exit()
+				
+			elif event.key == pygame.K_RETURN:
+				if quitSelect[0] == True:
+					# retry level
+					return currentQuitScreen, True, False
+					
+				elif quitSelect[1] == True:
+					# quit to main menu
+					return currentQuitScreen, False, True
+					
+					
+			elif event.key == pygame.K_UP:
+				if quitSelect[0] == True:
+					quitSelect[0] = False
+					quitSelect[1] = True
+					currentQuitScreen = gameOverExit
+					
+				elif quitSelect[1] == True:
+					quitSelect[1] = False
+					quitSelect[0] = True
+					currentQuitScreen = gameOverRetry
+					
+			elif event.key == pygame.K_DOWN:
+				if quitSelect[0] == True:
+					quitSelect[0] = False
+					quitSelect[1] = True
+					currentQuitScreen = gameOverExit
+					
+				elif quitSelect[1] == True:
+					quitSelect[1] = False
+					quitSelect[0] = True
+					currentQuitScreen = gameOverRetry
+					
+	return currentQuitScreen, False, False
+	
+
+
 
 def pauseScreen():
 	currentPauseScreen = pauseMenuResume
@@ -64,13 +124,9 @@ def pauseScreen():
 		
 	else:
 		game.restart()
+		sidebar.lives = 4
+		game.wave = 7
 		return True
-
-def processGameOverEvents(gameOverRestartScreen, gameOverExitScreen):
-	for event in pygame.event.get():
-		if event.type == pygame.KEYDOWN:
-			if event.key == pygame.K_ESCAPE:
-				sys.exit()
 				
 def processPauseEvents(currentPauseScreen, pauseMenuResume, pauseMenuRestart, pauseMenuExit):
 	for event in pygame.event.get():
@@ -199,7 +255,7 @@ def mainGameProcess():
 		i.flag() 
 	game.wave = 7
 	game.frame = 0
-	game.d = None	
+	game.d = None
 	
 	while gameRunning:
 		clock.tick(60)
