@@ -138,7 +138,7 @@ class SeagullA(Enemy):
 		if self.frame < 20:
 			self.position.Add((0, 2))
 		elif self.frame == 25:
-			BuckTarget(self.game, self, self.player.getPosition(), self.count, math.radians(7.5), 5, "seashell")
+			BuckTarget(self.game, self, self.player.getPosition(), self.count, math.radians(7.5), 4, "seashell")
 		elif self.frame > 40:
 			self.position.Add((0, -2))
 		self.frame+=1
@@ -165,7 +165,7 @@ class SeagullB(Enemy):
 		if self.frame < 20:
 			self.position.Add((0, -2))
 		elif self.frame == 25:
-			BuckTarget(self.game, self, self.player.getPosition(), self.count, math.radians(7.5), 5, "seashell")
+			BuckTarget(self.game, self, self.player.getPosition(), self.count, math.radians(7.5), 4, "seashell")
 		elif self.frame > 40:
 			self.position.Add((0, 2))
 		self.frame+=1
@@ -314,7 +314,7 @@ class HummingbirdB(Enemy):
 		if self.position.x<=30:
 			self.direction=1
 		if (self.frame-25)%self.timebetween==0:
-			BuckTarget(self.game,self,self.player.getPosition(),self.buck,math.radians(7.5),5,"seashell")
+			BuckTarget(self.game,self,self.player.getPosition(),self.buck,math.radians(7.5),3,"seashell")
 		self.frame+=1
 	
 	def draw(self, screen):
@@ -347,7 +347,7 @@ class HummingbirdC(Enemy):
 		if self.position.x<=30:
 			self.direction=1
 		if (self.frame-25)%self.timebetween==0:
-			BuckTarget(self.game,self,self.player.getPosition(),self.buck,math.radians(7.5),5,"seashell")
+			BuckTarget(self.game,self,self.player.getPosition(),self.buck,math.radians(7.5),3,"seashell")
 		self.frame+=1
 	
 	def draw(self, screen):
@@ -436,7 +436,6 @@ class DoveC(Enemy):
 	def __init__(self,init,game,player,count):
 		Enemy.__init__(self,init,game,player,50)
 		self.image=Image.get("dove")
-		self.t=None
 		self.count=count
 	def update(self):
 		if self.frame<25:
@@ -466,7 +465,7 @@ class DoveC(Enemy):
 	def flag(self):
 		Explosion(self.position, self.game, "dove")
 		Enemy.flag(self)	
-
+		
 class ToucanA(Enemy):
 	def __init__(self, init, game, player,count,amount,timebetween):
 		Enemy.__init__(self, init, game, player, 150)

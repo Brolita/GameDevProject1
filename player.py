@@ -10,9 +10,26 @@ class Dialogue:
 		self.game = game
 		game.gameObjects.append(self)
 		if Image.font == None:
-			Image.font = pygame.font.SysFont("monospace",22)
+			Image.font = pygame.font.SysFont("monospace",18)
 		self.image = Image.get(image)
-		self.value = Image.font.render(d, 1, c)
+		
+		lines = []
+		char = ''
+		while True:
+			if len(d) < 40:
+				lines.append(d)
+				break
+			else:
+				i = 40
+				while char != ' ':
+					i-=1
+					char = d[i]
+				lines.append(d[:i])
+				d = d[i:]
+		
+		self.value = pygame.image.load("Art stuff\\textbox.png")
+		for i in range(len(lines)):
+			self.value.blit(Image.font.render(lines[i].strip(), 1, c), (4, 10 + 30 * i))
 		self.player = player
 		self.lock = player.firing
 		self.ref = ref
@@ -28,8 +45,7 @@ class Dialogue:
 	def draw(self, screen):
 		if self.delay == 0:
 			screen.blit(self.image, (40, 600))
-			screen.blit(Image.get("textbox"), (110, 581))
-			screen.blit(self.value, (120, 591))
+			screen.blit(self.value, (110, 581))
 		else: 
 			self.delay -= 1
 	

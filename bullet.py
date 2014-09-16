@@ -27,14 +27,14 @@ class Bullet(pygame.sprite.Sprite):
 		
 class LinearBullet(Bullet):
 	def __init__(self, init, target, speed, game, spriteName):
+		super(LinearBullet, self).__init__(game, spriteName)
 		self.name = 'Bullet'
 		self.position = init.copy()
-		self.target = target.copy()
+		self.target = target.copy() - Vector(self.image.get_rect().topleft[0], self.image.get_rect().topleft[1])
 		self.speed = speed
 		pos = self.position.copy()
 		pos.MoveToward(self.target, self.speed)
 		self.velocity = pos - self.position
-		super(LinearBullet, self).__init__(game, spriteName)
 		
 	def update(self):
 		self.position.Add(self.velocity)
