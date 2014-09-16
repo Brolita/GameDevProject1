@@ -14,12 +14,12 @@ class Dialogue:
 		self.image = Image.get(image)
 		
 		lines = []
-		char = ''
 		while True:
 			if len(d) < 40:
 				lines.append(d)
 				break
 			else:
+				char = ''
 				i = 40
 				while char != ' ':
 					i-=1
