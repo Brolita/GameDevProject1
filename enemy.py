@@ -138,7 +138,7 @@ class SeagullA(Enemy):
 		if self.frame < 20:
 			self.position.Add((0, 2))
 		elif self.frame == 25:
-			BuckTarget(self.game, self, self.player.getPosition(), self.count, math.radians(7.5), 5, "seashell")
+			BuckTarget(self.game, self, self.player.getPosition(), self.count, math.radians(7.5), 4, "seashell")
 		elif self.frame > 40:
 			self.position.Add((0, -2))
 		self.frame+=1
@@ -165,7 +165,7 @@ class SeagullB(Enemy):
 		if self.frame < 20:
 			self.position.Add((0, -2))
 		elif self.frame == 25:
-			BuckTarget(self.game, self, self.player.getPosition(), self.count, math.radians(7.5), 5, "seashell")
+			BuckTarget(self.game, self, self.player.getPosition(), self.count, math.radians(7.5), 4, "seashell")
 		elif self.frame > 40:
 			self.position.Add((0, 2))
 		self.frame+=1
@@ -314,7 +314,7 @@ class HummingbirdB(Enemy):
 		if self.position.x<=30:
 			self.direction=1
 		if (self.frame-25)%self.timebetween==0:
-			BuckTarget(self.game,self,self.player.getPosition(),self.buck,math.radians(7.5),5,"seashell")
+			BuckTarget(self.game,self,self.player.getPosition(),self.buck,math.radians(7.5),3,"seashell")
 		self.frame+=1
 	
 	def draw(self, screen):
@@ -347,7 +347,7 @@ class HummingbirdC(Enemy):
 		if self.position.x<=30:
 			self.direction=1
 		if (self.frame-25)%self.timebetween==0:
-			BuckTarget(self.game,self,self.player.getPosition(),self.buck,math.radians(7.5),5,"seashell")
+			BuckTarget(self.game,self,self.player.getPosition(),self.buck,math.radians(7.5),3,"seashell")
 		self.frame+=1
 	
 	def draw(self, screen):
@@ -436,7 +436,6 @@ class DoveC(Enemy):
 	def __init__(self,init,game,player,count):
 		Enemy.__init__(self,init,game,player,50)
 		self.image=Image.get("dove")
-		self.t=None
 		self.count=count
 	def update(self):
 		if self.frame<25:
@@ -466,7 +465,7 @@ class DoveC(Enemy):
 	def flag(self):
 		Explosion(self.position, self.game, "dove")
 		Enemy.flag(self)	
-
+		
 class ToucanA(Enemy):
 	def __init__(self, init, game, player,count,amount,timebetween):
 		Enemy.__init__(self, init, game, player, 150)
@@ -602,13 +601,13 @@ class BlueparrotB(Enemy):
 			
 class Boss(Enemy):
 	def __init__(self, init, game, player, health):
-		Enemy.__init__(init, game, player)
+		Enemy.__init__(self,init, game, player,1000)
 		self.name = 'Boss'
 		self.health = health
 	
 	def hit(self):
-		health -= 1
-		if health == 0:
+		self.health -= 1
+		if self.health == 0:
 			self.flag()
 	
 	def draw(self, screen):
@@ -619,6 +618,46 @@ class Boss(Enemy):
 			
 	def flag(self):
 		Enemy.flag(self)
+
+class Albatross(Boss):
+	def __init__(self, init, game, player):
+		Enemy.__init__(self, init,game,player,5)
+		Boss.__init__(self, init, game, player,5)
+		self.image = Image.get("Albatross")
+		self.health=26
+		self.direction=1
+		self.t=None
+		self.tracers=False
+	def hit(self):
+		self.health-=1
+		if self.health==0:
+			self.flag()
+	
+	def update(self):
+		if self.frame<25:
+			self.position.Add((0,2))
+		else:
+			self.position.Add((self.direction*3,0))
+			if self.frame%50==0:
+				BuckTarget(self.game,self,self.player.getPosition(),8,math.radians(5),4,"seashell")
+			if self.tracers==False and self.health<=13:
+				self.t = Tracers(self.game, self, self.player, 40, 30, 7, "rock")
+				self.tracers=True
+		if self.position.x>=570:
+			self.direction=-1
+		if self.position.x<=30:
+			self.direction=1
+		self.frame+=1
+	
+	def draw(self, screen):
+		Boss.draw(self, screen)
+		
+	def get_rect(self):
+		return self.image.get_rect().move(self.position.x - self.image.get_width()/2, self.position.y - self.image.get_height()/2)
+			
+	def flag(self):
+		Explosion(self.position,self.game,"Albatross")
+		self.game.flag(self)
 		
 class ExampleBoss(Boss):
 	def __init__(self, init, game, player, health):

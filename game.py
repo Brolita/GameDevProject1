@@ -7,16 +7,18 @@ from sidebar import Sidebar
 from bullet import *
 from enemy import *
 
-levelOneBackground = pygame.image.load('Art Stuff\level one background.png')
-mainMenuNewGame = pygame.image.load('Art Stuff\MenuNewGame.png')
-mainMenuHighScores = pygame.image.load('Art Stuff\MenuHighScores.png')
-mainMenuExit = pygame.image.load('Art Stuff\MenuExit.png')
-pauseMenuResume = pygame.image.load('Art Stuff\PauseMenuResume.png')
-pauseMenuRestart = pygame.image.load('Art Stuff\PauseMenuRestart.png')
-pauseMenuExit = pygame.image.load('Art Stuff\PauseMenuExit.png')
-
 pygame.init()
 screen = pygame.display.set_mode((800, 800))
+
+levelOneBackground = Image.get('water_background\water1a')
+mainMenuNewGame = Image.get('MenuNewGame')
+mainMenuHighScores = Image.get('MenuHighScores')
+mainMenuExit = Image.get('MenuExit')
+pauseMenuResume = Image.get('PauseMenuResume')
+pauseMenuRestart = Image.get('PauseMenuRestart')
+pauseMenuExit = Image.get('PauseMenuExit')
+gameOverRetry = Image.get('GameOverRetry')
+gameOverExit = Image.get('GameOverExit')
 sidebar = Sidebar()
 game = Engine(screen, sidebar)
 Enemy.setSidebar(sidebar)
@@ -27,21 +29,79 @@ game.frame = 0
 gameOpen = True
 currentMenuScreen = mainMenuNewGame
 currentPauseScreen = pauseMenuResume
+currentQuitScreen = gameOverRetry
 screenSelect = [True, False, False]
 pauseSelect = [True, False, False]
+quitSelect = [True, False]
 
 def gameOverScreen():
+	currentQuitScreen = gameOverRetry
 	print "Game Over"
 	#its too shocking to just go to gameover from 
 	#last death so do something here as well
+	retry = False
+	quit = False
 	while True:
-		processGameOverEvents(None, None)
+		if retry:
+			game.restart('soft')
+			sidebar.lives = 4
+			return True
+		elif quit:
+			sidebar.lives = 4
+			return False
+		clock.tick(60)
+		screen.blit(currentQuitScreen, (250,325))
+		currentQuitScreen, retry, quit = processGameOverEvents(currentQuitScreen, gameOverRetry, gameOverExit)
+		pygame.display.flip()
 		
 	#if you call game.restart('soft')
 	#and then exit this function with 
 	#return True the game will restart 
 	#to the last level or boss return 
 	#False will return to main menu
+
+def processGameOverEvents(currentQuitScreen, gameOverRetry, gameOverExit):
+	for event in pygame.event.get():
+		if event.type == pygame.KEYDOWN:
+			if event.key == pygame.K_ESCAPE:
+				sys.exit()
+				
+			elif event.key == pygame.K_RETURN:
+				if quitSelect[0] == True:
+					# retry level
+					return currentQuitScreen, True, False
+					
+				elif quitSelect[1] == True:
+					# quit to main menu
+					return currentQuitScreen, False, True
+					
+					
+			elif event.key == pygame.K_UP:
+				if quitSelect[0] == True:
+					quitSelect[0] = False
+					quitSelect[1] = True
+					currentQuitScreen = gameOverExit
+					
+				elif quitSelect[1] == True:
+					quitSelect[1] = False
+					quitSelect[0] = True
+					currentQuitScreen = gameOverRetry
+					
+			elif event.key == pygame.K_DOWN:
+				if quitSelect[0] == True:
+					quitSelect[0] = False
+					quitSelect[1] = True
+					currentQuitScreen = gameOverExit
+					
+				elif quitSelect[1] == True:
+					quitSelect[1] = False
+					quitSelect[0] = True
+					currentQuitScreen = gameOverRetry
+					
+	return currentQuitScreen, False, False
+	
+
+
 
 def pauseScreen():
 	currentPauseScreen = pauseMenuResume
@@ -64,13 +124,9 @@ def pauseScreen():
 		
 	else:
 		game.restart()
+		sidebar.lives = 4
+		game.wave = 7
 		return True
-
-def processGameOverEvents(gameOverRestartScreen, gameOverExitScreen):
-	for event in pygame.event.get():
-		if event.type == pygame.KEYDOWN:
-			if event.key == pygame.K_ESCAPE:
-				sys.exit()
 				
 def processPauseEvents(currentPauseScreen, pauseMenuResume, pauseMenuRestart, pauseMenuExit):
 	for event in pygame.event.get():
@@ -197,9 +253,9 @@ def mainGameProcess():
 	gameRunning = True
 	for i in game.gameObjects:
 		i.flag() 
-	game.wave = 0
+	game.wave = 8
 	game.frame = 0
-	game.d = None	
+	game.d = None
 	
 	while gameRunning:
 		clock.tick(60)
@@ -211,14 +267,17 @@ def mainGameProcess():
 		if game.wave == 0:
 			if game.d not in game.gameObjects or game.d is None:
 				if game.d is None:
-					game.d = Dialogue("penguin_ava1", "Bleh", (200,255,255), game, player, 1)
+					game.d = Dialogue("penguin_ava1", "(Hmmm... this jetpack handles better than I thought it would)", (200,255,255), game, player, 1)
 				elif game.d.ref == 1:
-					game.d = Dialogue("penguin_ava1", "Meh", (200,255,255), game, player, game.d.ref + 1, 4)
+					game.d = Dialogue("penguin_ava1", "(At this speed it will take me no time to get to the Caribbean! I'll be there in 5 minutes)", (200,255,255), game, player, game.d.ref + 1, 4)
 				elif game.d.ref == 2:
-					game.d = Dialogue("penguin_ava1", "Bleh", (200,255,255), game, player, game.d.ref + 1, 4)
+					game.d = Dialogue("penguin_ava1", "(But why are the seagulls are throwing things at me?)", (200,255,255), game, player, game.d.ref + 1, 30)
+				elif game.d.ref == 3:
+					game.d = Dialogue("penguin_ava1", "(This might be more difficult that I thought...)", (200,255,255), game, player, game.d.ref + 1, 4)
 				else:
 					game.frame = 0
 					game.wave += 1
+		
 		
 		if game.wave == 5: #level 1 game.wave 5
 			if game.frame==30:
@@ -368,35 +427,35 @@ def mainGameProcess():
 		
 		if game.wave == 2: #level 1 game.wave 2
 			if game.frame==40:
-				SeagullA(Vector(300,-10),game,player,9)
+				SeagullA(Vector(300,-10),game,player,7)
 			if game.frame==80:
-				SeagullB(Vector(400,790),game,player,9)
+				SeagullA(Vector(400,-10),game,player,7)
 			if game.frame==120:
-				SeagullA(Vector(200,-10),game,player,8)
+				SeagullA(Vector(200,-10),game,player,7)
 			if game.frame==160:
-				SeagullA(Vector(300,-10),game,player,9)
+				SeagullA(Vector(300,-10),game,player,7)
 			if game.frame==200:
-				SeagullB(Vector(200,790),game,player,8)
+				SeagullB(Vector(200,790),game,player,7)
 			if game.frame==240:
-				SeagullA(Vector(500,-10),game,player,9)
+				SeagullA(Vector(500,-10),game,player,7)
 			if game.frame==280:
-				SeagullB(Vector(400,790),game,player,8)
+				SeagullA(Vector(400,-10),game,player,7)
 			if game.frame==320:
-				SeagullA(Vector(100,-10),game,player,9)
+				SeagullB(Vector(100,790),game,player,7)
 			if game.frame==360:
-				SeagullB(Vector(100,790),game,player,8)
+				SeagullA(Vector(100,-10),game,player,7)
 			if game.frame==400:
-				SeagullA(Vector(500,-10),game,player,9)
+				SeagullA(Vector(500,-10),game,player,7)
 			if game.frame==440:
-				SeagullB(Vector(300,790),game,player,9)
+				SeagullB(Vector(300,790),game,player,7)
 			if game.frame==480:
-				SeagullA(Vector(200,-10),game,player,8)
+				SeagullA(Vector(200,-10),game,player,7)
 			if game.frame==520:
-				SeagullB(Vector(500,790),game,player,9)
+				SeagullB(Vector(500,790),game,player,7)
 			if game.frame==560:
-				SeagullA(Vector(100,-10),game,player,9)
+				SeagullA(Vector(100,-10),game,player,7)
 			if game.frame==600:
-				SeagullB(Vector(400,790),game,player,9)
+				SeagullA(Vector(400,-10),game,player,7)
 			if game.frame==800:
 				game.wave += 1
 				game.frame = 0
@@ -527,18 +586,47 @@ def mainGameProcess():
 		
 		
 		if game.wave == 7: #level 1 boss dialogue
-			wave += 1
+			if game.d not in game.gameObjects or game.d is None:
+				if game.d is None:
+					game.d = Dialogue("penguin_ava1", "(Darn...I think I'm lost. Hey there's an Albatros, maybe he will help me)", (200,255,255), game, player, 1)
+				elif game.d.ref == 1:
+					game.d = Dialogue("penguin_ava1", "Hey. Hey...HEY!!.. HEY!!!!! HELLO!!", (200,255,255), game, player, game.d.ref + 1, 4)
+				elif game.d.ref == 2:
+					game.d = Dialogue("penguin_ava1", "What? What could you possibly want?", (200,255,255), game, player, game.d.ref + 1, 4)
+				elif game.d.ref == 3:
+					game.d = Dialogue("penguin_ava1", "I need to go to the Caribbean and I might be a little lost... Can you help me?", (200,255,255), game, player, game.d.ref + 1, 4)
+				elif game.d.ref == 4:
+					game.d = Dialogue("penguin_ava1", "No.", (200,255,255), game, player, game.d.ref + 1, 30)
+				elif game.d.ref == 5:
+					game.d = Dialogue("penguin_ava1", "Please?", (200,255,255), game, player, game.d.ref + 1, 45)
+				elif game.d.ref == 6:
+					game.d = Dialogue("penguin_ava1", "...", (200,255,255), game, player, game.d.ref + 1, 100)
+				elif game.d.ref == 7:
+					game.d = Dialogue("penguin_ava1", "Do you now know where it is, because if you don't thats okay. I don't really either.", (200,255,255), game, player, game.d.ref + 1, 4)
+				elif game.d.ref == 8:
+					game.d = Dialogue("penguin_ava1", "...", (200,255,255), game, player, game.d.ref + 1, 100)
+				elif game.d.ref == 9:
+					game.d = Dialogue("penguin_ava1", "I need to get to the Caribbean. If you don't know how to get there, maybe you can-", (200,255,255), game, player, game.d.ref + 1, 4)
+				elif game.d.ref == 10:
+					game.d = Dialogue("penguin_ava1", "CRAWWWWWW. I've had enough of your incessant chattering.", (200,255,255), game, player, game.d.ref + 1, 4)
+				
+				else:
+					game.frame = 0
+					game.wave += 1
 			
 			
 		if game.wave == 8: #level 1 boss: albatross
-			wave += 1
+			if game.frame==0:
+				Albatross(Vector(300,-10),game,player)
+			#Boss(Vector(300,100),game,player,4)
+			#game.wave += 1
 		
 		
 		if game.wave == 9: #level 1 post boss dialogue
-			wave += 1
+			game.wave += 1
 		
 		
-		if game.wave == 10: #level 2 game.wave 1
+		if game.wave == 11: #level 2 game.wave 2
 			if game.frame==30:
 				HummingbirdA(Vector(300,-10),game,player,1,2,50)
 			if game.frame==60:
@@ -573,9 +661,12 @@ def mainGameProcess():
 				HummingbirdA(Vector(200,-10),game,player,1,9,50)
 			if game.frame==610:
 				HummingbirdA(Vector(500,-10),game,player,1,10,50)
+			if game.frame==800:
+				game.frame=0
+				game.wave+=1
 				
 				
-		if game.wave == 11: #level 2 game.wave 2
+		if game.wave == 12: #level 2 game.wave 3
 			if game.frame==30: 
 				HummingbirdC(Vector(300,-10),game,player,1,5,30)
 			if game.frame==60:
@@ -603,13 +694,16 @@ def mainGameProcess():
 			if game.frame==530:
 				DoveB(Vector(300,-10),game,player,50,9)
 				DoveA(Vector(200,-10),game,player)
-				DoveA(Vecotr(400,-10),game,player)
+				DoveA(Vector(400,-10),game,player)
 			if game.frame==560:
 				HummingbirdA(Vector(200,-10),game,player,1,6,30)
 				HummingbirdA(Vector(400,-10),game,player,-1,6,30)
+			if game.frame==800:
+				game.frame=0
+				game.wave+=1
 		
 		
-		if game.wave == 12: #Level 2 game.wave 3
+		if game.wave == 14: #Level 2 game.wave 5
 			if game.frame==30:
 				DoveA(Vector(300,-10),game,player)
 				DoveA(Vector(200,-10),game,player)
@@ -657,9 +751,12 @@ def mainGameProcess():
 				HummingbirdA(Vector(200,-10),game,player,1,10,30)
 			if game.frame==560:
 				HummingbirdA(Vector(300,-10),game,player,-1,11,30)
+			if game.frame==800:
+				game.frame=0
+				game.wave+=1
 		
 		
-		if game.wave == 13: #level 2 game.wave 4
+		if game.wave == 15: #level 2 game.wave 4
 			if game.frame==30:
 				HummingbirdA(Vector(200,-10),game,player,1,5,30)
 				HummingbirdA(Vector(400,-10),game,player,-1,5,30)
@@ -702,9 +799,12 @@ def mainGameProcess():
 				HummingbirdB(Vector(500,-10),game,player,-1,9,30)
 				DoveB(Vector(200,-10),game,player,50,9)
 				DoveB(Vector(400,-10),game,player,50,9)
+			if game.frame==800:
+				game.frame=0
+				game.wave+=1
 		
 		
-		if game.wave == 14: #Level 2 game.wave 5
+		if game.wave == 13: #Level 2 game.wave 6
 			if game.frame==30:
 				DoveC(Vector(300,-10),game,player,5)
 			if game.frame==50:
@@ -765,9 +865,12 @@ def mainGameProcess():
 			if game.frame==600:
 				DoveC(Vector(500,-10),game,player,5)
 				HummingbirdB(Vector(200,-10),game,player,1,5,30)
+			if game.frame==800:
+				game.frame=0
+				game.wave+=1
 		
 		
-		if game.wave == 15: #Level 2 game.wave 6
+		if game.wave == 10: #Level 2 game.wave 1
 			if game.frame==30:
 				DoveA(Vector(100,-10),game,player)
 			if game.frame==50:
@@ -831,15 +934,15 @@ def mainGameProcess():
 		
 		
 		if game.wave == 16: #level 2 boss dialogue
-			wave += 1
+			game.wave += 1
 			
 			
 		if game.wave == 17: #level 2 boss: albatross
-			wave += 1
+			game.wave += 1
 		
 		
 		if game.wave == 18: #level 2 post boss dialogue
-			wave += 1
+			game.wave += 1
 		
 		
 		if game.wave == 19: #Level 3 game.wave 1
@@ -1057,15 +1160,15 @@ def mainGameProcess():
 		
 		
 		if game.wave == 25: #level 1 boss dialogue
-			wave += 1
+			game.wave += 1
 			
 			
 		if game.wave == 26: #level 1 boss: albatross
-			wave += 1
+			game.wave += 1
 		
 		
 		if game.wave == 27: #level 1 post boss dialogue
-			wave += 1
+			game.wave += 1
 			
 			
 		if game.wave == 28:

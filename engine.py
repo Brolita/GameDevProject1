@@ -15,25 +15,24 @@ class Engine:
 		for i in self.gameObjects:
 			i.flag()
 		if s:
-			if wave <= 6:
-				wave = 0
-			elif wave <= 9:
-				wave = 7
-			elif wave <= 15:
-				wave = 10
-			elif wave <= 18:
-				wave = 16
-			elif wave <= 24:
-				wave = 19
+			if self.wave <= 6:
+				self.wave = 0
+			elif self.wave <= 9:
+				self.wave = 7
+			elif self.wave <= 15:
+				self.wave = 10
+			elif self.wave <= 18:
+				self.wave = 16
+			elif self.wave <= 24:
+				self.wave = 19
 			else:
-				wave = 25
+				self.wave = 25
 		else:
 			self.frame = 0
 			self.wave = 0
 			
 		self.d =  None
 		self.sidebar.points = 0
-		self.sidebar.lives =4
 		
 	def playerHit(self, i):
 		i.invinsibility = 120

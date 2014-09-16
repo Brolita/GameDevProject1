@@ -2,11 +2,12 @@ import pygame
 from image import Image
 	
 class Sidebar(object):
+	font = None
 	def __init__(self):
 		self._lives = 4
 		self._points = 0
-		if Image.font == None:
-			Image.font = pygame.font.SysFont("monospace",22)
+		if Sidebar.font == None:
+			Sidebar.font = pygame.font.SysFont("monospace",22)
 		self._refresh()
 		
 	def _refresh(self):
@@ -32,7 +33,7 @@ class Sidebar(object):
 		while len(s) < 8:
 			s = '0' + s
 			
-		self.image.blit(Image.font.render(s, 2, (255, 255, 255)), (22, 100))
+		self.image.blit(Sidebar.font.render(s, 2, (255, 255, 255)), (22, 100))
 	
 	def _get_lives(self):
 		return self._lives
