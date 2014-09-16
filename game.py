@@ -19,11 +19,15 @@ pauseMenuRestart = Image.get('PauseMenuRestart')
 pauseMenuExit = Image.get('PauseMenuExit')
 gameOverRetry = Image.get('GameOverRetry')
 gameOverExit = Image.get('GameOverExit')
+highScoreBackground = Image.get('HighScoreBackground')
+highScoresFile = open('scores.txt', 'r+')
 sidebar = Sidebar()
 game = Engine(screen, sidebar)
 Enemy.setSidebar(sidebar)
 player = Player(game)
 
+
+# Initializing stuff on boot
 clock = pygame.time.Clock()
 game.frame = 0
 gameOpen = True
@@ -33,6 +37,11 @@ currentQuitScreen = gameOverRetry
 screenSelect = [True, False, False]
 pauseSelect = [True, False, False]
 quitSelect = [True, False]
+highScores = []
+for score in highScoresFile:
+	highScores.append(score)
+	
+scoresFont = pygame.font.SysFont("monospace", 18)
 
 def gameOverScreen():
 	currentQuitScreen = gameOverRetry
@@ -100,9 +109,6 @@ def processGameOverEvents(currentQuitScreen, gameOverRetry, gameOverExit):
 					
 	return currentQuitScreen, False, False
 	
-
-
-
 def pauseScreen():
 	currentPauseScreen = pauseMenuResume
 	keepPlaying = True # Conditional for when the player quits the current game via the pause menu
@@ -1186,6 +1192,22 @@ def mainGameProcess():
 		pygame.display.flip()
 		game.frame+=1
 
+def viewHighScores():
+	print 'viewing high scores now'
+	scoreString = ""
+	for line in highScores:
+		scoreString = scoreString + line + '\n'
+		
+	while True:
+		clock.tick(60)
+		screen.blit(highScoreBackground, (200, 275))
+		scoreRender = scoresFont.render(scoreString, 1, (255,255,255))
+		screen.blit(scoreRender, (205, 280))
+		pygame.display.flip()
+		for event in pygame.event.get():
+			if event.type == pygame.KEYDOWN:
+				return
+
 def mainMenuEvents(currentMenuScreen, mainMenuNewGame, mainMenuHighScores, mainMenuExit):
 	for event in pygame.event.get():
 		if event.type == pygame.KEYDOWN:
@@ -1197,8 +1219,8 @@ def mainMenuEvents(currentMenuScreen, mainMenuNewGame, mainMenuHighScores, mainM
 					mainGameProcess()
 					
 				elif screenSelect[1] == True:
-					# High Score selected
-					a = 5
+					print 'attempting to view high scores'
+					viewHighScores()
 					
 				elif screenSelect[2] == True:
 					sys.exit()
