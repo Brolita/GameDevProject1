@@ -253,7 +253,7 @@ def mainGameProcess():
 	gameRunning = True
 	for i in game.gameObjects:
 		i.flag() 
-	game.wave = 7
+	game.wave = 8
 	game.frame = 0
 	game.d = None
 	
@@ -616,7 +616,10 @@ def mainGameProcess():
 			
 			
 		if game.wave == 8: #level 1 boss: albatross
-			game.wave += 1
+			if game.frame==0:
+				Albatross(Vector(300,-10),game,player)
+			#Boss(Vector(300,100),game,player,4)
+			#game.wave += 1
 		
 		
 		if game.wave == 9: #level 1 post boss dialogue
