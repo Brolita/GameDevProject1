@@ -40,11 +40,13 @@ class Engine:
 				self.wave = 26
 				self.levelBackground = self.levelThreeBackground
 		else:
+			self.levelBackground = self.levelOneBackground
 			self.frame = 0
 			self.wave = 0
 			
 		self.d =  None
 		self.sidebar.points = 0
+		self.sidebar.lives = 4
 		
 	def playerHit(self, i):
 		i.invinsibility = 120
@@ -76,11 +78,11 @@ class Engine:
 							self.playerHit(i)
 														   
 					# check if Player has collided with an enemy
-					if i.name == 'Player' and j.name == 'Enemy':
+					if i.name == 'Player' and j.name == 'Enemy' and i.invinsibility == 0:
 						collisionDetected = j.get_rect().collidepoint((i.getPosition().x, i.getPosition().y))
 						if collisionDetected == True:
+							j.hit()
 							self.playerHit(i)
-							j.flag()
 
 					# check if Player has shot an enemy
 					if i.name == 'Snowball' and j.name == 'Enemy':

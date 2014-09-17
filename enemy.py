@@ -630,7 +630,8 @@ class BlueparrotC(Enemy):
 		
 	def flag(self):
 		Explosion(self.position, self.game, "blueparrot")
-		Enemy.flag(self)	
+		Enemy.flag(self)
+		
 class Boss(Enemy):
 	def __init__(self, init, game, player, health):
 		Enemy.__init__(self,init, game, player,1000)
@@ -657,10 +658,9 @@ class Albatross(Boss):
 	def __init__(self, init, game, player):
 		Boss.__init__(self, init, game, player,26)
 		self.image = Image.get("Albatross")
-		self.health=26
+		self.health=50
 		self.direction=1
 		self.t=None
-		self.tracers=False
 		
 	def hit(self):
 		Boss.hit(self)
@@ -674,9 +674,10 @@ class Albatross(Boss):
 			self.position.Add((self.direction*3,0))
 			if self.frame%50==0:
 				BuckTarget(self.game,self,self.player.getPosition(),8,math.radians(5),4,"seashell")
-			if self.tracers==False and self.health<=13:
-				self.t = Tracers(self.game, self, self.player, 40, 10, 7, "rock")
-				self.tracers=True
+			if self.t == None and self.health<=35:
+				self.t = Tracers(self.game, self, self.player, 100, 10, 10, "rock")
+			if self.frame%50==25 and self.health<=20:
+				BuckTarget(self.game,self,self.player.getPosition(),8,math.radians(5),4,"seashell")
 		if self.position.x>=570:
 			self.direction=-1
 		if self.position.x<=30:
@@ -699,11 +700,10 @@ class Flamingo(Boss):
 	def __init__(self, init, game, player):
 		Boss.__init__(self, init, game, player, 30)
 		self.image = Image.get("Flamingo_boss")
-		self.health=1
+		self.health=30
 		self.directionvert=1
 		self.directionhorz=1
 		self.t=None
-		self.tracers=False
 	def hit(self):
 		Boss.hit(self)
 	
@@ -714,9 +714,8 @@ class Flamingo(Boss):
 			return
 		else:
 			self.position.Add((self.directionhorz*2,self.directionvert*2))
-			if self.frame%50==0 and self.tracers==False:
+			if self.frame%50==0 and self.t == None:
 				self.t = Tracers(self.game, self, self.player, 40, 30, 7, "rock")
-				self.tracers==True
 			if self.frame%50==25 and self.health<=15:
 				BuckTarget(self.game,self,self.player.getPosition(),4,math.radians(5),10,"seashell")
 		if self.position.x>=520 or self.position.x<=80:
@@ -732,6 +731,7 @@ class Flamingo(Boss):
 		return self.image.get_rect().move(self.position.x - self.image.get_width()/2, self.position.y - self.image.get_height()/2)
 			
 	def flag(self):
+		Explosion(self.position,self.game,"Flamingo")
 		if self.t != None:
 			self.t.flag()
 		Boss.flag(self)
@@ -787,7 +787,7 @@ class MacawB(Boss):
 			return
 		else:
 			self.position.Add((self.directionhorz*3,0))
-		if self.position.x>=400 or self.position.x<=200:
+		if self.position.x>=440 or self.position.x<=160:
 			self.directionhorz*=-1
 		if self.health<=25 and self.tracers==False:
 			self.tracers=True
@@ -801,4 +801,5 @@ class MacawB(Boss):
 		return self.image.get_rect().move(self.position.x - self.image.get_width()/2, self.position.y - self.image.get_height()/2)
 			
 	def flag(self):
+		Explosion(self.position,self.game,"Macaw")
 		Boss.flag(self)
