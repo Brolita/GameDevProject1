@@ -21,7 +21,7 @@ class Tracers:
 			LinearBullet(self.enemy.position, self.player.getPosition(), self.speed, self.game, self.spriteName)
 			self.count-= 1
 			if(self.count == 0):
-				self.__del()
+				self.flag()
 		self.frame+=1
 		if self.enemy == None:
 			self.flag()
@@ -604,6 +604,8 @@ class Boss(Enemy):
 		self.health = health
 	
 	def hit(self):
+		if self.game.d != None:
+			return
 		self.health -= 1
 		if self.health == 0:
 			self.flag()
@@ -619,21 +621,21 @@ class Boss(Enemy):
 
 class Albatross(Boss):
 	def __init__(self, init, game, player):
-		Enemy.__init__(self, init,game,player,26)
 		Boss.__init__(self, init, game, player,26)
 		self.image = Image.get("Albatross")
 		self.health=26
 		self.direction=1
 		self.t=None
 		self.tracers=False
+		
 	def hit(self):
-		self.health-=1
-		if self.health==0:
-			self.flag()
+		Boss.hit(self)
 	
 	def update(self):
 		if self.frame<25:
 			self.position.Add((0,2))
+		elif self.game.d != None:
+			return
 		else:
 			self.position.Add((self.direction*3,0))
 			if self.frame%50==0:
@@ -655,11 +657,12 @@ class Albatross(Boss):
 			
 	def flag(self):
 		Explosion(self.position,self.game,"Albatross")
+		if self.t != None:
+			self.t.flag()
 		self.game.flag(self)
 		
 class Flamingo(Boss):
 	def __init__(self, init, game, player):
-		Enemy.__init__(self, init,game,player,30)
 		Boss.__init__(self, init, game, player, 30)
 		self.image = Image.get("Flamingo_boss")
 		self.health=30
@@ -668,13 +671,13 @@ class Flamingo(Boss):
 		self.t=None
 		self.tracers=False
 	def hit(self):
-		self.health-=1
-		if self.health==0:
-			self.flag()
+		Boss.hit(self)
 	
 	def update(self):
 		if self.frame<25:
 			self.position.Add((0,2))
+		elif self.game.d != None:
+			return
 		else:
 			self.position.Add((self.directionhorz*2,self.directionvert*2))
 			if self.frame%50==0 and self.tracers==False:

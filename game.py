@@ -19,11 +19,15 @@ pauseMenuRestart = Image.get('PauseMenuRestart')
 pauseMenuExit = Image.get('PauseMenuExit')
 gameOverRetry = Image.get('GameOverRetry')
 gameOverExit = Image.get('GameOverExit')
+highScoreBackground = Image.get('HighScoreBackground')
+highScoresFile = open('scores.txt', 'r+')
 sidebar = Sidebar()
 game = Engine(screen, sidebar)
 Enemy.setSidebar(sidebar)
 player = Player(game)
 
+
+# Initializing stuff on boot
 clock = pygame.time.Clock()
 game.frame = 0
 gameOpen = True
@@ -33,12 +37,14 @@ currentQuitScreen = gameOverRetry
 screenSelect = [True, False, False]
 pauseSelect = [True, False, False]
 quitSelect = [True, False]
+highScores = []
+for score in highScoresFile:
+	highScores.append(score)
+	
+scoresFont = pygame.font.SysFont("monospace", 18)
 
 def gameOverScreen():
 	currentQuitScreen = gameOverRetry
-	print "Game Over"
-	#its too shocking to just go to gameover from 
-	#last death so do something here as well
 	retry = False
 	quit = False
 	while True:
@@ -53,7 +59,6 @@ def gameOverScreen():
 		screen.blit(currentQuitScreen, (250,325))
 		currentQuitScreen, retry, quit = processGameOverEvents(currentQuitScreen, gameOverRetry, gameOverExit)
 		pygame.display.flip()
-		
 	#if you call game.restart('soft')
 	#and then exit this function with 
 	#return True the game will restart 
@@ -99,9 +104,6 @@ def processGameOverEvents(currentQuitScreen, gameOverRetry, gameOverExit):
 					currentQuitScreen = gameOverRetry
 					
 	return currentQuitScreen, False, False
-	
-
-
 
 def pauseScreen():
 	currentPauseScreen = pauseMenuResume
@@ -127,7 +129,7 @@ def pauseScreen():
 		sidebar.lives = 4
 		game.wave = 7
 		return True
-				
+			
 def processPauseEvents(currentPauseScreen, pauseMenuResume, pauseMenuRestart, pauseMenuExit):
 	for event in pygame.event.get():
 		if event.type == pygame.MOUSEMOTION:
@@ -252,8 +254,13 @@ def processPlayerEvents(player, gameRunning):
 def mainGameProcess():
 	gameRunning = True
 	for i in game.gameObjects:
+<<<<<<< HEAD
 		i.flag() 
 	game.wave = 25
+=======
+		i.flag()
+	game.wave = 7
+>>>>>>> 8b842d680c77ac957ea1405b8613ca770c8a1424
 	game.frame = 0
 	game.d = None
 	
@@ -588,6 +595,7 @@ def mainGameProcess():
 		if game.wave == 7: #level 1 boss dialogue
 			if game.d not in game.gameObjects or game.d is None:
 				if game.d is None:
+					game.boss = Albatross(Vector(300,-10),game,player)
 					game.d = Dialogue("penguin_ava1", "(Darn...I think I'm lost. Hey there's an Albatros, maybe he will help me)", (200,255,255), game, player, 1)
 				elif game.d.ref == 1:
 					game.d = Dialogue("penguin_ava1", "Hey. Hey...HEY!!.. HEY!!!!! HELLO!!", (200,255,255), game, player, game.d.ref + 1, 4)
@@ -602,27 +610,36 @@ def mainGameProcess():
 				elif game.d.ref == 6:
 					game.d = Dialogue("penguin_ava1", "...", (200,255,255), game, player, game.d.ref + 1, 100)
 				elif game.d.ref == 7:
-					game.d = Dialogue("penguin_ava1", "Do you now know where it is, because if you don't thats okay. I don't really either.", (200,255,255), game, player, game.d.ref + 1, 4)
+					game.d = Dialogue("penguin_ava1", "Do you not know where it is? Because if you don't thats okay. I don't really either.", (200,255,255), game, player, game.d.ref + 1, 4)
 				elif game.d.ref == 8:
 					game.d = Dialogue("penguin_ava1", "...", (200,255,255), game, player, game.d.ref + 1, 100)
 				elif game.d.ref == 9:
 					game.d = Dialogue("penguin_ava1", "I need to get to the Caribbean. If you don't know how to get there, maybe you can-", (200,255,255), game, player, game.d.ref + 1, 4)
 				elif game.d.ref == 10:
 					game.d = Dialogue("penguin_ava1", "CRAWWWWWW. I've had enough of your incessant chattering.", (200,255,255), game, player, game.d.ref + 1, 4)
-				
 				else:
+					game.d = None
 					game.frame = 0
 					game.wave += 1
 			
 			
 		if game.wave == 8: #level 1 boss: albatross
-			if game.frame==0:
-				Albatross(Vector(300,-10),game,player)
-			#game.wave += 1
+			if game.boss not in game.gameObjects:
+				game.boss = None
+				game.wave += 1
 		
 		
 		if game.wave == 9: #level 1 post boss dialogue
-			game.wave += 1
+			if len([x for x in game.gameObjects if x.name == 'Bullet']) == 0:
+				if game.d not in game.gameObjects or game.d is None:
+					if game.d is None:
+						game.d = Dialogue("penguin_ava1", "(I guess he really didn't know where the Caribbean was)", (200,255,255), game, player, 1)
+					elif game.d.ref == 1:
+						game.d = Dialogue("penguin_ava1", "(Maybe if I keep going in this direction someone else will help me)", (200,255,255), game, player, game.d.ref + 1, 4)
+					else:
+						game.d = None
+						game.frame = 0
+						game.wave += 1
 		
 		
 		if game.wave == 11: #level 2 game.wave 2
@@ -930,23 +947,79 @@ def mainGameProcess():
 			if game.frame==600:
 				DoveA(Vector(200,-10),game,player)
 				DoveC(Vector(500,-10),game,player,5)
+			if game.frame==800:
+				game.frame=0
+				game.wave+=1
 		
 		
 		if game.wave == 16: #level 2 boss dialogue
-			game.wave += 1
+			if game.d not in game.gameObjects or game.d is None:
+				if game.d is None:
+					Flamingo(Vector(300,-10),game,player)
+					game.d = Dialogue("penguin_ava1", "What are you? I've never seen something like you in the sky before.", (200,255,255), game, player, 1)
+				elif game.d.ref == 1:
+					game.d = Dialogue("penguin_ava1", "I'm a Penguin.", (200,255,255), game, player, game.d.ref + 1, 4)
+				elif game.d.ref == 2:
+					game.d = Dialogue("penguin_ava1", "A Penguin?! In the sky?! Now that's unheard of.", (200,255,255), game, player, game.d.ref + 1, 4)
+				elif game.d.ref == 3:
+					game.d = Dialogue("penguin_ava1", "I built a jet-pack.", (200,255,255), game, player, game.d.ref + 1, 4)
+				elif game.d.ref == 4:
+					game.d = Dialogue("penguin_ava1", "Do you think you are special?", (200,255,255), game, player, game.d.ref + 1, 4)
+				elif game.d.ref == 5:
+					game.d = Dialogue("penguin_ava1", "Umm.... What?", (200,255,255), game, player, game.d.ref + 1, 4)
+				elif game.d.ref == 6:
+					game.d = Dialogue("penguin_ava1", "Insolence! Trying to upstage me! Me, the most beautiful Flamingo in the world!", (200,255,255), game, player, game.d.ref + 1, 4)
+				elif game.d.ref == 7:
+					game.d = Dialogue("penguin_ava1", "I'm not trying to upstage anyone.", (200,255,255), game, player, game.d.ref + 1, 4)
+				elif game.d.ref == 8:
+					game.d = Dialogue("penguin_ava1", "Of course you are. That's why you've come to challange me to see who the most graceful creature in the sky is!", (200,255,255), game, player, game.d.ref + 1, 4)
+				elif game.d.ref == 9:
+					game.d = Dialogue("penguin_ava1", "I didn't challenge anyone.", (200,255,255), game, player, game.d.ref + 1, 4)
+				elif game.d.ref == 10:
+					game.d = Dialogue("penguin_ava1", "LET THE CHALLENGE BEGIN!", (200,255,255), game, player, game.d.ref + 1, 4)
+				else:
+					game.d = None
+					game.frame = 0
+					game.wave += 1
 			
 			
 		if game.wave == 17: #level 2 boss: flamingo
-			if game.frame==0:
-				Flamingo(Vector(300,-10),game,player)
-			#game.wave += 1
-		
+			if game.boss not in game.gameObjects:
+				game.boss = None
+				game.wave += 1
 		
 		if game.wave == 18: #level 2 post boss dialogue
-			game.wave += 1
+			if len([x for x in game.gameObjects if x.name == 'Bullet']) == 0:
+				if game.d not in game.gameObjects or game.d is None:
+					if game.d is None:
+						game.d = Dialogue("penguin_ava1", "(I really didn't challenge him)", (200,255,255), game, player, 1)
+					elif game.d.ref == 1:
+						game.d = Dialogue("penguin_ava1", "(I mean, I don't think I'm that graceful)", (200,255,255), game, player, game.d.ref + 1, 4)
+					else:
+						game.d = None
+						game.frame = 0
+						game.wave += 1
 		
 		
-		if game.wave == 19: #Level 3 game.wave 1
+		if game.wave == 19: #level 3 opening dialogue
+			if game.d not in game.gameObjects or game.d is None:
+				if game.d is None:
+					game.d = Dialogue("penguin_ava1", "Now... what do we have here? I've never seen your kind before.", (200,255,255), game, player, 1)
+				elif game.d.ref == 1:
+					game.d = Dialogue("penguin_ava1", "I'm a penguin. I'm going to the Caribbean.", (200,255,255), game, player, game.d.ref + 1, 4)
+				elif game.d.ref == 2:
+					game.d = Dialogue("penguin_ava1", "I'd recommend you find an alternate route. My boys here don't like strangers on our turf.", (200,255,255), game, player, game.d.ref + 1, 4)
+				elif game.d.ref == 3:
+					game.d = Dialogue("penguin_ava1", "But the fastest way there is over the Jungle.", (200,255,255), game, player, game.d.ref + 1, 4)
+				elif game.d.ref == 4:
+					game.d = Dialogue("penguin_ava1", "Look kid. I admire your spirit, but you're in the wrong neighborhood. Find a new route.", (200,255,255), game, player, game.d.ref + 1, 4)
+				else:
+					game.d = None
+					game.frame = 0
+					game.wave += 1
+			
+		
+		if game.wave == 20: #Level 3 game.wave 1
 			if game.frame==30:
 				ToucanA(Vector(300,-10),game,player,5,5,15)
 			if game.frame==60:
@@ -990,7 +1063,7 @@ def mainGameProcess():
 				ToucanA(Vector(500,-10),game,player,6,5,15)
 		
 		
-		if game.wave == 20: #Level 3 game.wave 2
+		if game.wave == 21: #Level 3 game.wave 2
 			if game.frame==30:
 				ToucanB(Vector(300,-10),game,player,5,15)
 			if game.frame==90:
@@ -1015,7 +1088,7 @@ def mainGameProcess():
 				ToucanB(Vector(100,-10),game,player,8,15)
 		
 		
-		if game.wave == 21: #Level 3 game.wave 3
+		if game.wave == 22: #Level 3 game.wave 3
 			if game.frame==30:
 				BlueparrotA(Vector(300,-10),game,player,1,4,30)
 			if game.frame==60:
@@ -1058,7 +1131,7 @@ def mainGameProcess():
 				BlueparrotA(Vector(200,-10),game,player,-1,4,30)
 		
 		
-		if game.wave == 22: #Level 3 game.wave 4
+		if game.wave == 23: #Level 3 game.wave 4
 			if game.frame==30:
 				ToucanA(Vector(100,-10),game,player,6,5,15)
 				ToucanA(Vector(200,-10),game,player,6,5,15)
@@ -1084,7 +1157,7 @@ def mainGameProcess():
 				BlueparrotA(Vector(300,-10),game,player,-1,5,30)
 		
 		
-		if game.wave == 23: #Level 3 game.wave 5
+		if game.wave == 24: #Level 3 game.wave 5
 			if game.frame==30:
 				BlueparrotB(Vector(300,-10),game,player,1,30,7)
 			if game.frame==60:
@@ -1127,7 +1200,7 @@ def mainGameProcess():
 				BlueparrotA(Vector(100,-10),game,player,-1,5,30)
 		
 		
-		if game.wave == 24: #Level 3 game.wave 6
+		if game.wave == 25: #Level 3 game.wave 6
 			if game.frame==30:
 				ToucanA(Vector(100,-10),game,player,5,4,30)  #For some reason that 4 needs to be a 4 to spawn 3 bucks. don't ask why. I don't know  --Nick
 			if game.frame==50:
@@ -1160,6 +1233,7 @@ def mainGameProcess():
 				ToucanA(Vector(100,-10),game,player,5,4,30)
 		
 		
+<<<<<<< HEAD
 		if game.wave == 25: #level 1 boss dialogue
 			#game.wave += 1
 			if game.frame==0:
@@ -1167,13 +1241,40 @@ def mainGameProcess():
 			
 		if game.wave == 26: #level 3 boss: Macaw
 			game.wave += 1
+=======
+		if game.wave == 26: #level 3 boss dialogue
+			if game.d not in game.gameObjects or game.d is None:
+				if game.d is None:
+					#Macaw(pos,game,player)
+					game.d = Dialogue("penguin_ava1", "Look kid. I did you a favour by telling you not to come here. Why do you disrespect me by ignoring my kindness?", (200,255,255), game, player, 1)
+				elif game.d.ref == 1:
+					game.d = Dialogue("penguin_ava1", "Huh?", (200,255,255), game, player, game.d.ref + 1, 4)
+				elif game.d.ref == 2:
+					game.d = Dialogue("penguin_ava1", "I told you my boys are territorial and you shouldn't be here. Did you think I was kidding? Do I look like a joker?", (200,255,255), game, player, game.d.ref + 1, 4)
+				elif game.d.ref == 3:
+					game.d = Dialogue("penguin_ava1", "I'm just trying to get to the Caribbean. I dont want any trouble.", (200,255,255), game, player, game.d.ref + 1, 4)
+				elif game.d.ref == 4:
+					game.d = Dialogue("penguin_ava1", "Well you should have thought of that before you ignored everything I have done for you.", (200,255,255), game, player, game.d.ref + 1, 4)
+				elif game.d.ref == 5:
+					game.d = Dialogue("penguin_ava1", "Prepare to never fly again you previously flightless freak. ", (200,255,255), game, player, game.d.ref + 1, 4)
+				else:
+					game.d = None
+					game.frame = 0
+					game.wave += 1
+			
+			
+		if game.wave == 27: #level 3 boss: Don Macaw
+			if game.boss not in game.gameObjects:
+				game.boss = None
+				game.wave += 1
+>>>>>>> 8b842d680c77ac957ea1405b8613ca770c8a1424
 		
 		
-		if game.wave == 27: #level 1 post boss dialogue
+		if game.wave == 28: #level 3 post boss dialogue
 			game.wave += 1
 			
 			
-		if game.wave == 28:
+		if game.wave == 29:
 			print "GG"
 			return
 		
@@ -1187,6 +1288,22 @@ def mainGameProcess():
 		pygame.display.flip()
 		game.frame+=1
 
+def viewHighScores():
+	print 'viewing high scores now'
+	scoreString = ""
+	for line in highScores:
+		scoreString = scoreString + line + '\n'
+		
+	while True:
+		clock.tick(60)
+		screen.blit(highScoreBackground, (200, 275))
+		scoreRender = scoresFont.render(scoreString, 1, (255,255,255))
+		screen.blit(scoreRender, (205, 280))
+		pygame.display.flip()
+		for event in pygame.event.get():
+			if event.type == pygame.KEYDOWN:
+				return
+
 def mainMenuEvents(currentMenuScreen, mainMenuNewGame, mainMenuHighScores, mainMenuExit):
 	for event in pygame.event.get():
 		if event.type == pygame.KEYDOWN:
@@ -1198,8 +1315,8 @@ def mainMenuEvents(currentMenuScreen, mainMenuNewGame, mainMenuHighScores, mainM
 					mainGameProcess()
 					
 				elif screenSelect[1] == True:
-					# High Score selected
-					a = 5
+					print 'attempting to view high scores'
+					viewHighScores()
 					
 				elif screenSelect[2] == True:
 					sys.exit()

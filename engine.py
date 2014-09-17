@@ -10,6 +10,7 @@ class Engine:
 		self.frame = 0
 		self.wave = 0
 		self.d =  None
+		self.boss = None
 		
 	def restart(self, s = False):
 		for i in self.gameObjects:
