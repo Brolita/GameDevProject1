@@ -280,7 +280,7 @@ class HummingbirdA(Enemy):
 		if self.position.x<=30:
 			self.direction=1
 		if (self.frame-25)%self.timebetween==0:
-			BuckTarget(self.game,self,Vector(self.position.x,99999),self.buck,math.radians(7.5),3,"seashell")
+			BuckTarget(self.game,self,Vector(self.position.x,99999),self.buck,math.radians(7.5),3,"cherry")
 		self.frame+=1
 	
 	def draw(self, screen):
@@ -313,7 +313,7 @@ class HummingbirdB(Enemy):
 		if self.position.x<=30:
 			self.direction=1
 		if (self.frame-25)%self.timebetween==0:
-			BuckTarget(self.game,self,self.player.getPosition(),self.buck,math.radians(7.5),3,"seashell")
+			BuckTarget(self.game,self,self.player.getPosition(),self.buck,math.radians(7.5),3,"cherry")
 		self.frame+=1
 	
 	def draw(self, screen):
@@ -346,7 +346,7 @@ class HummingbirdC(Enemy):
 		if self.position.x<=30:
 			self.direction=1
 		if (self.frame-25)%self.timebetween==0:
-			BuckTarget(self.game,self,self.player.getPosition(),self.buck,math.radians(7.5),3,"seashell")
+			BuckTarget(self.game,self,self.player.getPosition(),self.buck,math.radians(7.5),3,"cherry")
 		self.frame+=1
 	
 	def draw(self, screen):
@@ -440,7 +440,7 @@ class DoveC(Enemy):
 		if self.frame<25:
 			self.position.Add((0,2))
 		if self.frame%25==0:
-			BuckTarget(self.game, self, self.player.getPosition(), self.count, math.radians(7.5), 5, "seashell")
+			BuckTarget(self.game, self, self.player.getPosition(), self.count, math.radians(7.5), 5, "cherry")
 		else:
 			if self.position.x<self.player.rect.x+16:
 				self.position.Add((3,0))
@@ -613,7 +613,10 @@ class BlueparrotC(Enemy):
 			self.position.Add((self.boss.directionhorz*3, 0))
 			self.position.RotateAround(self.boss.position, math.radians(1))
 			if (self.frame-25)%self.timebetween==0:
-				BuckTarget(self.game,self,self.player.getPosition(),self.buck,math.radians(7.5),5,"blueflower8x8")
+				if(self.buck%2==0):
+					BuckTarget(self.game,self,self.player.getPosition(),self.buck,math.radians(7.5),5,"blueflower8x8")
+				else:
+					BuckTarget(self.game,self,self.player.getPosition(),self.buck,math.radians(7.5),5,"yellowflower9x9")
 		self.frame+=1
 	
 	def draw(self, screen):
@@ -733,12 +736,45 @@ class Flamingo(Boss):
 			self.t.flag()
 		Boss.flag(self)
 
-class Macaw(Boss):
+class MacawA(Boss):
 	def __init__(self, init, game, player):
 		Boss.__init__(self, init, game, player,50)
 		self.image = Image.get("macaw")
 		self.health=50
 		self.directionhorz=1
+		self.tracers=False
+		self.t=None
+	def hit(self):
+		self.health-=1
+		if self.health==0:
+			self.flag()
+	
+	def update(self):
+		if self.frame<50:
+			self.position.Add((0,2))
+		elif self.game.d != None:
+			return
+		else:
+			self.position.Add((0,-2))
+		self.frame+=1
+	
+	def draw(self, screen):
+		Boss.draw(self, screen)
+		
+	def get_rect(self):
+		return self.image.get_rect().move(self.position.x - self.image.get_width()/2, self.position.y - self.image.get_height()/2)
+			
+	def flag(self):
+		Boss.flag(self)
+
+class MacawB(Boss):
+	def __init__(self, init, game, player):
+		Boss.__init__(self, init, game, player,50)
+		self.image = Image.get("macaw")
+		self.health=50
+		self.directionhorz=1
+		self.tracers=False
+		self.t=None
 	def hit(self):
 		self.health-=1
 		if self.health==0:
@@ -753,6 +789,9 @@ class Macaw(Boss):
 			self.position.Add((self.directionhorz*3,0))
 		if self.position.x>=440 or self.position.x<=160:
 			self.directionhorz*=-1
+		if self.health<=25 and self.tracers==False:
+			self.tracers=True
+			self.t=self.t = Tracers(self.game, self, self.player, 40, 30, 7, "redflower10x10")
 		self.frame+=1
 	
 	def draw(self, screen):
