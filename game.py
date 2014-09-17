@@ -245,8 +245,6 @@ def processPlayerEvents(player, gameRunning):
 def mainGameProcess():
 	gameRunning = True
 	game.restart()
-	game.wave = 20
-	game.levelBackground = game.levelThreeBackground
 	
 	while gameRunning:
 		clock.tick(60)
@@ -1337,9 +1335,6 @@ def mainGameProcess():
 					game.frame = 0
 					game.wave += 1
 			
-		if game.wave == 30:
-			if player.firing and game.frame > 30:
-				return
 		
 		#update 
 		game.update()
@@ -1348,6 +1343,12 @@ def mainGameProcess():
 		#draw
 		game.draw()
 		sidebar.draw(screen)
+		
+		if game.wave == 30:
+			screen.blit(Image.get("caribbean"), (0,0))
+			if player.firing and game.frame > 30:
+				return
+				
 		pygame.display.flip()
 		game.frame+=1
 

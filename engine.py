@@ -68,6 +68,8 @@ class Engine:
 		
 		for i in self.gameObjects:
 			i.update()
+			
+		for i in self.gameObjects:
 			if i.name == 'Player' or i.name == 'Snowball':
 				for j in self.gameObjects:	
 					if i.name == 'Player' and j.name == 'Bullet' and i.invinsibility == 0:

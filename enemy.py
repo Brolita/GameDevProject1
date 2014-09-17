@@ -694,7 +694,6 @@ class Albatross(Boss):
 		
 	def hit(self):
 		Boss.hit(self)
-		print self.health
 	
 	def update(self):
 		if self.frame<25:
@@ -704,11 +703,11 @@ class Albatross(Boss):
 		else:
 			self.position.Add((self.direction*3,0))
 			if self.frame%50==0:
-				BuckTarget(self.game,self,self.player.getPosition(),8,math.radians(10),4,"seashell")
+				BuckTarget(self.game,self,Vector(self.position.x,800),8,math.radians(10),4,"seashell")
 			if self.t == None and self.health<=15:
 				self.t = Tracers(self.game, self, self.player, -1, 10, 6, "rock")
 			if self.frame%50==25 and self.health<=30:
-				BuckTarget(self.game,self,self.player.getPosition(),8,math.radians(10),4,"seashell")
+				BuckTarget(self.game,self,Vector(self.position.x,800),8,math.radians(10),4,"seashell")
 		if self.position.x>=570:
 			self.direction=-1
 		if self.position.x<=30:
