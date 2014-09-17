@@ -1014,6 +1014,7 @@ def mainGameProcess():
 				ToucanA(Vector(300,-10),game,player,5,5,15)
 			if game.frame==60:
 				ToucanA(Vector(500,-10),game,player,4,5,15)
+				ToucanA(Vector(200,-10),game,player,5,5,15)
 			if game.frame==90:
 				ToucanA(Vector(100,-10),game,player,4,5,15)
 			if game.frame==120:
@@ -1023,102 +1024,128 @@ def mainGameProcess():
 				ToucanA(Vector(300,-10),game,player,6,5,15)
 			if game.frame==180:
 				ToucanA(Vector(100,-10),game,player,5,5,15)
+				ToucanA(Vector(400,-10),game,player,4,5,15)
 			if game.frame==210:
 				ToucanA(Vector(500,-10),game,player,5,5,15)
 			if game.frame==240:
 				ToucanA(Vector(100,-10),game,player,6,5,15)
+				ToucanA(Vector(300,-10),game,player,5,5,15)
 			if game.frame==270:
 				ToucanA(Vector(400,-10),game,player,5,5,15)
 			if game.frame==300:
 				ToucanA(Vector(200,-10),game,player,6,5,15)
+				ToucanA(Vector(100,-10),game,player,5,5,15)
 			if game.frame==330:
 				ToucanA(Vector(400,-10),game,player,5,5,15)
 			if game.frame==360:
 				ToucanA(Vector(500,-10),game,player,6,5,15)
+				ToucanA(Vector(200,-10),game,player,7,6,15)
 			if game.frame==390:
 				ToucanA(Vector(300,-10),game,player,6,5,15)
 			if game.frame==420:
 				ToucanA(Vector(500,-10),game,player,6,5,15)
+				ToucanA(Vector(200,-10),game,player,7,5,15)
 			if game.frame==450:
 				ToucanA(Vector(100,-10),game,player,6,5,15)
 			if game.frame==480:
 				ToucanA(Vector(300,-10),game,player,5,5,15)
+				ToucanA(Vector(200,-10),game,player,6,5,15)
 			if game.frame==510:
 				ToucanA(Vector(400,-10),game,player,6,5,15)
 			if game.frame==540:
 				ToucanA(Vector(500,-10),game,player,5,5,15)
+				ToucanA(Vector(200,-10),game,player,6,5,15)
 			if game.frame==570:
 				ToucanA(Vector(100,-10),game,player,6,5,15)
 			if game.frame==600:
 				ToucanA(Vector(500,-10),game,player,6,5,15)
+				ToucanA(Vector(200,-10),game,player,7,5,15)
 		
 		
 		if game.wave == 21: #Level 3 game.wave 2
 			if game.frame==30:
 				ToucanB(Vector(300,-10),game,player,5,15)
+			if game.frame==60:
+				ToucanB(Vector(200,-10),game,player,5,15)
 			if game.frame==90:
 				ToucanB(Vector(100,-10),game,player,5,15)
 				ToucanB(Vector(500,-10),game,player,5,15)
+			if game.frame==120:
+				ToucanB(Vector(300,-10),game,player,5,15)
 			if game.frame==150:
 				ToucanB(Vector(200,-10),game,player,7,15)
+			if game.frame==180:
+				ToucanB(Vector(100,-10),game,player,7,15)
 			if game.frame==210:
 				ToucanB(Vector(400,-10),game,player,7,15)
+			if game.frame==240:
+				ToucanB(Vector(100,-10),game,player,6,15)
 			if game.frame==270:
 				ToucanB(Vector(200,-10),game,player,6,15)
 				ToucanB(Vector(500,-10),game,player,6,15)
+			if game.frame==300:
+				ToucanB(Vector(100,-10),game,player,7,15)
 			if game.frame==330:
 				ToucanB(Vector(300,-10),game,player,8,15)
+			if game.frame==360:
+				ToucanB(Vector(100,-10),game,player,8,15)
 			if game.frame==390:
 				ToucanB(Vector(400,-10),game,player,7,15)
+			if game.frame==420:
+				ToucanB(Vector(100,-10),game,player,10,15)
 			if game.frame==450:
 				ToucanB(Vector(300,-10),game,player,11,15)
+			if game.frame==480:
+				ToucanB(Vector(100,-10),game,player,11,15)
 			if game.frame==510:
 				ToucanB(Vector(500,-10),game,player,11,15)
+			if game.frame==560:
+				ToucanB(Vector(300,-10),game,player,10,15)
 			if game.frame==570:
 				ToucanB(Vector(100,-10),game,player,8,15)
 		
 		
 		if game.wave == 22: #Level 3 game.wave 3
 			if game.frame==30:
-				BlueparrotA(Vector(300,-10),game,player,1,4,30)
+				BlueparrotA(Vector(300,-10),game,player,1,4,15)
 			if game.frame==60:
-				BlueparrotA(Vector(100,-10),game,player,-1,3,30)
+				BlueparrotA(Vector(100,-10),game,player,-1,3,15)
 			if game.frame==90:
-				BlueparrotA(Vector(300,-10),game,player,1,3,30)
+				BlueparrotA(Vector(300,-10),game,player,1,3,15)
 			if game.frame==120:
-				BlueparrotA(Vector(200,-10),game,player,-1,3,30)
+				BlueparrotA(Vector(200,-10),game,player,-1,3,15)
 			if game.frame==150:
-				BlueparrotA(Vector(100,-10),game,player,1,3,30)
+				BlueparrotA(Vector(100,-10),game,player,1,3,15)
 			if game.frame==180:
-				BlueparrotA(Vector(400,-10),game,player,-1,3,30)
+				BlueparrotA(Vector(400,-10),game,player,-1,3,15)
 			if game.frame==210:
-				BlueparrotA(Vector(100,-10),game,player,1,4,30)
+				BlueparrotA(Vector(100,-10),game,player,1,4,15)
 			if game.frame==240:
-				BlueparrotA(Vector(200,-10),game,player,-1,4,30)
+				BlueparrotA(Vector(200,-10),game,player,-1,4,15)
 			if game.frame==270:
-				BlueparrotA(Vector(400,-10),game,player,1,4,30)
+				BlueparrotA(Vector(400,-10),game,player,1,4,15)
 			if game.frame==300:
-				BlueparrotA(Vector(200,-10),game,player,-1,4,30)
+				BlueparrotA(Vector(200,-10),game,player,-1,4,15)
 			if game.frame==330:
-				BlueparrotA(Vector(300,-10),game,player,1,3,30)
+				BlueparrotA(Vector(300,-10),game,player,1,3,15)
 			if game.frame==360:
-				BlueparrotA(Vector(100,-10),game,player,-1,4,30)
+				BlueparrotA(Vector(100,-10),game,player,-1,4,15)
 			if game.frame==390:
-				BlueparrotA(Vector(300,-10),game,player,1,4,30)
+				BlueparrotA(Vector(300,-10),game,player,1,4,15)
 			if game.frame==420:
-				BlueparrotA(Vector(500,-10),game,player,-1,3,30)
+				BlueparrotA(Vector(500,-10),game,player,-1,3,15)
 			if game.frame==450:
-				BlueparrotA(Vector(300,-10),game,player,1,3,30)
+				BlueparrotA(Vector(300,-10),game,player,1,3,15)
 			if game.frame==480:
-				BlueparrotA(Vector(200,-10),game,player,-1,3,30)
+				BlueparrotA(Vector(200,-10),game,player,-1,3,15)
 			if game.frame==510:
-				BlueparrotA(Vector(300,-10),game,player,1,3,30)
+				BlueparrotA(Vector(300,-10),game,player,1,3,15)
 			if game.frame==540:
-				BlueparrotA(Vector(400,-10),game,player,-1,3,30)
+				BlueparrotA(Vector(400,-10),game,player,-1,3,15)
 			if game.frame==570:
-				BlueparrotA(Vector(500,-10),game,player,1,3,30)
+				BlueparrotA(Vector(500,-10),game,player,1,3,15)
 			if game.frame==600:
-				BlueparrotA(Vector(200,-10),game,player,-1,4,30)
+				BlueparrotA(Vector(200,-10),game,player,-1,4,15)
 		
 		
 		if game.wave == 23: #Level 3 game.wave 4
@@ -1149,45 +1176,45 @@ def mainGameProcess():
 		
 		if game.wave == 24: #Level 3 game.wave 5
 			if game.frame==30:
-				BlueparrotB(Vector(300,-10),game,player,1,30,7)
+				BlueparrotB(Vector(300,-10),game,player,1,30,5)
 			if game.frame==60:
-				BlueparrotB(Vector(500,-10),game,player,-1,30,7)
+				BlueparrotB(Vector(500,-10),game,player,-1,30,5)
 			if game.frame==90:
-				BlueparrotB(Vector(100,-10),game,player,1,30,7)
+				BlueparrotB(Vector(100,-10),game,player,1,30,5)
 			if game.frame==120:
-				BlueparrotB(Vector(400,-10),game,player,-1,30,7)
+				BlueparrotB(Vector(400,-10),game,player,-1,30,5)
 			if game.frame==150:
-				BlueparrotB(Vector(200,-10),game,player,1,30,7)
+				BlueparrotB(Vector(200,-10),game,player,1,30,5)
 			if game.frame==180:
-				BlueparrotA(Vector(300,-10),game,player,-1,5,30)
+				BlueparrotA(Vector(300,-10),game,player,-1,5,15)
 			if game.frame==210:
-				BlueparrotA(Vector(300,-10),game,player,1,5,30)
+				BlueparrotA(Vector(300,-10),game,player,1,5,15)
 			if game.frame==240:
-				BlueparrotB(Vector(100,-10),game,player,-1,30,7)
+				BlueparrotB(Vector(100,-10),game,player,-1,30,5)
 			if game.frame==270:
-				BlueparrotA(Vector(500,-10),game,player,1,5,30)
+				BlueparrotA(Vector(500,-10),game,player,1,5,15)
 			if game.frame==300:
-				BlueparrotB(Vector(100,-10),game,player,-1,30,7)
+				BlueparrotB(Vector(100,-10),game,player,-1,30,5)
 			if game.frame==330:
-				BlueparrotB(Vector(500,-10),game,player,1,30,7)
+				BlueparrotB(Vector(500,-10),game,player,1,30,5)
 			if game.frame==360:
-				BlueparrotB(Vector(400,-10),game,player,-1,30,7)
+				BlueparrotB(Vector(400,-10),game,player,-1,30,5)
 			if game.frame==390:
-				BlueparrotA(Vector(500,-10),game,player,1,5,30)
+				BlueparrotA(Vector(500,-10),game,player,1,5,15)
 			if game.frame==420:
-				BlueparrotA(Vector(100,-10),game,player,-1,5,30)
+				BlueparrotA(Vector(100,-10),game,player,-1,5,15)
 			if game.frame==450:
-				BlueparrotA(Vector(300,-10),game,player,1,5,30)
+				BlueparrotA(Vector(300,-10),game,player,1,5,15)
 			if game.frame==480:
-				BlueparrotA(Vector(200,-10),game,player,-1,5,30)
+				BlueparrotA(Vector(200,-10),game,player,-1,5,15)
 			if game.frame==510:
-				BlueparrotA(Vector(400,-10),game,player,1,5,30)
+				BlueparrotA(Vector(400,-10),game,player,1,5,15)
 			if game.frame==540:
-				BlueparrotB(Vector(100,-10),game,player,-1,30,7)
+				BlueparrotB(Vector(100,-10),game,player,-1,30,5)
 			if game.frame==570:
-				BlueparrotA(Vector(300,-10),game,player,1,5,30)
+				BlueparrotA(Vector(300,-10),game,player,1,5,15)
 			if game.frame==600:
-				BlueparrotA(Vector(100,-10),game,player,-1,5,30)
+				BlueparrotA(Vector(100,-10),game,player,-1,5,15)
 		
 		
 		if game.wave == 25: #Level 3 game.wave 6
@@ -1195,30 +1222,36 @@ def mainGameProcess():
 				ToucanA(Vector(100,-10),game,player,5,4,30)  #For some reason that 4 needs to be a 4 to spawn 3 bucks. don't ask why. I don't know  --Nick
 			if game.frame==50:
 				BlueparrotB(Vector(400,-10),game,player,1,30,7)
+				BlueparrotB(Vector(300,-10),game,player,-1,30,7)
 			if game.frame==90:
 				ToucanA(Vector(200,-10),game,player,5,4,30)
 			if game.frame==150:
 				ToucanA(Vector(400,-10),game,player,5,4,30)
 				BlueparrotB(Vector(300,-10),game,player,-1,30,7)
+				BlueparrotB(Vector(500,-10),game,player,1,39,7)
 			if game.frame==210:
 				ToucanA(Vector(100,-10),game,player,5,4,30)
 			if game.frame==250:
 				BlueparrotB(Vector(500,-10),game,player,1,30,7)
+				BlueparrotB(Vector(200,-10),game,player,-1,30,7)
 			if game.frame==270:
 				ToucanA(Vector(400,-10),game,player,5,4,30)
 			if game.frame==330:
 				ToucanA(Vector(500,-10),game,player,5,4,30)
 			if game.frame==350:
 				BlueparrotB(Vector(100,-10),game,player,-1,30,7)
+				BlueparrotB(Vector(300,-10),game,player,1,30,7)
 			if game.frame==390:
 				ToucanA(Vector(400,-10),game,player,5,4,30)
 			if game.frame==450:
 				ToucanA(Vector(100,-10),game,player,5,4,30)
 				BlueparrotB(Vector(500,-10),game,player,1,30,7)
+				BlueparrotB(Vector(200,-10),game,player,-1,30,7)
 			if game.frame==510:
 				ToucanA(Vector(300,-10),game,player,5,4,30)
 			if game.frame==550:
 				BlueparrotB(Vector(200,-10),game,player,-1,30,7)
+				BlueparrotB(Vector(500,-10),game,player,1,30,7)
 			if game.frame==570:
 				ToucanA(Vector(100,-10),game,player,5,4,30)
 		
