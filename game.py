@@ -254,13 +254,13 @@ def mainGameProcess():
 		if game.wave == 0:
 			if game.d not in game.gameObjects or game.d is None:
 				if game.d is None:
-					game.d = Dialogue("penguin_avi1", "(Hmmm... this jetpack handles better than I thought it would)", (200,255,255), game, player, 1)
+					game.d = Dialogue("penguin_avi1", "(Hmmm... this jetpack handles better than I thought it would)", (255,255,255), game, player, 1)
 				elif game.d.ref == 1:
-					game.d = Dialogue("penguin_avi1", "(At this speed it will take me no time to get to the Caribbean! I'll be there in 5 minutes)", (200,255,255), game, player, game.d.ref + 1, 4)
+					game.d = Dialogue("penguin_avi1", "(At this speed it will take me no time to get to the Caribbean! I'll be there in 5 minutes)", (255,255,255), game, player, game.d.ref + 1, 4)
 				elif game.d.ref == 2:
-					game.d = Dialogue("penguin_avi1", "(But why are the seagulls are throwing things at me?)", (200,255,255), game, player, game.d.ref + 1, 30)
+					game.d = Dialogue("penguin_avi1", "(But why are the seagulls are throwing things at me?)", (255,255,255), game, player, game.d.ref + 1, 30)
 				elif game.d.ref == 3:
-					game.d = Dialogue("penguin_avi1", "(This might be more difficult that I thought...)", (200,255,255), game, player, game.d.ref + 1, 4)
+					game.d = Dialogue("penguin_avi1", "(This might be more difficult that I thought...)", (255,255,255), game, player, game.d.ref + 1, 4)
 				else:
 					game.d = None
 					game.frame = 0
@@ -577,27 +577,27 @@ def mainGameProcess():
 			if (game.d not in game.gameObjects or game.d is None) and len([x for x in game.gameObjects if x.name == 'Bullet']) == 0:
 				if game.d is None:
 					game.boss = Albatross(Vector(300,-10),game,player)
-					game.d = Dialogue("penguin_avi1", "(Darn...I think I'm lost. Hey there's an Albatros, maybe he will help me)", (200,255,255), game, player, 1)
+					game.d = Dialogue("penguin_avi1", "(Darn...I think I'm lost. Hey there's an Albatros, maybe he will help me)", (255,255,255), game, player, 1)
 				elif game.d.ref == 1:
-					game.d = Dialogue("penguin_avi3", "Hey. Hey...HEY!!.. HEY!!!!! HELLO!!", (200,255,255), game, player, game.d.ref + 1, 4)
+					game.d = Dialogue("penguin_avi3", "Hey. Hey...HEY!!.. HEY!!!!! HELLO!!", (255,255,255), game, player, game.d.ref + 1, 4)
 				elif game.d.ref == 2:
-					game.d = Dialogue("albatross_avi1", "What? What could you possibly want?", (200,255,255), game, player, game.d.ref + 1, 4)
+					game.d = Dialogue("albatross_avi1", "What? What could you possibly want?", (255,255,255), game, player, game.d.ref + 1, 4)
 				elif game.d.ref == 3:
-					game.d = Dialogue("penguin_avi3", "I need to go to the Caribbean and I might be a little lost... Can you help me?", (200,255,255), game, player, game.d.ref + 1, 4)
+					game.d = Dialogue("penguin_avi3", "I need to go to the Caribbean and I might be a little lost... Can you help me?", (255,255,255), game, player, game.d.ref + 1, 4)
 				elif game.d.ref == 4:
-					game.d = Dialogue("albatross_avi1", "No.", (200,255,255), game, player, game.d.ref + 1, 30)
+					game.d = Dialogue("albatross_avi1", "No.", (255,255,255), game, player, game.d.ref + 1, 30)
 				elif game.d.ref == 5:
-					game.d = Dialogue("penguin_avi3", "Please?", (200,255,255), game, player, game.d.ref + 1, 45)
+					game.d = Dialogue("penguin_avi3", "Please?", (255,255,255), game, player, game.d.ref + 1, 45)
 				elif game.d.ref == 6:
-					game.d = Dialogue("albatross_avi1", "...", (200,255,255), game, player, game.d.ref + 1, 100)
+					game.d = Dialogue("albatross_avi1", "...", (255,255,255), game, player, game.d.ref + 1, 100)
 				elif game.d.ref == 7:
-					game.d = Dialogue("penguin_avi1", "Do you not know where it is? Because if you don't thats okay. I don't really either.", (200,255,255), game, player, game.d.ref + 1, 4)
+					game.d = Dialogue("penguin_avi1", "Do you not know where it is? Because if you don't thats okay. I don't really either.", (255,255,255), game, player, game.d.ref + 1, 4)
 				elif game.d.ref == 8:
-					game.d = Dialogue("albatross_avi1", "...", (200,255,255), game, player, game.d.ref + 1, 100)
+					game.d = Dialogue("albatross_avi1", "...", (255,255,255), game, player, game.d.ref + 1, 100)
 				elif game.d.ref == 9:
-					game.d = Dialogue("penguin_avi1", "I need to get to the Caribbean. If you don't know how to get there, maybe you can-", (200,255,255), game, player, game.d.ref + 1, 4)
+					game.d = Dialogue("penguin_avi1", "I need to get to the Caribbean. If you don't know how to get there, maybe you can-", (255,255,255), game, player, game.d.ref + 1, 4)
 				elif game.d.ref == 10:
-					game.d = Dialogue("albatross_avi4", "CRAWWWWWW. I've had enough of your incessant chattering.", (200,255,255), game, player, game.d.ref + 1, 4)
+					game.d = Dialogue("albatross_avi4", "CRAWWWWWW. I've had enough of your incessant chattering.", (255,255,255), game, player, game.d.ref + 1, 4)
 				else:
 					game.d = None
 					game.frame = 0
@@ -614,9 +614,9 @@ def mainGameProcess():
 			if not game.levelFade and len([x for x in game.gameObjects if x.name == 'Bullet']) == 0:
 				if game.d not in game.gameObjects or game.d is None:
 					if game.d is None:
-						game.d = Dialogue("penguin_avi1", "(I guess he really didn't know where the Caribbean was)", (200,255,255), game, player, 1)
+						game.d = Dialogue("penguin_avi1", "(I guess he really didn't know where the Caribbean was)", (255,255,255), game, player, 1)
 					elif game.d.ref == 1:
-						game.d = Dialogue("penguin_avi1", "(Maybe if I keep going in this direction someone else will help me)", (200,255,255), game, player, game.d.ref + 1, 4)
+						game.d = Dialogue("penguin_avi1", "(Maybe if I keep going in this direction someone else will help me)", (255,255,255), game, player, game.d.ref + 1, 4)
 					else:
 						game.d = None
 						game.frame = 0
@@ -937,27 +937,27 @@ def mainGameProcess():
 			if (game.d not in game.gameObjects or game.d is None) and len([x for x in game.gameObjects if x.name == 'Bullet']) == 0:
 				if game.d is None:
 					game.boss = Flamingo(Vector(300,-10),game,player)
-					game.d = Dialogue("flamingo_avi1", "What are you? I've never seen something like you in the sky before.", (200,255,255), game, player, 1)
+					game.d = Dialogue("flamingo_avi1", "What are you? I've never seen something like you in the sky before.", (255,255,255), game, player, 1)
 				elif game.d.ref == 1:
-					game.d = Dialogue("penguin_avi1", "I'm a Penguin.", (200,255,255), game, player, game.d.ref + 1, 4)
+					game.d = Dialogue("penguin_avi1", "I'm a Penguin.", (255,255,255), game, player, game.d.ref + 1, 4)
 				elif game.d.ref == 2:
-					game.d = Dialogue("flamingo_avi1", "A Penguin?! In the sky?! Now that's unheard of.", (200,255,255), game, player, game.d.ref + 1, 4)
+					game.d = Dialogue("flamingo_avi1", "A Penguin?! In the sky?! Now that's unheard of.", (255,255,255), game, player, game.d.ref + 1, 4)
 				elif game.d.ref == 3:
-					game.d = Dialogue("penguin_avi1", "I built a jet-pack.", (200,255,255), game, player, game.d.ref + 1, 4)
+					game.d = Dialogue("penguin_avi1", "I built a jet-pack.", (255,255,255), game, player, game.d.ref + 1, 4)
 				elif game.d.ref == 4:
-					game.d = Dialogue("flamingo_avi2", "Do you think you are special?", (200,255,255), game, player, game.d.ref + 1, 4)
+					game.d = Dialogue("flamingo_avi2", "Do you think you are special?", (255,255,255), game, player, game.d.ref + 1, 4)
 				elif game.d.ref == 5:
-					game.d = Dialogue("penguin_avi1", "Umm.... What?", (200,255,255), game, player, game.d.ref + 1, 4)
+					game.d = Dialogue("penguin_avi1", "Umm.... What?", (255,255,255), game, player, game.d.ref + 1, 4)
 				elif game.d.ref == 6:
-					game.d = Dialogue("flamingo_avi3", "Insolence! Trying to upstage me! Me, the most beautiful Flamingo in the world!", (200,255,255), game, player, game.d.ref + 1, 4)
+					game.d = Dialogue("flamingo_avi3", "Insolence! Trying to upstage me! Me, the most beautiful Flamingo in the world!", (255,255,255), game, player, game.d.ref + 1, 4)
 				elif game.d.ref == 7:
-					game.d = Dialogue("penguin_avi1", "I'm not trying to upstage anyone.", (200,255,255), game, player, game.d.ref + 1, 4)
+					game.d = Dialogue("penguin_avi1", "I'm not trying to upstage anyone.", (255,255,255), game, player, game.d.ref + 1, 4)
 				elif game.d.ref == 8:
-					game.d = Dialogue("flamingo_avi3", "Of course you are. That's why you've come to challange me to see who the most graceful creature in the sky is!", (200,255,255), game, player, game.d.ref + 1, 4)
+					game.d = Dialogue("flamingo_avi3", "Of course you are. That's why you've come to challange me to see who the most graceful creature in the sky is!", (255,255,255), game, player, game.d.ref + 1, 4)
 				elif game.d.ref == 9:
-					game.d = Dialogue("penguin_avi1", "I didn't challenge anyone.", (200,255,255), game, player, game.d.ref + 1, 4)
+					game.d = Dialogue("penguin_avi1", "I didn't challenge anyone.", (255,255,255), game, player, game.d.ref + 1, 4)
 				elif game.d.ref == 10:
-					game.d = Dialogue("flamingo_avi4", "LET THE CHALLENGE BEGIN!", (200,255,255), game, player, game.d.ref + 1, 4)
+					game.d = Dialogue("flamingo_avi4", "LET THE CHALLENGE BEGIN!", (255,255,255), game, player, game.d.ref + 1, 4)
 				else:
 					game.d = None
 					game.frame = 0
@@ -974,9 +974,9 @@ def mainGameProcess():
 			if not game.levelFade and len([x for x in game.gameObjects if x.name == 'Bullet']) == 0:
 				if game.d not in game.gameObjects or game.d is None:
 					if game.d is None:
-						game.d = Dialogue("penguin_avi1", "(I really didn't challenge him)", (200,255,255), game, player, 1)
+						game.d = Dialogue("penguin_avi1", "(I really didn't challenge him)", (255,255,255), game, player, 1)
 					elif game.d.ref == 1:
-						game.d = Dialogue("penguin_avi1", "(I mean, I don't think I'm that graceful)", (200,255,255), game, player, game.d.ref + 1, 4)
+						game.d = Dialogue("penguin_avi1", "(I mean, I don't think I'm that graceful)", (255,255,255), game, player, game.d.ref + 1, 4)
 					else:
 						game.d = None
 						game.frame = 0
@@ -987,15 +987,15 @@ def mainGameProcess():
 			if not game.levelFade and game.d not in game.gameObjects or game.d is None:
 				if game.d is None:
 					MacawA(Vector(300,-10),game,player)
-					game.d = Dialogue("macaw_avi1", "Now... what do we have here? I've never seen your kind before.", (200,255,255), game, player, 1)
+					game.d = Dialogue("macaw_avi1", "Now... what do we have here? I've never seen your kind before.", (255,255,255), game, player, 1)
 				elif game.d.ref == 1:
-					game.d = Dialogue("penguin_avi3", "I'm a penguin. I'm going to the Caribbean.", (200,255,255), game, player, game.d.ref + 1, 4)
+					game.d = Dialogue("penguin_avi3", "I'm a penguin. I'm going to the Caribbean.", (255,255,255), game, player, game.d.ref + 1, 4)
 				elif game.d.ref == 2:
-					game.d = Dialogue("macaw_avi1", "I'd recommend you find an alternate route. My boys here don't like strangers on our turf.", (200,255,255), game, player, game.d.ref + 1, 4)
+					game.d = Dialogue("macaw_avi1", "I'd recommend you find an alternate route. My boys here don't like strangers on our turf.", (255,255,255), game, player, game.d.ref + 1, 4)
 				elif game.d.ref == 3:
-					game.d = Dialogue("penguin_avi1", "But the fastest way there is over the Jungle.", (200,255,255), game, player, game.d.ref + 1, 4)
+					game.d = Dialogue("penguin_avi1", "But the fastest way there is over the Jungle.", (255,255,255), game, player, game.d.ref + 1, 4)
 				elif game.d.ref == 4:
-					game.d = Dialogue("macaw_avi3", "Look kid. I admire your spirit, but you're in the wrong neighborhood. Find a new route.", (200,255,255), game, player, game.d.ref + 1, 4)
+					game.d = Dialogue("macaw_avi3", "Look kid. I admire your spirit, but you're in the wrong neighborhood. Find a new route.", (255,255,255), game, player, game.d.ref + 1, 4)
 				else:
 					game.d = None
 					game.frame = 0
@@ -1301,17 +1301,17 @@ def mainGameProcess():
 			if (game.d not in game.gameObjects or game.d is None) and len([x for x in game.gameObjects if x.name == 'Bullet']) == 0:
 				if game.d is None:
 					game.boss=MacawB(Vector(300,-10),game,player)
-					game.d = Dialogue("macaw_avi3", "Look kid. I did you a favour by telling you not to come here. Why do you disrespect me by ignoring my kindness?", (200,255,255), game, player, 1)
+					game.d = Dialogue("macaw_avi3", "Look kid. I did you a favour by telling you not to come here. Why do you disrespect me by ignoring my kindness?", (255,255,255), game, player, 1)
 				elif game.d.ref == 1:
-					game.d = Dialogue("penguin_avi2", "Huh?", (200,255,255), game, player, game.d.ref + 1, 4)
+					game.d = Dialogue("penguin_avi2", "Huh?", (255,255,255), game, player, game.d.ref + 1, 4)
 				elif game.d.ref == 2:
-					game.d = Dialogue("macaw_avi3", "I told you my boys are territorial and you shouldn't be here. Did you think I was kidding? Do I look like a joker?", (200,255,255), game, player, game.d.ref + 1, 4)
+					game.d = Dialogue("macaw_avi3", "I told you my boys are territorial and you shouldn't be here. Did you think I was kidding? Do I look like a joker?", (255,255,255), game, player, game.d.ref + 1, 4)
 				elif game.d.ref == 3:
-					game.d = Dialogue("penguin_avi2", "I'm just trying to get to the Caribbean. I dont want any trouble.", (200,255,255), game, player, game.d.ref + 1, 4)
+					game.d = Dialogue("penguin_avi2", "I'm just trying to get to the Caribbean. I dont want any trouble.", (255,255,255), game, player, game.d.ref + 1, 4)
 				elif game.d.ref == 4:
-					game.d = Dialogue("macaw_avi3", "Well you should have thought of that before you ignored everything I have done for you.", (200,255,255), game, player, game.d.ref + 1, 4)
+					game.d = Dialogue("macaw_avi3", "Well you should have thought of that before you ignored everything I have done for you.", (255,255,255), game, player, game.d.ref + 1, 4)
 				elif game.d.ref == 5:
-					game.d = Dialogue("macaw_avi4", "Prepare to never fly again you previously flightless freak. ", (200,255,255), game, player, game.d.ref + 1, 4)
+					game.d = Dialogue("macaw_avi4", "Prepare to never fly again you previously flightless freak. ", (255,255,255), game, player, game.d.ref + 1, 4)
 				else:
 					game.d = None
 					game.frame = 0
@@ -1327,7 +1327,7 @@ def mainGameProcess():
 		if game.wave == 28: #level 3 post boss dialogue
 			if (game.d not in game.gameObjects or game.d is None) and len([x for x in game.gameObjects if x.name == 'Bullet']) == 0:
 				if game.d is None:
-					game.d = Dialogue("penguin_avi2", "(I think I'm almost there! I can hear the waves)", (200,255,255), game, player, 1)
+					game.d = Dialogue("penguin_avi2", "(I think I'm almost there! I can hear the waves)", (255,255,255), game, player, 1)
 				else:
 					game.d = None
 					game.levelFade = True

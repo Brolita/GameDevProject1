@@ -881,11 +881,11 @@ class MacawB(Boss):
 				self.e = True
 				if (self.game.d not in self.game.gameObjects or self.game.d is None) and len([x for x in self.game.gameObjects if x.name == 'Bullet']) == 0:
 					if self.game.d is None:
-						self.game.d = Dialogue("macaw_avi1", "You were pretty tough, kid... Pretty tough.", (200,255,255), self.game, self.player, 1)
+						self.game.d = Dialogue("macaw_avi1", "You were pretty tough, kid... Pretty tough.", (255,255,255), self.game, self.player, 1)
 					elif self.game.d.ref == 1:
 						Explosion(self.position,self.game,"Macaw")
 						self.stopDraw = True
-						self.game.d = Dialogue("penguin_avi2", "(Wow, that was intense...)", (200,255,255), self.game, self.player, self.game.d.ref + 1, 60)
+						self.game.d = Dialogue("penguin_avi2", "(Wow, that was intense...)", (255,255,255), self.game, self.player, self.game.d.ref + 1, 60)
 					else:
 						self.flag()
 						self.game.sidebar.points += 10000
