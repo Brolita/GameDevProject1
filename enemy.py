@@ -280,7 +280,7 @@ class HummingbirdA(Enemy):
 		if self.position.x<=30:
 			self.direction=1
 		if (self.frame-25)%self.timebetween==0:
-			BuckTarget(self.game,self,Vector(self.position.x,99999),self.buck,math.radians(7.5),3,"seashell")
+			BuckTarget(self.game,self,Vector(self.position.x,99999),self.buck,math.radians(7.5),3,"cherry")
 		self.frame+=1
 	
 	def draw(self, screen):
@@ -313,7 +313,7 @@ class HummingbirdB(Enemy):
 		if self.position.x<=30:
 			self.direction=1
 		if (self.frame-25)%self.timebetween==0:
-			BuckTarget(self.game,self,self.player.getPosition(),self.buck,math.radians(7.5),3,"seashell")
+			BuckTarget(self.game,self,self.player.getPosition(),self.buck,math.radians(7.5),3,"cherry")
 		self.frame+=1
 	
 	def draw(self, screen):
@@ -346,7 +346,7 @@ class HummingbirdC(Enemy):
 		if self.position.x<=30:
 			self.direction=1
 		if (self.frame-25)%self.timebetween==0:
-			BuckTarget(self.game,self,self.player.getPosition(),self.buck,math.radians(7.5),3,"seashell")
+			BuckTarget(self.game,self,self.player.getPosition(),self.buck,math.radians(7.5),3,"cherry")
 		self.frame+=1
 	
 	def draw(self, screen):
@@ -440,7 +440,7 @@ class DoveC(Enemy):
 		if self.frame<25:
 			self.position.Add((0,2))
 		if self.frame%25==0:
-			BuckTarget(self.game, self, self.player.getPosition(), self.count, math.radians(7.5), 5, "seashell")
+			BuckTarget(self.game, self, self.player.getPosition(), self.count, math.radians(7.5), 5, "cherry")
 		else:
 			if self.position.x<self.player.rect.x+16:
 				self.position.Add((3,0))
