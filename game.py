@@ -245,7 +245,8 @@ def processPlayerEvents(player, gameRunning):
 def mainGameProcess():
 	gameRunning = True
 	game.restart()
-	game.wave = 16
+	game.wave = 26
+	game.levelBackground = game.levelThreeBackground
 	
 	while gameRunning:
 		clock.tick(60)
@@ -576,7 +577,7 @@ def mainGameProcess():
 		
 		
 		if game.wave == 7: #level 1 boss dialogue
-			if game.d not in game.gameObjects or game.d is None:
+			if game.d not in game.gameObjects or game.d is None and len([x for x in game.gameObjects if x.name == 'Bullet']) == 0:
 				if game.d is None:
 					game.boss = Albatross(Vector(300,-10),game,player)
 					game.d = Dialogue("penguin_avi1", "(Darn...I think I'm lost. Hey there's an Albatros, maybe he will help me)", (200,255,255), game, player, 1)
@@ -936,7 +937,7 @@ def mainGameProcess():
 		
 		
 		if game.wave == 16: #level 2 boss dialogue
-			if game.d not in game.gameObjects or game.d is None:
+			if game.d not in game.gameObjects or game.d is None and len([x for x in game.gameObjects if x.name == 'Bullet']) == 0:
 				if game.d is None:
 					game.boss = Flamingo(Vector(300,-10),game,player)
 					game.d = Dialogue("flamingo_avi1", "What are you? I've never seen something like you in the sky before.", (200,255,255), game, player, 1)
@@ -1237,13 +1238,9 @@ def mainGameProcess():
 		
 		
 		if game.wave == 26: #level 3 boss dialogue
-			if game.d not in game.gameObjects or game.d is None:
+			if game.d not in game.gameObjects or game.d is None and len([x for x in game.gameObjects if x.name == 'Bullet']) == 0:
 				if game.d is None:
 					game.boss=MacawB(Vector(300,-10),game,player)
-					BlueparrotC(Vector(300,-10),game,player,4,20,game.boss,190)
-					BlueparrotC(Vector(300,-10),game,player,4,20,game.boss,10)
-					BlueparrotC(Vector(210,-10),game,player,3,20,game.boss,100)
-					BlueparrotC(Vector(390,-10),game,player,3,20,game.boss,100)
 					game.d = Dialogue("macaw_avi3", "Look kid. I did you a favour by telling you not to come here. Why do you disrespect me by ignoring my kindness?", (200,255,255), game, player, 1)
 				elif game.d.ref == 1:
 					game.d = Dialogue("penguin_avi2", "Huh?", (200,255,255), game, player, game.d.ref + 1, 4)

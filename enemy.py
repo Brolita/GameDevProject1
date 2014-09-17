@@ -604,6 +604,7 @@ class BlueparrotC(Enemy):
 		self.timebetween=timebetween
 		self.boss=boss
 		self.down=down
+		self.health = 20
 	def update(self):
 		if self.position.y<self.down and self.game.d != None:
 			self.position.Add((0,2))
@@ -626,9 +627,14 @@ class BlueparrotC(Enemy):
 		return self.image.get_rect().move(self.position.x-self.image.get_width()/2,self.position.y-self.image.get_height()/2)
 	
 	def hit(self):
-		return
+		if self.game.d != None:
+			return
+		self.health -= 1
+		if self.health == 0:
+			self.flag()
 		
 	def flag(self):
+		self.boss.b.remove(self)
 		Explosion(self.position, self.game, "blueparrot")
 		Enemy.flag(self)
 		
@@ -700,27 +706,55 @@ class Flamingo(Boss):
 	def __init__(self, init, game, player):
 		Boss.__init__(self, init, game, player, 30)
 		self.image = Image.get("Flamingo_boss")
-		self.health=30
+		self.health=75
 		self.directionvert=1
 		self.directionhorz=1
 		self.t=None
+		self.invinsible = False
 	def hit(self):
-		Boss.hit(self)
+		if not self.invinsible:
+			Boss.hit(self)
 	
 	def update(self):
 		if self.frame<25:
-			self.position.Add((0,2))
+			self.position.Add((0,4))
 		elif self.game.d != None:
 			return
 		else:
-			self.position.Add((self.directionhorz*2,self.directionvert*2))
-			if self.frame%50==0 and self.t == None:
-				self.t = Tracers(self.game, self, self.player, 40, 30, 7, "rock")
-			if self.frame%50==25 and self.health<=15:
-				BuckTarget(self.game,self,self.player.getPosition(),4,math.radians(5),10,"seashell")
+			if self.health > 50:
+				self.position.Add((self.directionhorz*2,self.directionvert*2))
+			if self.t == None and self.health > 65:
+				self.t = Tracers(self.game, self, self.player, -1, 10, 7, "cherry")
+			if self.health<=65 and self.health > 50 and self.t.frameOffset == 10:
+				self.t.flag()
+				self.t = Tracers(self.game, self, self.player, -1, 4, 7, "cherry")
+			if self.health<=50:
+				if self.t != None:
+					self.t.flag()
+					self.t = None
+				if self.position.y < 100:
+					self.invinsible = True
+					self.position.Add((0,3))
+					if self.position.y > 96:
+						self.position.y = 100
+				elif self.position.y > 100:
+					self.invinsible = True
+					self.position.Add((0,-3))
+					if self.position.y < 104:
+						self.position.y = 100
+				else:
+					self.invinsible = False
+					if self.position.x < self.player.getPosition().x:
+						self.position.Add((1,0))
+					
+					if self.position.x > self.player.getPosition().x:
+						self.position.Add((-1,0))
+							
+					if self.frame%10==0:
+						BuckTarget(self.game,self,self.player.getPosition(),41,math.radians(5),4,"cherry")
 		if self.position.x>=520 or self.position.x<=80:
 			self.directionhorz*=-1
-		if self.position.y<=30 or self.position.y>=720:
+		if self.position.y<=80 or self.position.y>=720:
 			self.directionvert*=-1
 		self.frame+=1
 	
@@ -731,7 +765,7 @@ class Flamingo(Boss):
 		return self.image.get_rect().move(self.position.x - self.image.get_width()/2, self.position.y - self.image.get_height()/2)
 			
 	def flag(self):
-		Explosion(self.position,self.game,"Flamingo")
+		Explosion(self.position,self.game,"flamingo_boss")
 		if self.t != None:
 			self.t.flag()
 		Boss.flag(self)
@@ -770,6 +804,11 @@ class MacawA(Boss):
 class MacawB(Boss):
 	def __init__(self, init, game, player):
 		Boss.__init__(self, init, game, player,50)
+		self.b = []
+		self.b.append(BlueparrotC(Vector(300,-10),game,player,4,20,game.boss,190))
+		self.b.append(BlueparrotC(Vector(300,-10),game,player,4,20,game.boss,10))
+		self.b.append(BlueparrotC(Vector(210,-10),game,player,3,20,game.boss,100))
+		self.b.append(BlueparrotC(Vector(390,-10),game,player,3,20,game.boss,100))
 		self.image = Image.get("macaw")
 		self.health=50
 		self.directionhorz=1

@@ -58,8 +58,8 @@ class Engine:
 		self.sidebar.lives -= 1			
 		
 	def update(self):
-		if len(self.gameObjects) > 500:
-			print "Warning! over 500 gameobject to be rendered, expect slow down. # of gameObjects", len(self.gameObjects)
+		#if len(self.gameObjects) > 500:
+			#print "Warning! over 500 gameobject to be rendered, expect slow down. # of gameObjects", len(self.gameObjects)
 		
 		for i in self.gameObjects:
 			if i.name == "Dialouge":
