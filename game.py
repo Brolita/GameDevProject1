@@ -10,9 +10,8 @@ from enemy import *
 pygame.init()
 screen = pygame.display.set_mode((800, 800))
 
-mainMenuNewGame = Image.get('MenuNewGame')
-mainMenuHighScores = Image.get('MenuHighScores')
-mainMenuExit = Image.get('MenuExit')
+mainMenuNewGame = Image.get('title1')
+mainMenuExit = Image.get('title2')
 pauseMenuResume = Image.get('PauseMenuResume')
 pauseMenuRestart = Image.get('PauseMenuRestart')
 pauseMenuExit = Image.get('PauseMenuExit')
@@ -33,7 +32,7 @@ gameOpen = True
 currentMenuScreen = mainMenuNewGame
 currentPauseScreen = pauseMenuResume
 currentQuitScreen = gameOverRetry
-screenSelect = [True, False, False]
+screenSelect = [True, False]
 pauseSelect = [True, False, False]
 quitSelect = [True, False]
 highScores = []
@@ -1368,7 +1367,7 @@ def viewHighScores():
 			if event.type == pygame.KEYDOWN:
 				return
 
-def mainMenuEvents(currentMenuScreen, mainMenuNewGame, mainMenuHighScores, mainMenuExit):
+def mainMenuEvents(currentMenuScreen, mainMenuNewGame, mainMenuExit):
 	for event in pygame.event.get():
 		if event.type == pygame.KEYDOWN:
 			if event.key == pygame.K_ESCAPE:
@@ -1379,44 +1378,28 @@ def mainMenuEvents(currentMenuScreen, mainMenuNewGame, mainMenuHighScores, mainM
 					mainGameProcess()
 					
 				elif screenSelect[1] == True:
-					print 'attempting to view high scores'
-					viewHighScores()
-					
-				elif screenSelect[2] == True:
 					sys.exit()
 					
 			if event.key == pygame.K_UP:
 				if screenSelect[0] == True: #New Game Selected
 					#print 'switching from new game to exit'
 					screenSelect[0] = False
-					screenSelect[2] = True
+					screenSelect[1] = True
 					currentMenuScreen = mainMenuExit
 					
 				elif screenSelect[1] == True: #High Scores Selected
-					#print 'switching from high scores to new game'
 					screenSelect[1] = False
 					screenSelect[0] = True
 					currentMenuScreen = mainMenuNewGame
-					
-				elif screenSelect[2] == True: #Exit Selected
-					#print 'switching from exit to high scores'
-					screenSelect[2] = False
-					screenSelect[1] = True
-					currentMenuScreen = mainMenuHighScores
 					
 			if event.key == pygame.K_DOWN:
 				if screenSelect[0] == True: #New Game Selected
 					screenSelect[0] = False
 					screenSelect[1] = True
-					currentMenuScreen = mainMenuHighScores
+					currentMenuScreen = mainMenuExit
 					
 				elif screenSelect[1] == True: #High Scores Selected
 					screenSelect[1] = False
-					screenSelect[2] = True
-					currentMenuScreen = mainMenuExit
-					
-				elif screenSelect[2] == True: #Exit Selected
-					screenSelect[2] = False
 					screenSelect[0] = True
 					currentMenuScreen = mainMenuNewGame
 		
@@ -1426,6 +1409,6 @@ def mainMenuEvents(currentMenuScreen, mainMenuNewGame, mainMenuHighScores, mainM
 while gameOpen:
 	clock.tick(60)
 	screen.blit(currentMenuScreen, currentMenuScreen.get_rect(), [0, 0, 800, 800])
-	currentMenuScreen = mainMenuEvents(currentMenuScreen, mainMenuNewGame, mainMenuHighScores, mainMenuExit)
+	currentMenuScreen = mainMenuEvents(currentMenuScreen, mainMenuNewGame, mainMenuExit)
 	pygame.display.flip()
 	
