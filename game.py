@@ -120,8 +120,6 @@ def pauseScreen():
 		
 	else:
 		game.restart()
-		sidebar.lives = 4
-		game.wave = 7
 		return True
 			
 def processPauseEvents(currentPauseScreen, pauseMenuResume, pauseMenuRestart, pauseMenuExit):
@@ -211,7 +209,7 @@ def processPlayerEvents(player, gameRunning):
 			if event.key == pygame.K_TAB:
 				print player.getPosition()
 				
-			if event.key == pygame.K_SPACE:
+			if event.key == pygame.K_z:
 				player.firing = True
 				
 			if event.key == pygame.K_LSHIFT:
@@ -236,7 +234,7 @@ def processPlayerEvents(player, gameRunning):
 			if event.key == pygame.K_RIGHT:
 				player.moving[3] = False
 
-			if event.key == pygame.K_SPACE:
+			if event.key == pygame.K_z:
 				player.firing = False
 				
 			if event.key == pygame.K_LSHIFT:
@@ -246,12 +244,8 @@ def processPlayerEvents(player, gameRunning):
 				
 def mainGameProcess():
 	gameRunning = True
-	for i in game.gameObjects:
-		i.flag()
-	game.wave = 26
-	game.frame = 0
-	game.d = None
-	game.levelBackground = game.levelOneBackground
+	game.restart()
+	game.wave = 16
 	
 	while gameRunning:
 		clock.tick(60)
@@ -270,6 +264,7 @@ def mainGameProcess():
 				elif game.d.ref == 3:
 					game.d = Dialogue("penguin_avi1", "(This might be more difficult that I thought...)", (200,255,255), game, player, game.d.ref + 1, 4)
 				else:
+					game.d = None
 					game.frame = 0
 					game.wave += 1
 		
@@ -618,7 +613,7 @@ def mainGameProcess():
 		
 		
 		if game.wave == 9: #level 1 post boss dialogue
-			if not game.levelFade and game.frame < 25 and len([x for x in game.gameObjects if x.name == 'Bullet']) == 0:
+			if not game.levelFade and len([x for x in game.gameObjects if x.name == 'Bullet']) == 0:
 				if game.d not in game.gameObjects or game.d is None:
 					if game.d is None:
 						game.d = Dialogue("penguin_avi1", "(I guess he really didn't know where the Caribbean was)", (200,255,255), game, player, 1)
@@ -1050,6 +1045,9 @@ def mainGameProcess():
 				ToucanA(Vector(100,-10),game,player,6,5,15)
 			if game.frame==600:
 				ToucanA(Vector(500,-10),game,player,6,5,15)
+			if game.frame==800:
+				game.frame=0
+				game.wave+=1
 		
 		
 		if game.wave == 21: #Level 3 game.wave 2
@@ -1075,6 +1073,9 @@ def mainGameProcess():
 				ToucanB(Vector(500,-10),game,player,11,15)
 			if game.frame==570:
 				ToucanB(Vector(100,-10),game,player,8,15)
+			if game.frame==800:
+				game.frame=0
+				game.wave+=1
 		
 		
 		if game.wave == 22: #Level 3 game.wave 3
@@ -1118,6 +1119,9 @@ def mainGameProcess():
 				BlueparrotA(Vector(500,-10),game,player,1,3,30)
 			if game.frame==600:
 				BlueparrotA(Vector(200,-10),game,player,-1,4,30)
+			if game.frame==800:
+				game.frame=0
+				game.wave+=1
 		
 		
 		if game.wave == 23: #Level 3 game.wave 4
@@ -1144,6 +1148,9 @@ def mainGameProcess():
 				BlueparrotA(Vector(400,-10),game,player,1,5,30)
 			if game.frame==600:
 				BlueparrotA(Vector(300,-10),game,player,-1,5,30)
+			if game.frame==800:
+				game.frame=0
+				game.wave+=1
 		
 		
 		if game.wave == 24: #Level 3 game.wave 5
@@ -1187,6 +1194,9 @@ def mainGameProcess():
 				BlueparrotA(Vector(300,-10),game,player,1,5,30)
 			if game.frame==600:
 				BlueparrotA(Vector(100,-10),game,player,-1,5,30)
+			if game.frame==800:
+				game.frame=0
+				game.wave+=1
 		
 		
 		if game.wave == 25: #Level 3 game.wave 6
@@ -1220,6 +1230,9 @@ def mainGameProcess():
 				BlueparrotB(Vector(200,-10),game,player,-1,30,7)
 			if game.frame==570:
 				ToucanA(Vector(100,-10),game,player,5,4,30)
+			if game.frame==800:
+				game.frame=0
+				game.wave+=1
 		
 		
 		if game.wave == 26: #level 3 boss dialogue

@@ -54,7 +54,10 @@ class Dialogue:
 
 class Player:
 	def __init__ (self, game):
-		self.image = pygame.image.load("Art Stuff\penguin.png").convert_alpha()
+		self.image = self.center = Image.get("penguin")
+		self.left = Image.get("penguin_L")
+		self.right = Image.get("penguin_R")
+		
 		self.rect = self.image.get_rect()
 		self.rect.x = 300
 		self.rect.y = 400
@@ -108,6 +111,7 @@ class Player:
 				self.rect = future
 				
 		if self.moving[2]:
+			self.image = self.left
 			if self.focus:
 				future = self.rect.move(-self.x_velocity/2.5, 0)
 			else:
@@ -119,6 +123,7 @@ class Player:
 				self.rect = future
 				
 		elif self.moving[3]:
+			self.image = self.right
 			if self.focus:
 				future = self.rect.move(self.x_velocity/2.5, 0)
 			else:
@@ -128,9 +133,11 @@ class Player:
 				
 			else:
 				self.rect = future
+		else:
+			self.image = self.center
 				
 		if self.invinsibility != 0:
-			self.invinsibility-= 1
+			self.invinsibility -= 1
 				
 	def getPosition(self):
 		#print 'Player is currently at', self.rect.x + 16, ', ', self.rect.y + 48
