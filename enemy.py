@@ -604,7 +604,7 @@ class BlueparrotC(Enemy):
 		self.timebetween=timebetween
 		self.boss=boss
 		self.down=down
-		self.health = 20
+		self.health = 30
 	def update(self):
 		if self.position.y<self.down and self.game.d != None:
 			self.position.Add((0,2))
@@ -638,6 +638,27 @@ class BlueparrotC(Enemy):
 		Explosion(self.position, self.game, "blueparrot")
 		Enemy.flag(self)
 		
+class ToucanC(Enemy):
+	def __init__(self, init, game, player):
+		Enemy.__init__(self, init, game, player, 150)
+		self.image = Image.get("toucan")
+	def update(self):
+		self.position.Add((0, 10))
+	
+	def draw(self, screen):
+		Enemy.draw(self, screen)
+		
+	def get_rect(self):
+		return self.image.get_rect().move(self.position.x - self.image.get_width()/2, self.position.y - self.image.get_height()/2)
+			
+	def hit(self):
+		return
+		Enemy.hit(self)
+		
+	def flag(self):
+		Explosion(self.position, self.game, "toucan")
+		Enemy.flag(self)		
+
 class Boss(Enemy):
 	def __init__(self, init, game, player, health):
 		Enemy.__init__(self,init, game, player,1000)
@@ -805,19 +826,22 @@ class MacawB(Boss):
 	def __init__(self, init, game, player):
 		Boss.__init__(self, init, game, player,50)
 		self.b = []
-		self.b.append(BlueparrotC(Vector(300,-10),game,player,4,20,game.boss,190))
-		self.b.append(BlueparrotC(Vector(300,-10),game,player,4,20,game.boss,10))
-		self.b.append(BlueparrotC(Vector(210,-10),game,player,3,20,game.boss,100))
-		self.b.append(BlueparrotC(Vector(390,-10),game,player,3,20,game.boss,100))
+		self.b.append(BlueparrotC(Vector(300,-10),self.game,self.player,4,20,self,190))
+		self.b.append(BlueparrotC(Vector(300,-10),self.game,self.player,4,20,self,10))
+		self.b.append(BlueparrotC(Vector(210,-10),self.game,self.player,3,20,self,100))
+		self.b.append(BlueparrotC(Vector(390,-10),self.game,self.player,3,20,self,100))
 		self.image = Image.get("macaw")
 		self.health=50
 		self.directionhorz=1
 		self.tracers=False
 		self.t=None
+		self.subwave = 0
+		self.subframe = 0
 	def hit(self):
-		self.health-=1
-		if self.health==0:
-			self.flag()
+		if self.subwave == 2:
+			self.health-=1
+			if self.health==0:
+				self.flag()
 	
 	def update(self):
 		if self.frame<50:
@@ -826,11 +850,16 @@ class MacawB(Boss):
 			return
 		else:
 			self.position.Add((self.directionhorz*3,0))
+			if len(self.b) == 0 and self.subwave == 0:
+				self.subframe = self.frame
+				self.subwave += 1
+			if self.subwave == 1:
+				if self.frame%40 == 0:
+					ToucanC(Vector(self.player.getPosition().x, -10),self.game,self.player)
+				if self.frame - self.subframe == 200:
+					self.subwave += 1
 		if self.position.x>=440 or self.position.x<=160:
 			self.directionhorz*=-1
-		if self.health<=25 and self.tracers==False:
-			self.tracers=True
-			self.t=self.t = Tracers(self.game, self, self.player, 40, 30, 7, "redflower10x10")
 		self.frame+=1
 	
 	def draw(self, screen):
