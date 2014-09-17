@@ -245,7 +245,7 @@ def processPlayerEvents(player, gameRunning):
 def mainGameProcess():
 	gameRunning = True
 	game.restart()
-	game.wave = 28
+	game.wave = 20
 	game.levelBackground = game.levelThreeBackground
 	
 	while gameRunning:
@@ -533,7 +533,7 @@ def mainGameProcess():
 				SeagullA(Vector(450,-10),game,player,20)
 			if game.frame==100:
 				PelicanC(Vector(100,-10),game,player,10,7)
-				PelifcanC(Vector(500,-10),game,player,10,7)
+				PelicanC(Vector(500,-10),game,player,10,7)
 			if game.frame==130:
 				SeagullA(Vector(300,-10),game,player,5)
 			if game.frame==150:
@@ -1336,10 +1336,6 @@ def mainGameProcess():
 					game.levelFade = True
 					game.frame = 0
 					game.wave += 1
-		
-			
-		if game.wave == 29:
-			print "GG"
 			
 		if game.wave == 30:
 			if player.firing and game.frame > 30:

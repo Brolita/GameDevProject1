@@ -535,7 +535,7 @@ class BlueparrotA(Enemy):
 		self.image=Image.get("blueparrot")
 		self.direction=direction
 		self.buck=buck
-		self.timebetween=timebetween
+		self.timebetween=4*timebetween
 	def update(self):
 		if self.frame<25:
 			self.position.Add((0,2))
@@ -672,6 +672,7 @@ class Boss(Enemy):
 			return
 		self.health -= 1
 		if self.health == 0:
+			self.game.sidebar.points += self.points
 			self.flag()
 	
 	def draw(self, screen):
@@ -687,12 +688,13 @@ class Albatross(Boss):
 	def __init__(self, init, game, player):
 		Boss.__init__(self, init, game, player,26)
 		self.image = Image.get("Albatross")
-		self.health=50
+		self.health=40
 		self.direction=1
 		self.t=None
 		
 	def hit(self):
 		Boss.hit(self)
+		print self.health
 	
 	def update(self):
 		if self.frame<25:
@@ -702,11 +704,11 @@ class Albatross(Boss):
 		else:
 			self.position.Add((self.direction*3,0))
 			if self.frame%50==0:
-				BuckTarget(self.game,self,self.player.getPosition(),8,math.radians(5),4,"seashell")
-			if self.t == None and self.health<=35:
-				self.t = Tracers(self.game, self, self.player, 100, 10, 10, "rock")
-			if self.frame%50==25 and self.health<=20:
-				BuckTarget(self.game,self,self.player.getPosition(),8,math.radians(5),4,"seashell")
+				BuckTarget(self.game,self,self.player.getPosition(),8,math.radians(10),4,"seashell")
+			if self.t == None and self.health<=15:
+				self.t = Tracers(self.game, self, self.player, -1, 10, 6, "rock")
+			if self.frame%50==25 and self.health<=30:
+				BuckTarget(self.game,self,self.player.getPosition(),8,math.radians(10),4,"seashell")
 		if self.position.x>=570:
 			self.direction=-1
 		if self.position.x<=30:
@@ -859,33 +861,35 @@ class MacawB(Boss):
 			if len(self.b) == 0 and self.subwave == 0:
 				self.subwave += 1
 			if self.subwave == 2:
-				#if self.frame%40 == 0:
-					#BlueparrotD(Vector(self.player.getPosition().x, -10),self.game,self.player)
+				if self.frame%40 == 0:
+					BlueparrotD(Vector(self.player.getPosition().x, -10),self.game,self.player)
 				if self.frame%75 == 0:
-					BuckTarget(self.game,self,self.player.getPosition(),20,math.radians(5),2,"yellowflower9x9")
+					BuckTarget(self.game,self,Vector(self.position.x, 800),20,math.radians(5),2,"yellowflower9x9")
 				if self.frame%75 == 25:
-					BuckTarget(self.game,self,self.player.getPosition(),20,math.radians(5),2,"redflower10x10")
+					BuckTarget(self.game,self,Vector(self.position.x, 800),20,math.radians(5),2,"redflower10x10")
 				if self.frame%75 == 50:
-					BuckTarget(self.game,self,self.player.getPosition(),20,math.radians(5),2,"blueflower8x8")
+					BuckTarget(self.game,self,Vector(self.position.x, 800),20,math.radians(5),2,"blueflower8x8")
 				if self.frame - self.subframe == 600:
 					self.subwave += 1
 			if self.subwave == 1:
 				if self.frame%75 == 0:
-					BuckTarget(self.game,self,self.player.getPosition(),20,math.radians(5),2,"yellowflower9x9")
+					BuckTarget(self.game,self,Vector(self.position.x, 800),20,math.radians(5),2,"yellowflower9x9")
 				if self.frame%75 == 25:
-					BuckTarget(self.game,self,self.player.getPosition(),20,math.radians(5),2,"redflower10x10")
+					BuckTarget(self.game,self,Vector(self.position.x, 800),20,math.radians(5),2,"redflower10x10")
 				if self.frame%75 == 50:
-					BuckTarget(self.game,self,self.player.getPosition(),20,math.radians(5),2,"blueflower8x8")
+					BuckTarget(self.game,self,Vector(self.position.x, 800),20,math.radians(5),2,"blueflower8x8")
 			if self.subwave == 3:
 				self.e = True
 				if (self.game.d not in self.game.gameObjects or self.game.d is None) and len([x for x in self.game.gameObjects if x.name == 'Bullet']) == 0:
 					if self.game.d is None:
-						self.game.d = Dialogue("macaw_avi1", "You were pretty tough, kid... pretty tough", (200,255,255), self.game, self.player, 1)
+						self.game.d = Dialogue("macaw_avi1", "You were pretty tough, kid... Pretty tough.", (200,255,255), self.game, self.player, 1)
 					elif self.game.d.ref == 1:
 						Explosion(self.position,self.game,"Macaw")
 						self.stopDraw = True
 						self.game.d = Dialogue("penguin_avi2", "(Wow, that was intense...)", (200,255,255), self.game, self.player, self.game.d.ref + 1, 60)
 					else:
+						self.flag()
+						self.game.sidebar.points += 10000
 						self.game.d = None
 						self.game.frame = 0
 						self.game.wave += 1
