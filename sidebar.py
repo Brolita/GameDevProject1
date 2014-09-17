@@ -11,7 +11,7 @@ class Sidebar(object):
 		self._refresh()
 		
 	def _refresh(self):
-		self.image = pygame.image.load('Art Stuff\\side.png').convert_alpha()
+		self.image = pygame.image.load('Art Stuff\\sidebar2.png').convert_alpha()
 		self.__draw_lives()
 		self.__draw_points()
 		
@@ -21,9 +21,9 @@ class Sidebar(object):
 	def __draw_lives(self):
 		for i in range(self._lives):
 			if 18 + 33 * i < 182:
-				self.image.blit(Image.get("penguin"), (17 + 33 * i, 470))
+				self.image.blit(Image.get("penguin"), (17 + 33 * i, 310))
 			else:
-				self.image.blit(Image.get("penguin"), (17 + 33 * (i - 5), 510))
+				self.image.blit(Image.get("penguin"), (17 + 33 * (i - 5), 350))
 	
 	def __draw_points(self):
 		s = ''

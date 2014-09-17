@@ -1,5 +1,6 @@
 import pygame
 import math
+from image import Image
 
 class Engine:
 	def __init__(self, screen, sidebar):
@@ -11,6 +12,10 @@ class Engine:
 		self.wave = 0
 		self.d =  None
 		self.boss = None
+		self.levelFade = False
+		self.levelBackground = self.levelOneBackground = Image.get('water_background\water1a')
+		self.levelTwoBackground = Image.get('cloud_background\clouds1')
+		self.levelThreeBackground = Image.get('rainforest')
 		
 	def restart(self, s = False):
 		for i in self.gameObjects:
@@ -18,16 +23,22 @@ class Engine:
 		if s:
 			if self.wave <= 6:
 				self.wave = 0
+				self.levelBackground = self.levelOneBackground
 			elif self.wave <= 9:
 				self.wave = 7
+				self.levelBackground = self.levelOneBackground
 			elif self.wave <= 15:
 				self.wave = 10
+				self.levelBackground = self.levelTwoBackground
 			elif self.wave <= 18:
 				self.wave = 16
+				self.levelBackground = self.levelTwoBackground
 			elif self.wave <= 24:
 				self.wave = 19
+				self.levelBackground = self.levelThreeBackground
 			else:
 				self.wave = 25
+				self.levelBackground = self.levelThreeBackground
 		else:
 			self.frame = 0
 			self.wave = 0
@@ -86,12 +97,29 @@ class Engine:
 							j.hit()
 										
 	def draw(self):
+		self.screen.blit(self.levelBackground, (0,0))
+		
 		if self.flags:
 			while self.flags:
 				self.gameObjects.remove(self.flags.pop())
 		
 		for i in range(len(self.gameObjects)):
-			self.gameObjects[i].draw(self.screen)
+			self.gameObjects[i].draw(self.screen)	
+			
+		if self.levelFade and self.frame > 1:
+			s = pygame.Surface((600,800), pygame.SRCALPHA)
+			s.fill((0,0,0,8*self.frame - 1))
+			self.screen.blit(s, (0,0))
+			if self.frame == 32:
+				self.levelFade = False
+				self.frame = 0
+				self.wave += 1
+				if self.levelBackground == self.levelOneBackground:
+					self.levelBackground = self.levelTwoBackground
+				elif self.levelBackground == self.levelTwoBackground:
+					self.levelBackground = self.levelThreeBackground
+				
+				
 		
 	def flag(self, obj):
 		self.flags.add(obj)

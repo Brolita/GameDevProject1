@@ -10,7 +10,6 @@ from enemy import *
 pygame.init()
 screen = pygame.display.set_mode((800, 800))
 
-levelOneBackground = Image.get('water_background\water1a')
 mainMenuNewGame = Image.get('MenuNewGame')
 mainMenuHighScores = Image.get('MenuHighScores')
 mainMenuExit = Image.get('MenuExit')
@@ -59,11 +58,6 @@ def gameOverScreen():
 		screen.blit(currentQuitScreen, (250,325))
 		currentQuitScreen, retry, quit = processGameOverEvents(currentQuitScreen, gameOverRetry, gameOverExit)
 		pygame.display.flip()
-	#if you call game.restart('soft')
-	#and then exit this function with 
-	#return True the game will restart 
-	#to the last level or boss return 
-	#False will return to main menu
 
 def processGameOverEvents(currentQuitScreen, gameOverRetry, gameOverExit):
 	for event in pygame.event.get():
@@ -168,7 +162,6 @@ def processPauseEvents(currentPauseScreen, pauseMenuResume, pauseMenuRestart, pa
 					currentPauseScreen = pauseMenuRestart
 					
 			elif event.key == pygame.K_DOWN:
-				print 'Turn down for what'
 				if pauseSelect[0] == True: #Resume Selected
 					pauseSelect[0] = False
 					pauseSelect[1] = True
@@ -255,16 +248,16 @@ def mainGameProcess():
 	gameRunning = True
 	for i in game.gameObjects:
 		i.flag()
-	game.wave = 7
+	game.wave = 16
 	game.frame = 0
 	game.d = None
+	game.levelBackground = game.levelOneBackground
 	
 	while gameRunning:
 		clock.tick(60)
 		gameRunning = processPlayerEvents(player, gameRunning)
 		if sidebar.lives == 0:
 			gameRunning = gameOverScreen()
-		screen.blit(levelOneBackground, levelOneBackground.get_rect(), [0, 0, 600, 800])
 		
 		if game.wave == 0:
 			if game.d not in game.gameObjects or game.d is None:
@@ -625,7 +618,7 @@ def mainGameProcess():
 		
 		
 		if game.wave == 9: #level 1 post boss dialogue
-			if len([x for x in game.gameObjects if x.name == 'Bullet']) == 0:
+			if not game.levelFade and game.frame < 25 and len([x for x in game.gameObjects if x.name == 'Bullet']) == 0:
 				if game.d not in game.gameObjects or game.d is None:
 					if game.d is None:
 						game.d = Dialogue("penguin_ava1", "(I guess he really didn't know where the Caribbean was)", (200,255,255), game, player, 1)
@@ -634,7 +627,7 @@ def mainGameProcess():
 					else:
 						game.d = None
 						game.frame = 0
-						game.wave += 1
+						game.levelFade = True
 		
 		
 		if game.wave == 11: #level 2 game.wave 2
@@ -950,7 +943,7 @@ def mainGameProcess():
 		if game.wave == 16: #level 2 boss dialogue
 			if game.d not in game.gameObjects or game.d is None:
 				if game.d is None:
-					Flamingo(Vector(300,-10),game,player)
+					game.boss = Flamingo(Vector(300,-10),game,player)
 					game.d = Dialogue("penguin_ava1", "What are you? I've never seen something like you in the sky before.", (200,255,255), game, player, 1)
 				elif game.d.ref == 1:
 					game.d = Dialogue("penguin_ava1", "I'm a Penguin.", (200,255,255), game, player, game.d.ref + 1, 4)
@@ -983,21 +976,24 @@ def mainGameProcess():
 				game.boss = None
 				game.wave += 1
 		
+		
 		if game.wave == 18: #level 2 post boss dialogue
-			if len([x for x in game.gameObjects if x.name == 'Bullet']) == 0:
+			if not game.levelFade and len([x for x in game.gameObjects if x.name == 'Bullet']) == 0:
 				if game.d not in game.gameObjects or game.d is None:
 					if game.d is None:
 						game.d = Dialogue("penguin_ava1", "(I really didn't challenge him)", (200,255,255), game, player, 1)
 					elif game.d.ref == 1:
 						game.d = Dialogue("penguin_ava1", "(I mean, I don't think I'm that graceful)", (200,255,255), game, player, game.d.ref + 1, 4)
+					elif game.d.ref == 2:
+						game.d = Dialogue("penguin_ava1", "(Wait, how was a Flamingo flying anyway?!)", (200,255,255), game, player, game.d.ref + 1, 60)
 					else:
 						game.d = None
 						game.frame = 0
-						game.wave += 1
+						game.levelFade = True
 		
 		
 		if game.wave == 19: #level 3 opening dialogue
-			if game.d not in game.gameObjects or game.d is None:
+			if not game.levelFade and game.d not in game.gameObjects or game.d is None:
 				if game.d is None:
 					game.d = Dialogue("penguin_ava1", "Now... what do we have here? I've never seen your kind before.", (200,255,255), game, player, 1)
 				elif game.d.ref == 1:

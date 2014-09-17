@@ -665,7 +665,7 @@ class Flamingo(Boss):
 	def __init__(self, init, game, player):
 		Boss.__init__(self, init, game, player, 30)
 		self.image = Image.get("Flamingo_boss")
-		self.health=30
+		self.health=1
 		self.directionvert=1
 		self.directionhorz=1
 		self.t=None
@@ -698,6 +698,8 @@ class Flamingo(Boss):
 		return self.image.get_rect().move(self.position.x - self.image.get_width()/2, self.position.y - self.image.get_height()/2)
 			
 	def flag(self):
+		if self.t != None:
+			self.t.flag()
 		Boss.flag(self)
 
 class Macaw(Boss):
