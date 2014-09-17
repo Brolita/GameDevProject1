@@ -254,13 +254,8 @@ def processPlayerEvents(player, gameRunning):
 def mainGameProcess():
 	gameRunning = True
 	for i in game.gameObjects:
-<<<<<<< HEAD
-		i.flag() 
-	game.wave = 25
-=======
 		i.flag()
 	game.wave = 7
->>>>>>> 8b842d680c77ac957ea1405b8613ca770c8a1424
 	game.frame = 0
 	game.d = None
 	
@@ -1233,15 +1228,6 @@ def mainGameProcess():
 				ToucanA(Vector(100,-10),game,player,5,4,30)
 		
 		
-<<<<<<< HEAD
-		if game.wave == 25: #level 1 boss dialogue
-			#game.wave += 1
-			if game.frame==0:
-				Macaw(Vector(300,-10),game,player)
-			
-		if game.wave == 26: #level 3 boss: Macaw
-			game.wave += 1
-=======
 		if game.wave == 26: #level 3 boss dialogue
 			if game.d not in game.gameObjects or game.d is None:
 				if game.d is None:
@@ -1267,7 +1253,6 @@ def mainGameProcess():
 			if game.boss not in game.gameObjects:
 				game.boss = None
 				game.wave += 1
->>>>>>> 8b842d680c77ac957ea1405b8613ca770c8a1424
 		
 		
 		if game.wave == 28: #level 3 post boss dialogue
