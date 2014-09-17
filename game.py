@@ -248,7 +248,7 @@ def mainGameProcess():
 	gameRunning = True
 	for i in game.gameObjects:
 		i.flag()
-	game.wave = 26
+	game.wave = 19
 	game.frame = 0
 	game.d = None
 	game.levelBackground = game.levelOneBackground
@@ -993,6 +993,7 @@ def mainGameProcess():
 		if game.wave == 19: #level 3 opening dialogue
 			if not game.levelFade and game.d not in game.gameObjects or game.d is None:
 				if game.d is None:
+					MacawA(Vector(300,-10),game,player)
 					game.d = Dialogue("macaw_avi1", "Now... what do we have here? I've never seen your kind before.", (200,255,255), game, player, 1)
 				elif game.d.ref == 1:
 					game.d = Dialogue("penguin_avi3", "I'm a penguin. I'm going to the Caribbean.", (200,255,255), game, player, game.d.ref + 1, 4)
@@ -1225,7 +1226,7 @@ def mainGameProcess():
 		if game.wave == 26: #level 3 boss dialogue
 			if game.d not in game.gameObjects or game.d is None:
 				if game.d is None:
-					game.boss=Macaw(Vector(300,-10),game,player)
+					game.boss=MacawB(Vector(300,-10),game,player)
 					BlueparrotC(Vector(300,-10),game,player,4,20,game.boss,190)
 					BlueparrotC(Vector(300,-10),game,player,4,20,game.boss,10)
 					BlueparrotC(Vector(210,-10),game,player,3,20,game.boss,100)

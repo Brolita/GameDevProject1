@@ -736,7 +736,38 @@ class Flamingo(Boss):
 			self.t.flag()
 		Boss.flag(self)
 
-class Macaw(Boss):
+class MacawA(Boss):
+	def __init__(self, init, game, player):
+		Boss.__init__(self, init, game, player,50)
+		self.image = Image.get("macaw")
+		self.health=50
+		self.directionhorz=1
+		self.tracers=False
+		self.t=None
+	def hit(self):
+		self.health-=1
+		if self.health==0:
+			self.flag()
+	
+	def update(self):
+		if self.frame<50:
+			self.position.Add((0,2))
+		elif self.game.d != None:
+			return
+		else:
+			self.position.Add((0,-2))
+		self.frame+=1
+	
+	def draw(self, screen):
+		Boss.draw(self, screen)
+		
+	def get_rect(self):
+		return self.image.get_rect().move(self.position.x - self.image.get_width()/2, self.position.y - self.image.get_height()/2)
+			
+	def flag(self):
+		Boss.flag(self)
+
+class MacawB(Boss):
 	def __init__(self, init, game, player):
 		Boss.__init__(self, init, game, player,50)
 		self.image = Image.get("macaw")
