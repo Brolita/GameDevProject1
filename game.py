@@ -253,7 +253,7 @@ def mainGameProcess():
 	gameRunning = True
 	for i in game.gameObjects:
 		i.flag() 
-	game.wave = 17
+	game.wave = 25
 	game.frame = 0
 	game.d = None
 	
@@ -1161,10 +1161,11 @@ def mainGameProcess():
 		
 		
 		if game.wave == 25: #level 1 boss dialogue
-			game.wave += 1
+			#game.wave += 1
+			if game.frame==0:
+				Macaw(Vector(300,-10),game,player)
 			
-			
-		if game.wave == 26: #level 1 boss: albatross
+		if game.wave == 26: #level 3 boss: Macaw
 			game.wave += 1
 		
 		

@@ -697,16 +697,21 @@ class Flamingo(Boss):
 	def flag(self):
 		Boss.flag(self)
 
-class ExampleBoss(Boss):
-	def __init__(self, init, game, player, health):
-		Boss.__init__(init, game, player, health)
-		self.image = Image.get("test")
-	
+class Macaw(Boss):
+	def __init__(self, init, game, player):
+		Enemy.__init__(self, init,game,player,50)
+		Boss.__init__(self, init, game, player,50)
+		self.image = Image.get("macaw")
+		self.health=50
 	def hit(self):
-		Boss.hit(self)
+		self.health-=1
+		if self.health==0:
+			self.flag()
 	
 	def update(self):
-		print "here you go nick, sorry for the delay"
+		if self.frame<25:
+			self.position.Add((0,2))
+		self.frame+=1
 	
 	def draw(self, screen):
 		Boss.draw(self, screen)
