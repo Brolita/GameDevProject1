@@ -255,7 +255,7 @@ def mainGameProcess():
 	gameRunning = True
 	for i in game.gameObjects:
 		i.flag()
-	game.wave = 7
+	game.wave = 26
 	game.frame = 0
 	game.d = None
 	
@@ -1231,7 +1231,11 @@ def mainGameProcess():
 		if game.wave == 26: #level 3 boss dialogue
 			if game.d not in game.gameObjects or game.d is None:
 				if game.d is None:
-					#Macaw(pos,game,player)
+					game.boss=Macaw(Vector(300,-10),game,player)
+					BlueparrotC(Vector(300,-10),game,player,3,15,game.boss,190)
+					BlueparrotC(Vector(300,-10),game,player,3,15,game.boss,10)
+					BlueparrotC(Vector(210,-10),game,player,3,15,game.boss,100)
+					BlueparrotC(Vector(390,-10),game,player,3,15,game.boss,100)
 					game.d = Dialogue("penguin_ava1", "Look kid. I did you a favour by telling you not to come here. Why do you disrespect me by ignoring my kindness?", (200,255,255), game, player, 1)
 				elif game.d.ref == 1:
 					game.d = Dialogue("penguin_ava1", "Huh?", (200,255,255), game, player, game.d.ref + 1, 4)
