@@ -1226,10 +1226,10 @@ def mainGameProcess():
 			if game.d not in game.gameObjects or game.d is None:
 				if game.d is None:
 					game.boss=Macaw(Vector(300,-10),game,player)
-					BlueparrotC(Vector(300,-10),game,player,3,15,game.boss,190)
-					BlueparrotC(Vector(300,-10),game,player,3,15,game.boss,10)
-					BlueparrotC(Vector(210,-10),game,player,3,15,game.boss,100)
-					BlueparrotC(Vector(390,-10),game,player,3,15,game.boss,100)
+					BlueparrotC(Vector(300,-10),game,player,4,20,game.boss,190)
+					BlueparrotC(Vector(300,-10),game,player,4,20,game.boss,10)
+					BlueparrotC(Vector(210,-10),game,player,3,20,game.boss,100)
+					BlueparrotC(Vector(390,-10),game,player,3,20,game.boss,100)
 					game.d = Dialogue("macaw_avi3", "Look kid. I did you a favour by telling you not to come here. Why do you disrespect me by ignoring my kindness?", (200,255,255), game, player, 1)
 				elif game.d.ref == 1:
 					game.d = Dialogue("penguin_avi2", "Huh?", (200,255,255), game, player, game.d.ref + 1, 4)

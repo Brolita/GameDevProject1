@@ -613,7 +613,10 @@ class BlueparrotC(Enemy):
 			self.position.Add((self.boss.directionhorz*3, 0))
 			self.position.RotateAround(self.boss.position, math.radians(1))
 			if (self.frame-25)%self.timebetween==0:
-				BuckTarget(self.game,self,self.player.getPosition(),self.buck,math.radians(7.5),5,"blueflower8x8")
+				if(self.buck%2==0):
+					BuckTarget(self.game,self,self.player.getPosition(),self.buck,math.radians(7.5),5,"blueflower8x8")
+				else:
+					BuckTarget(self.game,self,self.player.getPosition(),self.buck,math.radians(7.5),5,"yellowflower9x9")
 		self.frame+=1
 	
 	def draw(self, screen):
@@ -739,6 +742,8 @@ class Macaw(Boss):
 		self.image = Image.get("macaw")
 		self.health=50
 		self.directionhorz=1
+		self.tracers=False
+		self.t=None
 	def hit(self):
 		self.health-=1
 		if self.health==0:
@@ -753,6 +758,9 @@ class Macaw(Boss):
 			self.position.Add((self.directionhorz*3,0))
 		if self.position.x>=400 or self.position.x<=200:
 			self.directionhorz*=-1
+		if self.health<=25 and self.tracers==False:
+			self.tracers=True
+			self.t=self.t = Tracers(self.game, self, self.player, 40, 30, 7, "redflower10x10")
 		self.frame+=1
 	
 	def draw(self, screen):
