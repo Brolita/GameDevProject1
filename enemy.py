@@ -638,12 +638,12 @@ class BlueparrotC(Enemy):
 		Explosion(self.position, self.game, "blueparrot")
 		Enemy.flag(self)
 		
-class ToucanC(Enemy):
+class BlueparrotD(Enemy):
 	def __init__(self, init, game, player):
 		Enemy.__init__(self, init, game, player, 150)
-		self.image = Image.get("toucan")
+		self.image = Image.get("blueparrot")
 	def update(self):
-		self.position.Add((0, 10))
+		self.position.Add((0, 8))
 	
 	def draw(self, screen):
 		Enemy.draw(self, screen)
@@ -656,7 +656,7 @@ class ToucanC(Enemy):
 		Enemy.hit(self)
 		
 	def flag(self):
-		Explosion(self.position, self.game, "toucan")
+		Explosion(self.position, self.game, "blueparrot")
 		Enemy.flag(self)		
 
 class Boss(Enemy):
@@ -831,15 +831,17 @@ class MacawB(Boss):
 		self.b.append(BlueparrotC(Vector(210,-10),self.game,self.player,3,20,self,100))
 		self.b.append(BlueparrotC(Vector(390,-10),self.game,self.player,3,20,self,100))
 		self.image = Image.get("macaw")
-		self.health=50
+		self.health=20
 		self.directionhorz=1
 		self.tracers=False
 		self.t=None
 		self.subwave = 0
 		self.subframe = 0
 	def hit(self):
-		if self.subwave == 2:
+		if self.subwave != 0:
 			self.health-=1
+		
+		if self.subwave == 2:
 			if self.health==0:
 				self.flag()
 	
@@ -855,8 +857,14 @@ class MacawB(Boss):
 				self.subwave += 1
 			if self.subwave == 1:
 				if self.frame%40 == 0:
-					ToucanC(Vector(self.player.getPosition().x, -10),self.game,self.player)
-				if self.frame - self.subframe == 200:
+					BlueparrotD(Vector(self.player.getPosition().x, -10),self.game,self.player)
+				if self.frame%75 == 0:
+					BuckTarget(self.game,self,self.player.getPosition(),20,math.radians(5),2,"yellowflower9x9")
+				if self.frame%75 == 25:
+					BuckTarget(self.game,self,self.player.getPosition(),20,math.radians(5),2,"redflower10x10")
+				if self.frame%75 == 50:
+					BuckTarget(self.game,self,self.player.getPosition(),20,math.radians(5),2,"blueflower8x8")
+				if self.frame - self.subframe == 900:
 					self.subwave += 1
 		if self.position.x>=440 or self.position.x<=160:
 			self.directionhorz*=-1
