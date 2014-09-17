@@ -97,7 +97,6 @@ class Explosion:
 	def flag(self):
 		self.game.flag(self)
 		
-	
 class Enemy:
 	sidebar = None
 	@staticmethod
@@ -596,8 +595,7 @@ class BlueparrotB(Enemy):
 		Explosion(self.position, self.game, "blueparrot")
 		Enemy.flag(self)	
 		if self.t != None:
-			self.t.flag()
-			
+			self.t.flag()		
 			
 class Boss(Enemy):
 	def __init__(self, init, game, player, health):
@@ -621,8 +619,8 @@ class Boss(Enemy):
 
 class Albatross(Boss):
 	def __init__(self, init, game, player):
-		Enemy.__init__(self, init,game,player,5)
-		Boss.__init__(self, init, game, player,5)
+		Enemy.__init__(self, init,game,player,26)
+		Boss.__init__(self, init, game, player,26)
 		self.image = Image.get("Albatross")
 		self.health=26
 		self.direction=1
@@ -641,7 +639,7 @@ class Albatross(Boss):
 			if self.frame%50==0:
 				BuckTarget(self.game,self,self.player.getPosition(),8,math.radians(5),4,"seashell")
 			if self.tracers==False and self.health<=13:
-				self.t = Tracers(self.game, self, self.player, 40, 30, 7, "rock")
+				self.t = Tracers(self.game, self, self.player, 40, 10, 7, "rock")
 				self.tracers=True
 		if self.position.x>=570:
 			self.direction=-1
@@ -659,6 +657,46 @@ class Albatross(Boss):
 		Explosion(self.position,self.game,"Albatross")
 		self.game.flag(self)
 		
+class Flamingo(Boss):
+	def __init__(self, init, game, player):
+		Enemy.__init__(self, init,game,player,30)
+		Boss.__init__(self, init, game, player, 30)
+		self.image = Image.get("Flamingo_boss")
+		self.health=30
+		self.directionvert=1
+		self.directionhorz=1
+		self.t=None
+		self.tracers=False
+	def hit(self):
+		self.health-=1
+		if self.health==0:
+			self.flag()
+	
+	def update(self):
+		if self.frame<25:
+			self.position.Add((0,2))
+		else:
+			self.position.Add((self.directionhorz*2,self.directionvert*2))
+			if self.frame%50==0 and self.tracers==False:
+				self.t = Tracers(self.game, self, self.player, 40, 30, 7, "rock")
+				self.tracers==True
+			if self.frame%50==25 and self.health<=15:
+				BuckTarget(self.game,self,self.player.getPosition(),4,math.radians(5),4,"seashell")
+		if self.position.x>=520 or self.position.x<=80:
+			self.directionhorz*=-1
+		if self.position.y<=30 or self.position.y>=720:
+			self.directionvert*=-1
+		self.frame+=1
+	
+	def draw(self, screen):
+		Boss.draw(self, screen)
+		
+	def get_rect(self):
+		return self.image.get_rect().move(self.position.x - self.image.get_width()/2, self.position.y - self.image.get_height()/2)
+			
+	def flag(self):
+		Boss.flag(self)
+
 class ExampleBoss(Boss):
 	def __init__(self, init, game, player, health):
 		Boss.__init__(init, game, player, health)
