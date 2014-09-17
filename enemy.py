@@ -2,6 +2,7 @@ import pygame
 import math
 from Vector import Vector
 from bullet import *
+from player import Dialogue
 
 class Tracers:
 	def __init__(self, game, enemy, player, count, frameOffset, speed, spriteName):
@@ -545,7 +546,7 @@ class BlueparrotA(Enemy):
 		if self.position.x<=30:
 			self.direction=1
 		if (self.frame-25)%self.timebetween==0:
-			BuckTarget(self.game,self,self.player.getPosition(),self.buck,math.radians(7.5),5,"blueflower8x8")
+			BuckTarget(self.game,self,self.player.getPosition(),self.buck,math.radians(15),3,"blueflower8x8")
 		self.frame+=1
 	
 	def draw(self, screen):
@@ -595,7 +596,8 @@ class BlueparrotB(Enemy):
 		Explosion(self.position, self.game, "blueparrot")
 		Enemy.flag(self)	
 		if self.t != None:
-			self.t.flag()		
+			self.t.flag()	
+			
 class BlueparrotC(Enemy):
 	def __init__(self, init,game,player,buck,timebetween,boss,down):
 		Enemy.__init__(self,init,game,player,100)
@@ -604,7 +606,7 @@ class BlueparrotC(Enemy):
 		self.timebetween=timebetween
 		self.boss=boss
 		self.down=down
-		self.health = 30
+		self.health = 20
 	def update(self):
 		if self.position.y<self.down and self.game.d != None:
 			self.position.Add((0,2))
@@ -831,51 +833,74 @@ class MacawB(Boss):
 		self.b.append(BlueparrotC(Vector(210,-10),self.game,self.player,3,20,self,100))
 		self.b.append(BlueparrotC(Vector(390,-10),self.game,self.player,3,20,self,100))
 		self.image = Image.get("macaw")
-		self.health=20
+		self.health=30
 		self.directionhorz=1
 		self.tracers=False
 		self.t=None
 		self.subwave = 0
 		self.subframe = 0
+		self.stopDraw = False
+		self.e = False
 	def hit(self):
-		if self.subwave != 0:
+		if self.subwave == 1:
 			self.health-=1
-		
-		if self.subwave == 2:
 			if self.health==0:
-				self.flag()
+				self.subframe = self.frame
+				self.subwave += 1
 	
 	def update(self):
 		if self.frame<50:
 			self.position.Add((0,2))
-		elif self.game.d != None:
+		elif self.game.d != None and not self.e:
 			return
 		else:
-			self.position.Add((self.directionhorz*3,0))
+			if self.subwave != 3:
+				self.position.Add((self.directionhorz*3,0))
 			if len(self.b) == 0 and self.subwave == 0:
-				self.subframe = self.frame
 				self.subwave += 1
-			if self.subwave == 1:
-				if self.frame%40 == 0:
-					BlueparrotD(Vector(self.player.getPosition().x, -10),self.game,self.player)
+			if self.subwave == 2:
+				#if self.frame%40 == 0:
+					#BlueparrotD(Vector(self.player.getPosition().x, -10),self.game,self.player)
 				if self.frame%75 == 0:
 					BuckTarget(self.game,self,self.player.getPosition(),20,math.radians(5),2,"yellowflower9x9")
 				if self.frame%75 == 25:
 					BuckTarget(self.game,self,self.player.getPosition(),20,math.radians(5),2,"redflower10x10")
 				if self.frame%75 == 50:
 					BuckTarget(self.game,self,self.player.getPosition(),20,math.radians(5),2,"blueflower8x8")
-				if self.frame - self.subframe == 900:
+				if self.frame - self.subframe == 600:
 					self.subwave += 1
+			if self.subwave == 1:
+				if self.frame%75 == 0:
+					BuckTarget(self.game,self,self.player.getPosition(),20,math.radians(5),2,"yellowflower9x9")
+				if self.frame%75 == 25:
+					BuckTarget(self.game,self,self.player.getPosition(),20,math.radians(5),2,"redflower10x10")
+				if self.frame%75 == 50:
+					BuckTarget(self.game,self,self.player.getPosition(),20,math.radians(5),2,"blueflower8x8")
+			if self.subwave == 3:
+				self.e = True
+				if (self.game.d not in self.game.gameObjects or self.game.d is None) and len([x for x in self.game.gameObjects if x.name == 'Bullet']) == 0:
+					if self.game.d is None:
+						self.game.d = Dialogue("macaw_avi1", "You were pretty tough, kid... pretty tough", (200,255,255), self.game, self.player, 1)
+					elif self.game.d.ref == 1:
+						Explosion(self.position,self.game,"Macaw")
+						self.stopDraw = True
+						self.game.d = Dialogue("penguin_avi2", "(Wow, that was intense...)", (200,255,255), self.game, self.player, self.game.d.ref + 1, 60)
+					else:
+						self.game.d = None
+						self.game.frame = 0
+						self.game.wave += 1
+						
 		if self.position.x>=440 or self.position.x<=160:
 			self.directionhorz*=-1
 		self.frame+=1
 	
 	def draw(self, screen):
+		if self.stopDraw:
+			return
 		Boss.draw(self, screen)
 		
 	def get_rect(self):
 		return self.image.get_rect().move(self.position.x - self.image.get_width()/2, self.position.y - self.image.get_height()/2)
 			
 	def flag(self):
-		Explosion(self.position,self.game,"Macaw")
 		Boss.flag(self)

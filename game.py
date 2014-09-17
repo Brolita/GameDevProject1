@@ -245,7 +245,7 @@ def processPlayerEvents(player, gameRunning):
 def mainGameProcess():
 	gameRunning = True
 	game.restart()
-	game.wave = 23
+	game.wave = 28
 	game.levelBackground = game.levelThreeBackground
 	
 	while gameRunning:
@@ -577,7 +577,7 @@ def mainGameProcess():
 		
 		
 		if game.wave == 7: #level 1 boss dialogue
-			if game.d not in game.gameObjects or game.d is None and len([x for x in game.gameObjects if x.name == 'Bullet']) == 0:
+			if (game.d not in game.gameObjects or game.d is None) and len([x for x in game.gameObjects if x.name == 'Bullet']) == 0:
 				if game.d is None:
 					game.boss = Albatross(Vector(300,-10),game,player)
 					game.d = Dialogue("penguin_avi1", "(Darn...I think I'm lost. Hey there's an Albatros, maybe he will help me)", (200,255,255), game, player, 1)
@@ -937,7 +937,7 @@ def mainGameProcess():
 		
 		
 		if game.wave == 16: #level 2 boss dialogue
-			if game.d not in game.gameObjects or game.d is None and len([x for x in game.gameObjects if x.name == 'Bullet']) == 0:
+			if (game.d not in game.gameObjects or game.d is None) and len([x for x in game.gameObjects if x.name == 'Bullet']) == 0:
 				if game.d is None:
 					game.boss = Flamingo(Vector(300,-10),game,player)
 					game.d = Dialogue("flamingo_avi1", "What are you? I've never seen something like you in the sky before.", (200,255,255), game, player, 1)
@@ -1301,7 +1301,7 @@ def mainGameProcess():
 		
 		
 		if game.wave == 26: #level 3 boss dialogue
-			if game.d not in game.gameObjects or game.d is None and len([x for x in game.gameObjects if x.name == 'Bullet']) == 0:
+			if (game.d not in game.gameObjects or game.d is None) and len([x for x in game.gameObjects if x.name == 'Bullet']) == 0:
 				if game.d is None:
 					game.boss=MacawB(Vector(300,-10),game,player)
 					game.d = Dialogue("macaw_avi3", "Look kid. I did you a favour by telling you not to come here. Why do you disrespect me by ignoring my kindness?", (200,255,255), game, player, 1)
@@ -1324,16 +1324,26 @@ def mainGameProcess():
 		if game.wave == 27: #level 3 boss: Don Macaw
 			if game.boss not in game.gameObjects:
 				game.boss = None
+				game.frame = 0
 				game.wave += 1
-		
-		
-		if game.wave == 28: #level 3 post boss dialogue
-			game.wave += 1
 			
+		if game.wave == 28: #level 3 post boss dialogue
+			if (game.d not in game.gameObjects or game.d is None) and len([x for x in game.gameObjects if x.name == 'Bullet']) == 0:
+				if game.d is None:
+					game.d = Dialogue("penguin_avi2", "(I think I'm almost there! I can hear the waves)", (200,255,255), game, player, 1)
+				else:
+					game.d = None
+					game.levelFade = True
+					game.frame = 0
+					game.wave += 1
+		
 			
 		if game.wave == 29:
 			print "GG"
-			return
+			
+		if game.wave == 30:
+			if player.firing and game.frame > 30:
+				return
 		
 		#update 
 		game.update()
