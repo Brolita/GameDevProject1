@@ -681,7 +681,7 @@ class Flamingo(Boss):
 				self.t = Tracers(self.game, self, self.player, 40, 30, 7, "rock")
 				self.tracers==True
 			if self.frame%50==25 and self.health<=15:
-				BuckTarget(self.game,self,self.player.getPosition(),4,math.radians(5),4,"seashell")
+				BuckTarget(self.game,self,self.player.getPosition(),4,math.radians(5),10,"seashell")
 		if self.position.x>=520 or self.position.x<=80:
 			self.directionhorz*=-1
 		if self.position.y<=30 or self.position.y>=720:
