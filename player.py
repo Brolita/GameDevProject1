@@ -11,7 +11,7 @@ class Dialogue:
 		game.gameObjects.append(self)
 		if Image.font == None:
 			Image.font = pygame.font.SysFont("monospace",18)
-		self.image = Image.get(image)
+		self.image = Image.get('avatars\\' + image)
 		
 		lines = []
 		while True:

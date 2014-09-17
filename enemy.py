@@ -596,7 +596,38 @@ class BlueparrotB(Enemy):
 		Enemy.flag(self)	
 		if self.t != None:
 			self.t.flag()		
-			
+class BlueparrotC(Enemy):
+	def __init__(self, init,game,player,buck,timebetween,boss,down):
+		Enemy.__init__(self,init,game,player,100)
+		self.image=Image.get("blueparrot")
+		self.buck=buck
+		self.timebetween=timebetween
+		self.boss=boss
+		self.down=down
+	def update(self):
+		if self.position.y<self.down:
+			self.position.Add((0,2))
+		elif self.game.d != None:
+			return
+		else:
+			self.position.Add((self.boss.directionhorz*3, 0))
+			self.position.RotateAround(self.boss.position, math.radians(1))
+			if (self.frame-25)%self.timebetween==0:
+				BuckTarget(self.game,self,self.player.getPosition(),self.buck,math.radians(7.5),5,"blueflower8x8")
+		self.frame+=1
+	
+	def draw(self, screen):
+		Enemy.draw(self, screen)
+	
+	def get_rect(self):
+		return self.image.get_rect().move(self.position.x-self.image.get_width()/2,self.position.y-self.image.get_height()/2)
+	
+	def hit(self):
+		return
+		
+	def flag(self):
+		Explosion(self.position, self.game, "blueparrot")
+		Enemy.flag(self)	
 class Boss(Enemy):
 	def __init__(self, init, game, player, health):
 		Enemy.__init__(self,init, game, player,1000)
@@ -619,7 +650,7 @@ class Boss(Enemy):
 	def flag(self):
 		Enemy.flag(self)
 
-class Albatross(Boss):
+class Albatross(Boss):	
 	def __init__(self, init, game, player):
 		Boss.__init__(self, init, game, player,26)
 		self.image = Image.get("Albatross")
@@ -704,18 +735,24 @@ class Flamingo(Boss):
 
 class Macaw(Boss):
 	def __init__(self, init, game, player):
-		Enemy.__init__(self, init,game,player,50)
 		Boss.__init__(self, init, game, player,50)
 		self.image = Image.get("macaw")
 		self.health=50
+		self.directionhorz=1
 	def hit(self):
 		self.health-=1
 		if self.health==0:
 			self.flag()
 	
 	def update(self):
-		if self.frame<25:
+		if self.frame<50:
 			self.position.Add((0,2))
+		elif self.game.d != None:
+			return
+		else:
+			self.position.Add((self.directionhorz*3,0))
+		if self.position.x>=400 or self.position.x<=200:
+			self.directionhorz*=-1
 		self.frame+=1
 	
 	def draw(self, screen):

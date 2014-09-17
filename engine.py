@@ -13,9 +13,9 @@ class Engine:
 		self.d =  None
 		self.boss = None
 		self.levelFade = False
-		self.levelBackground = self.levelOneBackground = Image.get('water_background\water1a')
-		self.levelTwoBackground = Image.get('cloud_background\clouds1')
-		self.levelThreeBackground = Image.get('rainforest')
+		self.levelBackground = self.levelOneBackground = Image.get('backgrounds\water_background\water1a')
+		self.levelTwoBackground = Image.get('backgrounds\cloud_background\clouds1')
+		self.levelThreeBackground = Image.get('backgrounds\\rainforest')
 		
 	def restart(self, s = False):
 		for i in self.gameObjects:
@@ -33,11 +33,11 @@ class Engine:
 			elif self.wave <= 18:
 				self.wave = 16
 				self.levelBackground = self.levelTwoBackground
-			elif self.wave <= 24:
+			elif self.wave <= 25:
 				self.wave = 19
 				self.levelBackground = self.levelThreeBackground
 			else:
-				self.wave = 25
+				self.wave = 26
 				self.levelBackground = self.levelThreeBackground
 		else:
 			self.frame = 0
