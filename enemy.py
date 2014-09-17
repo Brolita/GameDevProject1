@@ -605,7 +605,7 @@ class BlueparrotC(Enemy):
 		self.boss=boss
 		self.down=down
 	def update(self):
-		if self.position.y<self.down:
+		if self.position.y<self.down and self.game.d != None:
 			self.position.Add((0,2))
 		elif self.game.d != None:
 			return
