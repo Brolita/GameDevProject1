@@ -245,7 +245,7 @@ def processPlayerEvents(player, gameRunning):
 def mainGameProcess():
 	gameRunning = True
 	game.restart()
-	game.wave = 26
+	game.wave = 20
 	game.levelBackground = game.levelThreeBackground
 	
 	while gameRunning:
